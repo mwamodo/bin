@@ -1,0 +1,18 @@
+# OS Files
+.DS_Store
+
+# Development
+node_modules/
+npm-debug.log
+vendor/
+
+# vi
+*~
+
+# General
+*.log
+log/
+
+#etc
+.idea/
+haters/
