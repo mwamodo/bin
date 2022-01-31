@@ -16,6 +16,9 @@ export PATH=$PATH:$HOME/bin/scripts
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 export XDEBUG_MODE=coverage
 
+# Flutter
+export PATH="$PATH:$HOME/Code/Externals/flutter/bin"
+
 # Git and GitHub
 commit () {
     commitMessage="$1"
