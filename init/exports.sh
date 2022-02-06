@@ -4,6 +4,10 @@ NPM_PACKAGES="${HOME}/.npm-packages"
 # Insert globally installed npm packages to path and local bin
 export PATH="$PATH:$NPM_PACKAGES/bin"
 
+# Gem and Ruby Staff
+export GEM_HOME=$HOME/.gem
+export PATH=$GEM_HOME/bin:$PATH
+
 # Unset manpath so we can inherit from /etc/manpath via the `manpath` command
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
