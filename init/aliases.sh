@@ -24,8 +24,10 @@ alias h="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5"
 
 # PHP | Laravel
 alias artisan="php artisan"
-alias a='artisan'
-alias horizon='a horizon'
+alias art="artisan"
+alias a="artisan"
+alias horizon="a horizon"
+alias h="a horizon"
 
 alias mf="a migrate"
 alias ms="a migrate:status"
@@ -38,10 +40,10 @@ alias db:wipe="a db:wipe"
 alias db:seed="a db:seed"
 
 alias logs:clear="truncate -s 0 storage/logs/laravel.log"
-alias artisan:test='a test --parallel'
-alias a:t='artisan:test'
-alias artisan:enlightn='a enlightn --report'
-alias a:e='artisan:enlightn'
+alias artisan:test="a test --parallel"
+alias a:t="artisan:test"
+alias artisan:enlightn="a enlightn --report"
+alias a:e="artisan:enlightn"
 
 alias pest="vendor/bin/pest"
 

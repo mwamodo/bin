@@ -53,5 +53,4 @@ commit:push () {
     git add .
     eval "git commit -a -m '${commitMessage}'"
     eval "git push origin ${gitCurrentBranch}"
-
 }
