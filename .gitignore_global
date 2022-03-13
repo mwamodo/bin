@@ -4,7 +4,6 @@
 # Development
 node_modules/
 npm-debug.log
-vendor/
 
 # vi
 *~
