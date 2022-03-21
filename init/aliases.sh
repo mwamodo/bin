@@ -28,12 +28,13 @@ alias art="artisan"
 alias a="artisan"
 alias horizon="a horizon"
 alias h="a horizon"
+alias acc="a cache:clear"
 
 alias mf="a migrate"
 alias ms="a migrate:status"
 
-alias mff="a migrate:fresh"
-alias mfs="a migrate:fresh --seed"
+alias mff="a migrate:fresh && a cache:clear"
+alias mfs="a migrate:fresh --seed && a cache:clear"
 alias tinker="a tinker"
 
 alias db:wipe="a db:wipe"
