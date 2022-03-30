@@ -40,7 +40,7 @@ alias tinker="a tinker"
 alias db:wipe="a db:wipe"
 alias db:seed="a db:seed"
 
-alias logs:clear="truncate -s 0 storage/logs/laravel.log"
+alias log:clear="truncate -s 0 storage/logs/laravel.log"
 alias artisan:test="a test --parallel"
 alias a:t="artisan:test"
 alias artisan:enlightn="a enlightn --report"
