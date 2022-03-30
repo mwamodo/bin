@@ -40,6 +40,7 @@ alias tinker="a tinker"
 alias db:wipe="a db:wipe"
 alias db:seed="a db:seed"
 
+# Required you to install truncate on macOs, ```brew install truncate```
 alias log:clear="truncate -s 0 storage/logs/laravel.log"
 alias artisan:test="a test --parallel"
 alias a:t="artisan:test"
