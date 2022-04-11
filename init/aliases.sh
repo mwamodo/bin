@@ -35,6 +35,7 @@ alias ms="a migrate:status"
 
 alias mff="a migrate:fresh && a cache:clear"
 alias mfs="a migrate:fresh --seed && a cache:clear"
+alias mfsr="a migrate:fresh --seed && a cache:clear && redis-cli flushdb"
 alias tinker="a tinker"
 
 alias db:wipe="a db:wipe"
