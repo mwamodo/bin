@@ -17,8 +17,9 @@ alias gpom="g push origin main"
 alias glog="g log --graph --pretty=format:'''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 
 # Programs aliases
-alias v="vim"
+alias vim="mvim"
 alias vi="vim"
+alias v="vi"
 alias hd="trash .zsh_history"
 alias h="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5"
 
