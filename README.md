@@ -1,5 +1,8 @@
 # $HOME/bin on steroids 
 
+## Prerequisites
+1. git
+
 ## usage & installation
 
 1. clone the repo to $HOME dir
@@ -16,4 +19,11 @@ mkdir -p "${HOME}/.vim/colors"
 ```bash
 cp "${HOME}/bin/vim/colors/cobalt2.vim" "${HOME}/.vim/colors"
 cp "${HOME}/bin/vim/colors/atom-dark.vim" "${HOME}/.vim/colors"
+```
+6. set up vim plugins with Vundle
+```bash
+mkdir -p "${HOME}/.vim/bundle"
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+ln -s "${HOME}/bin/vim/plugins.vim" "${HOME}/.vim/plugins.vim"
+vim +PluginInstall +qall
 ```

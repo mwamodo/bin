@@ -1,12 +1,19 @@
+" be iMproved, required
+set nocompatible	
+
+"source plugins file			
+so ~/bin/vim/plugins.vim
+
 "----Visuals-----"
 colorscheme atom-dark
 syntax enable
 
 "macvim-specifit line height
-set linespace=15
+set linespace=17
 
 "activate line numbers.
 set number
+set relativenumber
 
 "set font and line height
 set guifont=Operator_Mono_Lig:h16
@@ -15,6 +22,7 @@ set guioptions-=l
 set guioptions-=L
 set guioptions-=r
 set guioptions-=R
+let g:NERDTreeWinPos = "right"
 
 
 
@@ -27,6 +35,9 @@ set backspace=indent,eol,start
 "-----Mappings-----"
 "the default leader is \, but a comma is much better.
 let mapleader = ','
+
+"Make NerdTree toogle easier
+nmap <D-S-e> :NERDTreeToggle<cr>
 
 
 
