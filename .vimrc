@@ -22,7 +22,6 @@ set guioptions-=l
 set guioptions-=L
 set guioptions-=r
 set guioptions-=R
-let g:NERDTreeWinPos = "right"
 
 
 
@@ -39,6 +38,16 @@ let mapleader = ','
 "Make NerdTree toogle easier
 nmap <D-S-e> :NERDTreeToggle<cr>
 
+
+
+"---------Plugins---------"
+let g:NERDTreeWinPos = "right"
+
+nmap <C-T> :CtrlPBufTag<cr>
+
+nmap <C-R> :CtrlPMRUFiles<cr>
+
+nmap <D-p> :CtrlP<cr>
 
 
 "---------Searching---------"
