@@ -54,3 +54,15 @@ commit:push () {
     eval "git commit -a -m '${commitMessage}'"
     eval "git push origin ${gitCurrentBranch}"
 }
+
+g:b () {
+    newBranch="$1"
+    gitCurrentBranch=$(git branch --show-current)
+
+    if [ "$newBranch" = $gitCurrentBranch ]
+    then
+        echo "You are already on branch ${newBranch}"
+    else
+        git checkout -b $newBranch
+    fi
+}
