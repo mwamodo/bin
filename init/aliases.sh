@@ -32,6 +32,7 @@ alias h="a horizon"
 alias acc="a cache:clear"
 
 alias mf="a migrate"
+alias mfr="a migrate:rollback"
 alias ms="a migrate:status"
 
 alias mff="a migrate:fresh && a cache:clear"
