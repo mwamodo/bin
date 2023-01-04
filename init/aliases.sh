@@ -20,7 +20,7 @@ alias glog="g log --graph --pretty=format:'''%Cred%h%Creset -%C(yellow)%d%Creset
 alias vim="mvim"
 alias vi="vim"
 alias v="vi"
-alias hd="trash .zsh_history"
+alias hd="history -c"
 alias h="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5"
 
 # PHP | Laravel
@@ -28,7 +28,6 @@ alias artisan="php artisan"
 alias art="artisan"
 alias a="artisan"
 alias horizon="a horizon"
-alias h="a horizon"
 alias acc="a cache:clear"
 
 alias mf="a migrate"
@@ -60,3 +59,12 @@ alias ct="composer test"
 
 # System
 alias reload="source ~/.zshrc"
+
+# Jrnl
+alias j="jrnl"
+alias today="jrnl -on today"
+alias yesterday="jrnl -on yesterday"
+
+# TODO
+alias todo="todo.sh"
+alias t="todo.sh"

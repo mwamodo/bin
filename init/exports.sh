@@ -23,6 +23,10 @@ export XDEBUG_MODE=coverage
 # Flutter
 export PATH="$PATH:$HOME/Code/Externals/flutter/bin"
 
+# Command Line
+export HISTIGNORE="jrnl*:history:ls:ll:la:clear"
+export HISTCONTROL=ignoredups
+
 # This loads nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -63,7 +67,6 @@ commit () {
 }
 
 commit:push () {
-
     commitMessage="$1"
     gitCurrentBranch=$(git branch --show-current)
 
