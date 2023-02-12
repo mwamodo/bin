@@ -5,7 +5,7 @@
    export EDITOR='mvim'
  fi
 
-source ${HOME}/bin/init/aliases.sh
-source ${HOME}/bin/init/exports.sh
+[[ -f ${HOME}/bin/.zsh/aliases.sh ]] && source ${HOME}/bin/.zsh/aliases.sh
+[[ -f ${HOME}/bin/.zsh/exports.sh ]] && source ${HOME}/bin/.zsh/exports.sh
 
 eval "$(starship init zsh)"

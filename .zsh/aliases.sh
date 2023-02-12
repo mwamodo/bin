@@ -10,6 +10,7 @@ alias sites="cd ~/Sites"
 alias packages="cd ~/Packages"
 
 # Git aliases
+alias g="git"
 alias gs="g status -s"
 alias gst="gs"
 alias gpo="g push origin"
