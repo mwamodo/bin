@@ -48,6 +48,12 @@ ln -s "${HOME}/bin/vim/plugins.vim" "${HOME}/.vim/plugins.vim"
 vim +PluginInstall +qall
 ```
 
+7. Add starship config file
+
+```bash
+ln -s "${HOME}/bin/.configs/starship.toml" "${HOME}/.config/starship.toml"
+```
+
 ## aditional optional settings
 
 1. create global .gitignore file
