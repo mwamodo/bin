@@ -48,15 +48,18 @@ ln -s "${HOME}/bin/vim/plugins.vim" "${HOME}/.vim/plugins.vim"
 vim +PluginInstall +qall
 ```
 
-## setting up git and github
+## aditional optional settings
 
-1. install github
-2. add git global gitignore
+1. create global .gitignore file
 
 ```bash
 # link gitignore global
 ln -s "${HOME}/bin/.gitignore_global" "${HOME}/.gitignore"
+```
 
+2. add git global gitignore
+
+```bash
 # tell git about the global gitignore file
 git config --global core.excludesfile ~/.gitignore
 ```
