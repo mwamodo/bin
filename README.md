@@ -7,13 +7,16 @@
 
 1. clone the repo to $HOME dir
 
-2. install `zsh` & `oh my zsh` and link your $HOME/.zshrc to $HOME/bin/.vimrc
+2. install `zsh` & `starship` and link your $HOME/.zshrc to $HOME/bin/.vimrc
 
 ```bash
-# Backup your .zshrc file
+# install zsh
+brew install starship
+
+# backup your .zshrc file
 mv "${HOME}/.zshrc" "${HOME}/.zshrc-old"
 
-# Link file
+# link file
 ln -s "${HOME}/bin/.zshrc" "${HOME}/.zshrc"
 ```
 

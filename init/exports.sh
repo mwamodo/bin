@@ -2,13 +2,10 @@
 NPM_PACKAGES="${HOME}/.npm-packages"
 
 # insert globally installed npm packages to path homebrew to PATH
-export PATH="$NPM_PACKAGES/bin:/opt/homebrew/bin:$HOME/bin/scripts:$PATH"
+export PATH="$NPM_PACKAGES/bin:/opt/homebrew/bin:$HOME/bin/scripts:$HOME/.composer/vendor/bin:/opt/homebrew/sbin:$PATH"
 
 # unset manpath so we can inherit from /etc/manpath via the `manpath` command
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
-
-# PHP
-export XDEBUG_MODE=coverage
 
 # commandline
 export HISTCONTROL=ignoredups
@@ -39,7 +36,7 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
-# git and github
+# git and github functions
 commit () {
     commitMessage="$1"
 
@@ -65,3 +62,6 @@ commit:push () {
     eval "git commit -a -m '${commitMessage}'"
     eval "git push origin ${gitCurrentBranch}"
 }
+
+# misc.
+export GPG_TTY=$(tty)
