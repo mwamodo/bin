@@ -24,11 +24,9 @@ set guioptions-=r
 set guioptions-=R
 
 
-
 "-----General Settings-----"
 "make backspace behave like normal text editors.
 set backspace=indent,eol,start
-
 
 
 "-----Mappings-----"
@@ -37,7 +35,6 @@ let mapleader = ','
 
 "Make NerdTree toogle easier
 nmap <D-S-e> :NERDTreeToggle<cr>
-
 
 
 "---------Plugins---------"
@@ -58,14 +55,12 @@ set hlsearch
 set incsearch
 
 
-
 "--------Mappings---------"
 "make .vimrc easy to edit
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 
 "Add simple highlight removal.
 nmap <Leader><space> :nohlsearch<cr>
-
 
 
 "-------------Split Management-----
@@ -76,7 +71,6 @@ nmap <C-J> <C-W><C-J>
 nmap <C-K> <C-W><C-K>
 nmap <C-H> <C-W><C-H>
 nmap <C-L> <C-W><C-L>
-
 
 
 "---------Auto-Commands---------"

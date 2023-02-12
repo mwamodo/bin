@@ -87,3 +87,5 @@ source $ZSH/oh-my-zsh.sh
 
 source ${HOME}/bin/init/aliases.sh
 source ${HOME}/bin/init/exports.sh
+
+export GPG_TTY=$(tty)
