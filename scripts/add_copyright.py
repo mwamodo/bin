@@ -9,13 +9,13 @@ directory = os.getcwd()
 
 # Copyright information to be added
 copyright = """<?php
-            /**
-            * Copyright (c) """ + str(date.today().year) + """ ApexCode
-            * All rights reserved.
+/**
+* Copyright (c) """ + str(date.today().year) + """ ApexCode
+* All rights reserved.
 
-            * The contents of this file may not be reproduced, distributed or modified without prior written permission from ApexCode.
-            * Unauthorized use and distribution of this code is strictly prohibited.
-            */"""
+* The contents of this file may not be reproduced, distributed or modified without prior written permission from ApexCode.
+* Unauthorized use and distribution of this code is strictly prohibited.
+*/"""
 
 # Iterate through all PHP files in the directory
 for filename in os.listdir(directory):
@@ -39,4 +39,3 @@ for filename in os.listdir(directory):
         with open(os.path.join(directory, filename), "w") as f:
             # Write the modified contents to the file
             f.write(filedata)
-            
