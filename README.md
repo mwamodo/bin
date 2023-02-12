@@ -44,3 +44,16 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ln -s "${HOME}/bin/vim/plugins.vim" "${HOME}/.vim/plugins.vim"
 vim +PluginInstall +qall
 ```
+
+## setting up git and github
+
+1. install github
+2. add git global gitignore
+
+```bash
+# link gitignore global
+ln -s "${HOME}/bin/.gitignore_global" "${HOME}/.gitignore"
+
+# tell git about the global gitignore file
+git config --global core.excludesfile ~/.gitignore
+```

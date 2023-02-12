@@ -1,26 +1,23 @@
 # npm global path to prevent install npm with sudo
 NPM_PACKAGES="${HOME}/.npm-packages"
 
-# Insert globally installed npm packages to path and local bin
-export PATH="$PATH:$NPM_PACKAGES/bin"
+# insert globally installed npm packages to path homebrew to PATH
+export PATH="$NPM_PACKAGES/bin:/opt/homebrew/bin:$HOME/bin/scripts:$PATH"
 
-# Insert homebrew to PATH
-export PATH="$PATH:/opt/homebrew/bin"
-
-# Unset manpath so we can inherit from /etc/manpath via the `manpath` command
+# unset manpath so we can inherit from /etc/manpath via the `manpath` command
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 # PHP
 export XDEBUG_MODE=coverage
 
-# Command Line
+# commandline
 export HISTCONTROL=ignoredups
 
-# This loads nvm
+# this loads nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-# Load node version in a project with .nvmrc file
+# load node version in a project with .nvmrc file
 autoload -U add-zsh-hook
 load-nvmrc() {
   local node_version="$(nvm version)"
@@ -42,7 +39,7 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
-# Git and GitHub
+# git and github
 commit () {
     commitMessage="$1"
 
@@ -56,7 +53,6 @@ commit () {
 }
 
 commit:push () {
-
     commitMessage="$1"
     gitCurrentBranch=$(git branch --show-current)
 

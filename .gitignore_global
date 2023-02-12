@@ -1,17 +1,17 @@
-# OS Files
+# OS files
 .DS_Store
 
-# Development
+# dev environment
 node_modules/
 npm-debug.log
 
 # vi
 *~
 
-# General
+# general
 *.log
 log/
 
-#etc
+# etc
 .idea/
 haters/

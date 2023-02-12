@@ -1,13 +1,13 @@
-#! /opt/homebrew/bin/python3
+#! /usr/bin/python3
 
 from datetime import date
 import os
 import re
 
-# Get current working directory
+# get current working directory
 directory = os.getcwd()
 
-# Copyright information to be added
+# copyright information to be added
 copyright = """<?php
 /**
 * Copyright (c) """ + str(date.today().year) + """ ApexCode
@@ -17,25 +17,25 @@ copyright = """<?php
 * Unauthorized use and distribution of this code is strictly prohibited.
 */"""
 
-# Iterate through all PHP files in the directory
+# iterate through all PHP files in the directory
 for filename in os.listdir(directory):
     if filename.endswith(".php"):
-        # Open the file in read mode
+        # open the file in read mode
         with open(os.path.join(directory, filename), "r") as f:
             # Read the contents of the file
             filedata = f.read()
 
-        # If the file already has a copyright, skip it
+        # if the file already has a copyright, skip it
         if "Copyright (c)" in filedata:
             continue
 
-        # Replace the opening PHP tag with an empty string
+        # replace the opening PHP tag with an empty string
         filedata = re.sub(r"<\?php","", filedata)
 
-        # Insert the copyright information at the top of the file
+        # insert the copyright information at the top of the file
         filedata = copyright + filedata
 
-        # Open the file in write mode
+        # open the file in write mode
         with open(os.path.join(directory, filename), "w") as f:
             # Write the modified contents to the file
             f.write(filedata)
