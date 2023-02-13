@@ -7,7 +7,6 @@
 
 [[ -f ${HOME}/bin/.zsh/aliases.sh ]] && source ${HOME}/bin/.zsh/aliases.sh
 [[ -f ${HOME}/bin/.zsh/exports.sh ]] && source ${HOME}/bin/.zsh/exports.sh
-[[ -f ${HOME}/bin/.zsh/functions.sh ]] && source ${HOME}/bin/.zsh/functions.sh
 [[ -f ${HOME}/bin/.zsh/starship.sh ]] && source ${HOME}/bin/.zsh/starship.sh
 
 eval "$(starship init zsh)"

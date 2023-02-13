@@ -38,3 +38,30 @@ load-nvmrc
 
 # misc.
 export GPG_TTY=$(tty)
+
+# functions
+commit () {
+    commitMessage="$1"
+
+    if [ "$commitMessage" = "" ]
+    then
+        commitMessage="WIP"
+    fi
+
+    git add .
+    eval "git commit -a -m '${commitMessage}'"
+}
+
+commit:push () {
+    commitMessage="$1"
+    gitCurrentBranch=$(git branch --show-current)
+
+    if [ "$commitMessage" = "" ]
+    then
+        commitMessage="WIP"
+    fi
+
+    git add .
+    eval "git commit -a -m '${commitMessage}'"
+    eval "git push origin ${gitCurrentBranch}"
+}
