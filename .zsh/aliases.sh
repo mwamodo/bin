@@ -60,3 +60,6 @@ alias ct="composer test"
 
 # System
 alias reload="source ~/.zshrc"
+
+# php and laravel
+alias sail='[ -f sail ] && sh sail || sh ./vendor/bin/sail'
