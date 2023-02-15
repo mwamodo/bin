@@ -41,6 +41,9 @@ alias a:t="artisan:test"
 alias artisan:enlightn="a enlightn --report"
 alias a:e="artisan:enlightn"
 
+alias npm:dev="sail npm run dev"
+alias npm:build="sail npm run build"
+
 alias mf="a migrate"
 alias ms="a migrate:status"
 alias mff="a migrate:fresh && a cache:clear"
