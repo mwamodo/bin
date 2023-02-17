@@ -24,6 +24,7 @@ alias h="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5"
 
 # PHP | laravel
 alias sail='[ -f sail ] && sh sail || sh ./vendor/bin/sail'
+alias s="sail"
 
 alias artisan="sail artisan"
 alias art="artisan"
