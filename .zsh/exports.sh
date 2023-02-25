@@ -65,3 +65,7 @@ commit:push () {
     eval "git commit -a -m '${commitMessage}'"
     eval "git push origin ${gitCurrentBranch}"
 }
+
+docker:clean() {
+    d image prune -af && d volume prune -f && d container prune -f
+}

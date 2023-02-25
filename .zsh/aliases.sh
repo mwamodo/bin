@@ -58,3 +58,6 @@ alias db:seed="a db:seed"
 
 # system
 alias reload="source ~/.zshrc"
+
+# docker
+alias d="docker"
