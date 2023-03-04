@@ -10,3 +10,4 @@
 [[ -f ${HOME}/bin/.zsh/starship.sh ]] && source ${HOME}/bin/.zsh/starship.sh
 
 eval "$(starship init zsh)"
+eval "$(twilio autocomplete:script zsh)"
