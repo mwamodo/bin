@@ -2,7 +2,7 @@
 NPM_PACKAGES="${HOME}/.npm-packages"
 
 # insert globally installed npm packages to path homebrew to PATH
-export PATH="$NPM_PACKAGES/bin:/opt/homebrew/bin:$HOME/bin/.scripts:$HOME/.composer/vendor/bin:/opt/homebrew/sbin:$PATH"
+export PATH="$HOME/.local/bin:$NPM_PACKAGES/bin:/opt/homebrew/bin:$HOME/bin/.scripts:$HOME/.composer/vendor/bin:/opt/homebrew/sbin:$PATH"
 
 # unset manpath so we can inherit from /etc/manpath via the `manpath` command
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
@@ -64,8 +64,4 @@ commit:push () {
     git add .
     eval "git commit -a -m '${commitMessage}'"
     eval "git push origin ${gitCurrentBranch}"
-}
-
-docker:clean() {
-    d image prune -af && d volume prune -f && d container prune -f
 }

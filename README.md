@@ -11,13 +11,13 @@ This Repository Dotfiles contain my personal config files. Here you'll find conf
 
 1. clone the repo to $HOME dir
 
-2. install `zsh` & `starship` and link your $HOME/.zshrc to $HOME/bin/.vimrc
+2. install `oh-my-zsh` and link your $HOME/.zshrc to $HOME/bin/.vimrc
 
 ```bash
-# install zsh
-brew install starship
+# run the command below an be found https://ohmyz.sh/#install
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# backup your .zshrc file
+# backup the original .zshrc file
 mv "${HOME}/.zshrc" "${HOME}/.zshrc-old"
 
 # link file
@@ -52,12 +52,6 @@ ln -s "${HOME}/bin/vim/plugins.vim" "${HOME}/.vim/plugins.vim"
 vim +PluginInstall +qall
 ```
 
-7. Add starship config file
-
-```bash
-ln -s "${HOME}/bin/.configs/starship.toml" "${HOME}/.config/starship.toml"
-```
-
 ## aditional optional settings
 
 1. create global .gitignore file
@@ -72,4 +66,11 @@ ln -s "${HOME}/bin/.gitignore_global" "${HOME}/.gitignore"
 ```bash
 # tell git about the global gitignore file
 git config --global core.excludesfile ~/.gitignore
+```
+
+3. install dependancies
+
+```bash
+# install truncate. required in laravel alias log:clear
+brew install truncate
 ```
