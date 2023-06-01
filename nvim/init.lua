@@ -1,0 +1,1 @@
+require('mwamodo/options')
