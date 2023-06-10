@@ -9,6 +9,6 @@ hide_window_decorations titlebar-only
 window_padding_width 8
 
 # BEGIN_KITTY_THEME
-# GitHub Light
+# One Dark
 include current-theme.conf
 # END_KITTY_THEME
