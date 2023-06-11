@@ -104,3 +104,5 @@ fi
 [[ -f ${HOME}/bin/zsh/exports.sh ]] && source ${HOME}/bin/zsh/exports.sh
 
 eval "$(twilio autocomplete:script zsh)"
+
+eval "$(op completion zsh)"; compdef _op op
