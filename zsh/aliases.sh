@@ -37,3 +37,6 @@ alias db:seed="a db:seed"
 
 # system
 alias reload="source ~/.zshrc"
+
+# github
+alias gs="git status"
