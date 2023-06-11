@@ -9,6 +9,8 @@ hide_window_decorations titlebar-only
 window_padding_width 8
 
 # BEGIN_KITTY_THEME
-# One Dark
-include current-theme.conf
+# Atom One Light
+# include current-theme.conf
 # END_KITTY_THEME
+
+include rose-pine.conf
