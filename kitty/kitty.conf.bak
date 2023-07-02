@@ -8,9 +8,9 @@ enable_audio_bell 0
 hide_window_decorations titlebar-only
 window_padding_width 8
 
-# BEGIN_KITTY_THEME
-# Atom One Light
-# include current-theme.conf
-# END_KITTY_THEME
-
 include rose-pine.conf
+
+# BEGIN_KITTY_THEME
+# Rosé Pine Moon
+include current-theme.conf
+# END_KITTY_THEME

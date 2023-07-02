@@ -65,3 +65,9 @@ commit:push () {
     eval "git commit -a -m '${commitMessage}'"
     eval "git push origin ${gitCurrentBranch}"
 }
+
+commit:today () {
+    git add .
+    eval "git commit -m '$(date +\"%Y-%m-%d\")'"
+    eval "git push origin ${gitCurrentBranch}"
+}
