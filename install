@@ -2,19 +2,42 @@
 
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
-rm -rf $HOME/.tmux.conf
-ln -s $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
+rm -f $HOME/.zshrc
+ln -s $DOTFILES/.zshrc $HOME/.zshrc
 
+# link copyright script
 mkdir -p $HOME/.local/bin
-
-rm -rf $HOME/.local/bin/t
-ln -s $DOTFILES/scripts/t $HOME/.local/bin/t
-
 rm -rf $HOME/.local/bin/copyright
 ln -s $DOTFILES/scripts/copyright $HOME/.local/bin/copyright
 
-rm -rf $HOME/.config/nvim
-ln -s $DOTFILES/nvim $HOME/.config/nvim
+# add warp themes
+rm -f $HOME/.warp
+ln -s $DOTFILES/warp $HOME/.warp
 
-rm -rf $HOME/.config/kitty
-ln -s $DOTFILES/kitty $HOME/.config/kitty
+# link your $HOME/.vimrc to $HOME/bin/.vimrc
+rm -f $HOME/.vimrc
+ln -s $DOTFILES/.vimrc $HOME/.vimrc
+
+# create .vim, and .vim/colors directory
+rm -rf "${HOME}/.vim"
+mkdir -p "${HOME}/.vim/colors"
+
+# copy vim themes to the created colors directory
+cp "${HOME}/bin/vim/colors/cobalt2.vim" "${HOME}/.vim/colors"
+cp "${HOME}/bin/vim/colors/atom-dark.vim" "${HOME}/.vim/colors"
+
+# set up vim plugins with Vundle
+mkdir -p "${HOME}/.vim/bundle"
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+ln -s "${HOME}/bin/vim/plugins.vim" "${HOME}/.vim/plugins.vim"
+vim +PluginInstall +qall
+
+# link gitignore global
+rm -f "${HOME}/.gitignore"
+ln -s "${HOME}/bin/.gitignore" "${HOME}/.gitignore"
+
+# tell git about the global gitignore file
+git config --global core.excludesfile ~/.gitignore
+
+# install truncate. required in laravel alias log:clear
+# brew install truncate

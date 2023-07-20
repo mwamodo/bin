@@ -1,5 +1,4 @@
 # Program & software aliases
-alias vim="nvim"
 alias vi="vim"
 alias v="vi"
 alias h="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5"
