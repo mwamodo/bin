@@ -39,3 +39,5 @@ alias reload="source ~/.zshrc"
 
 # github
 alias gs="git status"
+
+alias python="python3"
