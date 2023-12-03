@@ -21,8 +21,8 @@ alias a:t="artisan:test"
 alias artisan:enlightn="a enlightn --report"
 alias a:e="artisan:enlightn"
 
-alias npm:dev="sail npm run dev"
-alias npm:build="sail npm run build"
+alias npm:dev="npm run dev"
+alias npm:build="npm run build"
 alias nd="npm:dev"
 alias nb="npm:build"
 
