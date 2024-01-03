@@ -45,3 +45,6 @@ alias gs="git status"
 
 alias python="python3"
 alias pip="pip3"
+
+# projects
+alias inc_share="expose share https://incphone.test"
