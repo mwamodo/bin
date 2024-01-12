@@ -48,3 +48,4 @@ alias pip="pip3"
 
 # projects
 alias inc_share="expose share https://incphone.test"
+alias inc-share="inc_share"
