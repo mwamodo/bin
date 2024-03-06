@@ -25,3 +25,7 @@ cd $HOME/bin
 chmod +x install.sh
 ./install.sh
 ````
+
+## TODO
+
+1. add brew to the installation script
