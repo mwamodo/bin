@@ -1,6 +1,6 @@
 # Program & software aliases
-alias mvim="vim"
-alias vi="vim"
+alias vim="nvim"
+alias vi="nvim"
 alias v="vi"
 alias h="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5"
 
