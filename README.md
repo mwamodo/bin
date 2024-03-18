@@ -10,13 +10,14 @@ This Repository Dotfiles contain my personal config files. Here you'll find conf
 
 ## usage & installation
 
-1. clone the repo to $HOME dir
+1. install `git` then clone the repo to $HOME dir
 
 2. install `oh-my-zsh` and link your $HOME/.zshrc to $HOME/bin/.vimrc
 
-````bash
+```bash
 # run the command below an be found https://ohmyz.sh/#install
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
 
 3. run the installation script
 
@@ -24,7 +25,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 cd $HOME/bin
 chmod +x install.sh
 ./install.sh
-````
+```
 
 ## TODO
 

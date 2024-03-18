@@ -14,6 +14,10 @@ ln -s $DOTFILES/scripts/copyright $HOME/.local/bin/copyright
 rm -f $HOME/.warp
 ln -s $DOTFILES/warp $HOME/.warp
 
+# kitty terminal
+rm -rf $HOME/.config/kitty
+ln -s $DOTFILES/kitty $HOME/.config/kitty
+
 # link your $HOME/.vimrc to $HOME/bin/.vimrc
 rm -f $HOME/.vimrc
 ln -s $DOTFILES/.vimrc $HOME/.vimrc
@@ -38,6 +42,3 @@ ln -s "${HOME}/bin/.gitignore" "${HOME}/.gitignore"
 
 # tell git about the global gitignore file
 git config --global core.excludesfile ~/.gitignore
-
-# install truncate. required in laravel alias log:clear
-# brew install truncate
