@@ -18,6 +18,13 @@ ln -s $DOTFILES/warp $HOME/.warp
 rm -rf $HOME/.config/kitty
 ln -s $DOTFILES/kitty $HOME/.config/kitty
 
+# tmux
+rm -f $HOME/.tmux.conf
+ln -s $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
+
+rm -f $HOME/.local/bin/t
+ln -s $DOTFILES/scripts/t $HOME/.local/bin/t
+
 # link your $HOME/.vimrc to $HOME/bin/.vimrc
 rm -f $HOME/.vimrc
 ln -s $DOTFILES/.vimrc $HOME/.vimrc
