@@ -25,6 +25,9 @@ ln -s $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
 rm -f $HOME/.local/bin/t
 ln -s $DOTFILES/scripts/t $HOME/.local/bin/t
 
+rm -rf $HOME/.config/nvim
+ln -s $DOTFILES/nvim $HOME/.config/nvim
+
 # link your $HOME/.vimrc to $HOME/bin/.vimrc
 rm -f $HOME/.vimrc
 ln -s $DOTFILES/.vimrc $HOME/.vimrc
