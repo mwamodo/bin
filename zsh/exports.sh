@@ -20,6 +20,9 @@ export HISTCONTROL=ignoredups
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
+# set SSH_AUTH_SOCK for 1password
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+
 # load node version in a project with .nvmrc file
 autoload -U add-zsh-hook
 load-nvmrc() {
