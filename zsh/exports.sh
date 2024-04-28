@@ -2,13 +2,16 @@
 NPM_PACKAGES="${HOME}/.npm-packages"
 
 # insert globally installed npm packages to path homebrew to PATH
-export PATH="$HOME/.local/bin:$NPM_PACKAGES/bin:/usr/local/mysql/bin:$PATH"
+export PATH=$HOME/.local/bin:$NPM_PACKAGES/bin:/usr/local/mysql/bin:$PATH
 
 # redis path for DBngin
 export PATH=/Users/Shared/DBngin/redis/7.0.0/bin:$PATH
 
 # mysql path for DBngin
 export PATH=/Users/Shared/DBngin/mysql/8.0.33/bin:$PATH
+
+# Doom Emacs
+export PATH=$HOME/.config/emacs/bin:$PATH
 
 # unset manpath so we can inherit from /etc/manpath via the `manpath` command
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
