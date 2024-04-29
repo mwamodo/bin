@@ -23,8 +23,10 @@ alias a:e="artisan:enlightn"
 
 alias npm:dev="npm run dev"
 alias npm:build="npm run build"
-alias nd="npm:dev"
-alias nb="npm:build"
+alias n:d="npm:dev"
+alias nd="n:d"
+alias n:b="npm:build"
+alias nb="n:b"
 
 alias migrate="a migrate"
 alias mf="migrate"
@@ -51,3 +53,5 @@ alias pip="pip3"
 alias inc_share="expose share https://incphone.test"
 alias inc-share="inc_share"
 alias incshare="inc_share"
+
+alias emacs="emacsclient -c -a emacs"
