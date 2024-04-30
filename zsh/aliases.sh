@@ -28,6 +28,11 @@ alias nd="n:d"
 alias n:b="npm:build"
 alias nb="n:b"
 
+alias queue:work="php artisan queue:work"
+alias q:w="queue:work"
+alias queue:listen="php artisan queue:listen"
+alias q:l="queue:listen"
+
 alias migrate="a migrate"
 alias mf="migrate"
 alias ms="a migrate:status"
@@ -54,4 +59,6 @@ alias inc_share="expose share https://incphone.test"
 alias inc-share="inc_share"
 alias incshare="inc_share"
 
+# Editors
 alias emacs="emacsclient -c -a emacs"
+alias code="zed"
