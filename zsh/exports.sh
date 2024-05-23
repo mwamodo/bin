@@ -53,36 +53,58 @@ export GPG_TTY=$(tty)
 
 # functions
 commit () {
-    commitMessage="$1"
+    commitMessage="${1:-WIP}"  # Use the provided commit message or default to "WIP"
+    gitCurrentBranch=$(git branch --show-current)
 
-    if [ "$commitMessage" = "" ]
-    then
-        commitMessage="WIP"
+    if [ -z "$gitCurrentBranch" ]; then
+        echo "Error: Could not determine the current branch."
+        return 1
     fi
 
-    eval "git pull origin ${gitCurrentBranch}"
+    # Check if there are changes to stash
+    if ! git diff --quiet; then
+        git stash || { echo "Error: Could not stash changes."; return 1; }
+        stashNeeded=true
+    fi
 
-    git add .
-    eval "git commit -a -m '${commitMessage}'"
+    git pull --rebase origin "$gitCurrentBranch" || { echo "Error: Could not pull changes."; return 1; }
+
+    if [ "$stashNeeded" = true ]; then
+        git stash pop || { echo "Error: Could not pop stash."; return 1; }
+    fi
+
+    git add . || { echo "Error: Could not add changes."; return 1; }
+    git commit -m "$commitMessage" || { echo "Error: Could not commit changes."; return 1; }
+
+    echo "Changes have been successfully committed to ${gitCurrentBranch}."
 }
 
 commit:push () {
-    commitMessage="$1"
+    commitMessage="${1:-WIP}"  # Use the provided commit message or default to "WIP"
     gitCurrentBranch=$(git branch --show-current)
 
-    if [ "$commitMessage" = "" ]
-    then
-        commitMessage="WIP"
+    if [ -z "$gitCurrentBranch" ]; then
+        echo "Error: Could not determine the current branch."
+        return 1
     fi
 
-    eval "git stash"
-    eval "git pull origin ${gitCurrentBranch}"
+    # Check if there are changes to stash
+    if ! git diff --quiet; then
+        git stash || { echo "Error: Could not stash changes."; return 1; }
+        stashNeeded=true
+    fi
 
-    eval "git stash pop"
-    git add .
-    eval "git commit -a -m '${commitMessage}'"
+    git pull --rebase origin "$gitCurrentBranch" || { echo "Error: Could not pull changes."; return 1; }
 
-    eval "git push origin ${gitCurrentBranch}"
+    if [ "$stashNeeded" = true ]; then
+        git stash pop || { echo "Error: Could not pop stash."; return 1; }
+    fi
+
+    git add . || { echo "Error: Could not add changes."; return 1; }
+    git commit -m "$commitMessage" || { echo "Error: Could not commit changes."; return 1; }
+    git push origin "$gitCurrentBranch" || { echo "Error: Could not push changes."; return 1; }
+
+    echo "Changes have been successfully pushed to ${gitCurrentBranch}."
 }
 
 commit:today () {
