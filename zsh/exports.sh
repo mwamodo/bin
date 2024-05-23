@@ -60,6 +60,8 @@ commit () {
         commitMessage="WIP"
     fi
 
+    eval "git pull origin ${gitCurrentBranch}"
+
     git add .
     eval "git commit -a -m '${commitMessage}'"
 }
@@ -73,12 +75,16 @@ commit:push () {
         commitMessage="WIP"
     fi
 
+    eval "git pull origin ${gitCurrentBranch}"
+
     git add .
     eval "git commit -a -m '${commitMessage}'"
+
     eval "git push origin ${gitCurrentBranch}"
 }
 
 commit:today () {
+    eval "git pull origin ${gitCurrentBranch}"
     git add .
     eval "git commit -m '$(date +%Y-%m-%d)'"
     eval "git push origin ${gitCurrentBranch}"
