@@ -75,8 +75,10 @@ commit:push () {
         commitMessage="WIP"
     fi
 
+    eval "git stash"
     eval "git pull origin ${gitCurrentBranch}"
 
+    eval "git stash pop"
     git add .
     eval "git commit -a -m '${commitMessage}'"
 
