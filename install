@@ -50,5 +50,12 @@ vim +PluginInstall +qall
 rm -f "${HOME}/.gitignore"
 ln -s "${HOME}/bin/.gitignore" "${HOME}/.gitignore"
 
+# yabai configuration
+rm -f "${HOME}/.config/yabai/yabairc"
+ln -s "${HOME}/bin/yabai/yabairc" "${HOME}/.config/yabai/yabairc"
+
+rm -f "${HOME}/.config/skhd/skhdrc"
+ln -s "${HOME}/bin/skhd/skhdrc" "${HOME}/.config/skhd/skhdrc"
+
 # tell git about the global gitignore file
 git config --global core.excludesfile ~/.gitignore
