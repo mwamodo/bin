@@ -30,3 +30,9 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Telegram$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^ChatGPT$" manage=off
+
+yabai -m rule --add app="^JetBrains Toolbox$" manage=off
+
+# make jetbrains products popup windows float
+yabai -m rule --add app="^PhpStorm$" manage=off
+yabai -m rule --add app="^PhpStorm$" title="( – )"  manage=on
