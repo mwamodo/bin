@@ -62,3 +62,6 @@ alias incshare="inc_share"
 # Editors
 alias emacs="emacsclient -c -a emacs"
 alias code="zed"
+
+alias ls="lsd"
+alias ll="lsd -Fl"
