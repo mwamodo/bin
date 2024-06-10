@@ -10,8 +10,7 @@ export PATH="/Users/Shared/DBngin/redis/7.0.0/bin:$PATH"
 # mysql path for DBngin
 export PATH="/Users/Shared/DBngin/mysql/8.0.33/bin:$PATH"
 
-# Doom Emacs
-export PATH="$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/bin/scripts:$PATH"
 
 # unset manpath so we can inherit from /etc/manpath via the `manpath` command
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
@@ -29,21 +28,21 @@ export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agen
 # load node version in a project with .nvmrc file
 autoload -U add-zsh-hook
 load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
+	local node_version="$(nvm version)"
+	local nvmrc_path="$(nvm_find_nvmrc)"
 
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+	if [ -n "$nvmrc_path" ]; then
+		local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
 
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
+		if [ "$nvmrc_node_version" = "N/A" ]; then
+			nvm install
+		elif [ "$nvmrc_node_version" != "$node_version" ]; then
+			nvm use
+		fi
+	elif [ "$node_version" != "$(nvm version default)" ]; then
+		echo "Reverting to nvm default version"
+		nvm use default
+	fi
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc

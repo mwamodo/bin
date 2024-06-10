@@ -1,18 +1,18 @@
 #!/bin/bash
 
 if [[ $# -eq 1 ]]; then
-    selected=$1
+	selected=$1
 else
-    items=`find ~/Herd -maxdepth 1 -mindepth 1 -type d`
-    items+=`echo -e "\n/tmp"`
-    selected=`echo "$items" | fzf`
+	items=$(find ~/web -maxdepth 1 -mindepth 1 -type d)
+	items+=$(echo -e "\n/tmp")
+	selected=$(echo "$items" | fzf)
 fi
 
-dirname=`basename $selected | sed 's/\./_/g'`
+dirname=$(basename $selected | sed 's/\./_/g')
 
 tmux switch-client -t =$dirname
 if [[ $? -eq 0 ]]; then
-    exit 0
+	exit 0
 fi
 
 tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname

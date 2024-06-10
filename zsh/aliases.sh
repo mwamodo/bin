@@ -54,13 +54,7 @@ alias gs="git status"
 alias python="python3"
 alias pip="pip3"
 
-# projects
-alias inc_share="expose share https://incphone.test"
-alias inc-share="inc_share"
-alias incshare="inc_share"
-
 # Editors
-alias emacs="emacsclient -c -a emacs"
 alias code="zed"
 
 alias ls="lsd"
