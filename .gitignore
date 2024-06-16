@@ -20,3 +20,13 @@ node_modules
 .sass-cache
 .vscode
 .idea
+
+# From lazyvim
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
