@@ -3,7 +3,7 @@ bold_font        JetBrainsMono Nerd Font Mono Bold
 italic_font      JetBrainsMono Nerd Font Mono Italic
 bold_italic_font JetBrainsMono Nerd Font Mono ExtraBold Italic
 
-font_size 13
+font_size 14
 adjust_line_height 155%
 
 cursor_blink_interval 0
@@ -16,6 +16,6 @@ placement_strategy center
 
 
 # BEGIN_KITTY_THEME
-# One Dark
+# Github
 include current-theme.conf
 # END_KITTY_THEME

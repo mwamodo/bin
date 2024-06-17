@@ -58,3 +58,8 @@ alias code="zed"
 # ls & lsd
 alias ls="lsd"
 alias ll="lsd -Fl"
+
+# git and git-cli
+alias g="git"
+alias gst="g status"
+alias gaa="g add ."
