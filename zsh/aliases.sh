@@ -1,10 +1,10 @@
-# Program & software aliases
+# programs & software aliases
 alias vim="nvim"
 alias vi="nvim"
 alias v="vi"
 alias h="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5"
 
-# Laravel
+# laravel & dev work
 alias artisan="php artisan"
 alias art="artisan"
 alias a="artisan"
@@ -48,14 +48,13 @@ alias db:seed="a db:seed"
 # system
 alias reload="source ~/.zshrc"
 
-# github
-alias gs="git status"
-
+# python
 alias python="python3"
 alias pip="pip3"
 
-# Editors
+# editors
 alias code="zed"
 
+# ls & lsd
 alias ls="lsd"
 alias ll="lsd -Fl"
