@@ -3,9 +3,10 @@
 if [[ $# -eq 1 ]]; then
 	selected=$1
 else
-	items=$(find ~/web -maxdepth 1 -mindepth 1 -type d)
-	items+=$(echo -e "\n/tmp")
-	selected=$(echo "$items" | fzf)
+items=$(find ~/web -maxdepth 1 -mindepth 1 -type d)
+    items=$(echo -e "$items\n$(find ~/tmp -maxdepth 0)")
+    items=$(echo -e "$items\n$(find ~/tmp -maxdepth 1 -mindepth 1 -type d)")
+    selected=$(echo -e "$items" | fzf)
 fi
 
 dirname=$(basename $selected | sed 's/\./_/g')
