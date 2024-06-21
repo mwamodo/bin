@@ -45,6 +45,9 @@ alias tinker="a tinker"
 alias db:wipe="a db:wipe"
 alias db:seed="a db:seed"
 
+alias share="herd share"
+alias h:s="share"
+
 # system
 alias reload="source ~/.zshrc"
 
