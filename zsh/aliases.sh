@@ -74,3 +74,6 @@ alias gp="git push"
 alias gpom="gp origin main"
 alias gaa-gcm="gaa && gcm"
 alias commit="gaa-gcm"
+
+# youtube-dl
+alias youtube-dl-mp4="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'"
