@@ -49,3 +49,4 @@ load-nvmrc
 
 # misc.
 export GPG_TTY=$(tty)
+source <(fzf --zsh)
