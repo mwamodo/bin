@@ -55,9 +55,6 @@ alias reload="source ~/.zshrc"
 alias python="python3"
 alias pip="pip3"
 
-# editors
-alias code="zed"
-
 # ls & lsd
 alias ls="lsd"
 alias ll="lsd -Fl"
@@ -74,3 +71,8 @@ alias gp="git push"
 alias gpom="gp origin main"
 alias gaa-gcm="gaa && gcm"
 alias commit="gaa-gcm"
+
+# youtube-dl
+alias youtube-dl-mp4="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'"
+
+alias top="bpytop"
