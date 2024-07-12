@@ -59,6 +59,20 @@ alias pip="pip3"
 alias ls="lsd"
 alias ll="lsd -Fl"
 
+# git
+alias g="git"
+alias gst="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gp="git push"
+alias gpl="git pull"
+alias gb="git branch"
+alias gco="git checkout"
+alias gd="git diff"
+alias gl="git log"
+alias gll="git log --oneline --decorate --all --graph"
+
 # youtube-dl
 alias youtube-dl-mp4="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'"
 
