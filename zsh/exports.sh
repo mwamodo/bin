@@ -12,6 +12,8 @@ export PATH="/Users/Shared/DBngin/mysql/8.0.33/bin:$PATH"
 
 export PATH="$HOME/bin/scripts:$PATH"
 
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+
 # unset manpath so we can inherit from /etc/manpath via the `manpath` command
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
@@ -50,3 +52,30 @@ load-nvmrc
 # misc.
 export GPG_TTY=$(tty)
 source <(fzf --zsh)
+
+# functions
+commit () {
+    commitMessage="$1"
+
+    if [ "$commitMessage" = "" ]
+    then
+        commitMessage="WIP"
+    fi
+
+    git add .
+    eval "git commit -a -m '${commitMessage}'"
+}
+
+commit:push () {
+    commitMessage="$1"
+    gitCurrentBranch=$(git branch --show-current)
+
+    if [ "$commitMessage" = "" ]
+    then
+        commitMessage="WIP"
+    fi
+
+    git add .
+    eval "git commit -a -m '${commitMessage}'"
+    eval "git push origin ${gitCurrentBranch}"
+}
