@@ -50,9 +50,9 @@ alias h:s="share"
 
 alias duster="./vendor/bin/duster"
 alias duster:lint="duster lint"
-alias d:l="duster:lint"
+alias lint="duster:lint"
 alias duster:fix="duster fix"
-alias d:f="duster:fix"
+alias fix="duster:fix"
 
 # system
 alias reload="source ~/.zshrc"
