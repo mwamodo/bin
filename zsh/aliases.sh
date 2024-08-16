@@ -48,6 +48,12 @@ alias db:seed="a db:seed"
 alias share="herd share"
 alias h:s="share"
 
+alias duster="./vendor/bin/duster"
+alias duster:lint="duster lint"
+alias d:l="duster:lint"
+alias duster:fix="duster fix"
+alias d:f="duster:fix"
+
 # system
 alias reload="source ~/.zshrc"
 
