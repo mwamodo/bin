@@ -13,7 +13,7 @@ alias horizon="a horizon"
 alias h="a horizon"
 
 alias acc="a cache:clear"
-alias log:clear="truncate -s 0 storage/logs/laravel.log"
+alias log:clear="truncate -s 0 storage/logs/laravel*.log"
 
 alias artisan:test="a test --parallel"
 alias a:t="artisan:test"
@@ -48,6 +48,12 @@ alias db:seed="a db:seed"
 alias share="herd share"
 alias h:s="share"
 
+alias duster="./vendor/bin/duster"
+alias duster:lint="duster lint"
+alias d:l="duster:lint"
+alias duster:fix="duster fix"
+alias d:f="duster:fix"
+
 # system
 alias reload="source ~/.zshrc"
 
@@ -58,6 +64,23 @@ alias pip="pip3"
 # ls & lsd
 alias ls="lsd"
 alias ll="lsd -Fl"
+
+# git
+alias g="git"
+alias gst="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gp="git push"
+alias gpl="git pull"
+alias gb="git branch"
+alias gco="git checkout"
+alias gd="git diff"
+alias gl="git log"
+alias gll="git log --oneline --decorate --all --graph"
+
+# mysql herd
+alias mysql="mysql -u root -h 127.0.0.1 -P 3306 -p"
 
 # youtube-dl
 alias youtube-dl-mp4="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'"
