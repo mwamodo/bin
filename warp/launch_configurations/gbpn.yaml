@@ -1,0 +1,13 @@
+name: GBPN
+windows:
+  - tabs:
+      - title: "GBPN Expose"
+        layout:
+          cwd: /Users/mwamodo/web/gbpn
+          commands:
+            - exec: code .
+        color: green
+      - title: "GBPN Dev Phone"
+        layout:
+          cwd: /Users/mwamodo/web/gbpn
+        color: blue
