@@ -5,9 +5,17 @@ windows:
         layout:
           cwd: /Users/mwamodo/web/gbpn
           commands:
-            - exec: code .
+            - exec: h:s
         color: green
       - title: "GBPN Dev Phone"
         layout:
           cwd: /Users/mwamodo/web/gbpn
+          commands:
+            - exec: twilio dev-phone
         color: blue
+      - title: "GBPN Terminal"
+        layout:
+          cwd: /Users/mwamodo/web/gbpn
+          commands:
+            - exec: code .
+        color: purple
