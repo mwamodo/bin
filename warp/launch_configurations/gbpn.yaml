@@ -7,7 +7,7 @@ windows:
           commands:
             - exec: h:s
         color: green
-      - title: "GBPN Dev Phone"
+      - title: "GBPN DevPhone"
         layout:
           cwd: /Users/mwamodo/web/gbpn
           commands:
