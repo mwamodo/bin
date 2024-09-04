@@ -83,4 +83,5 @@ commit:push () {
 artisan:test-with-coverage() {
     local current_dir_name=$(basename "$PWD")
     a test --coverage-html "../coverage/${current_dir_name}/"
+    open "http://coverage.test/${current_dir_name}/"
 }
