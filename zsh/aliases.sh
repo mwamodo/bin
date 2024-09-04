@@ -15,8 +15,9 @@ alias h="a horizon"
 alias acc="a cache:clear"
 alias log:clear="truncate -s 0 storage/logs/laravel*.log"
 
-alias artisan:test="a test --parallel"
+alias artisan:test="a test"
 alias a:t="artisan:test"
+alias a:tp="a:t --parallel"
 alias a:tt="artisan:test-with-coverage"
 
 alias artisan:enlightn="a enlightn --report"
