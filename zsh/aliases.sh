@@ -17,6 +17,7 @@ alias log:clear="truncate -s 0 storage/logs/laravel*.log"
 
 alias artisan:test="a test --parallel"
 alias a:t="artisan:test"
+alias a:tt="artisan:test-with-coverage"
 
 alias artisan:enlightn="a enlightn --report"
 alias a:e="artisan:enlightn"

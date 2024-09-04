@@ -79,3 +79,8 @@ commit:push () {
     eval "git commit -a -m '${commitMessage}'"
     eval "git push origin ${gitCurrentBranch}"
 }
+
+artisan:test-with-coverage() {
+    local current_dir_name=$(basename "$PWD")
+    a test --coverage-html "../coverage/${current_dir_name}/"
+}
