@@ -46,3 +46,7 @@ vim +PluginInstall +qall
 rm -f "${HOME}/.gitignore"
 ln -s "${HOME}/bin/.gitignore" "${HOME}/.gitignore"
 git config --global core.excludesfile ~/.gitignore
+
+# link aerospace
+rm "${HOME}/.aerospace.toml"
+ln -s "${HOME}/bin/aerospace.toml" "${HOME}/.aerospace.toml"
