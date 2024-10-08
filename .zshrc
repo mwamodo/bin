@@ -127,3 +127,7 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 # eval "$(twilio autocomplete:script zsh)"
+
+
+# Herd injected PHP 8.0 configuration.
+export HERD_PHP_80_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/80/"
