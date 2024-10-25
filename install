@@ -2,31 +2,24 @@
 
 DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 
-rm -f $HOME/.zshrc
-ln -s $DOTFILES/.zshrc $HOME/.zshrc
+ln -Fsv $DOTFILES/.zshrc $HOME/.zshrc
 
 # link copyright script
 mkdir -p $HOME/.local/bin
-rm -rf $HOME/.local/bin/copyright
-ln -s $DOTFILES/scripts/copyright $HOME/.local/bin/copyright
+ln -Fsv $DOTFILES/scripts/copyright $HOME/.local/bin/copyright
 
 # tmux
-rm -f $HOME/.tmux.conf
-ln -s $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
+ln -Fsv $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
 
-rm -f $HOME/.local/bin/t
-ln -s $DOTFILES/.scripts/t $HOME/.local/bin/t
+ln -Fsv $DOTFILES/.scripts/t $HOME/.local/bin/t
 
-rm -rf $HOME/.config/nvim
-ln -s $DOTFILES/nvim $HOME/.config/nvim
+ln -Fsv $DOTFILES/nvim $HOME/.config/nvim
 
 # add warp themes
-rm -f $HOME/.warp
-ln -s $DOTFILES/warp $HOME/.warp
+ln -Fsv $DOTFILES/warp $HOME/.warp
 
 # link your $HOME/.vimrc to $HOME/bin/.vimrc
-rm -f $HOME/.vimrc
-ln -s $DOTFILES/.vimrc $HOME/.vimrc
+ln -Fsv $DOTFILES/.vimrc $HOME/.vimrc
 
 # create .vim, and .vim/colors directory
 rm -rf "${HOME}/.vim"
@@ -42,11 +35,12 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ln -s "${HOME}/bin/vim/plugins.vim" "${HOME}/.vim/plugins.vim"
 vim +PluginInstall +qall
 
+# set up nvim
+ln -Fsv "${HOME}/bin/nvim" "${HOME}/.config/nvim"
+
 # link gitignore global
-rm -f "${HOME}/.gitignore"
-ln -s "${HOME}/bin/.gitignore" "${HOME}/.gitignore"
+ln -Fsv "${HOME}/bin/.gitignore" "${HOME}/.gitignore"
 git config --global core.excludesfile ~/.gitignore
 
 # link aerospace
-rm "${HOME}/.aerospace.toml"
-ln -s "${HOME}/bin/aerospace.toml" "${HOME}/.aerospace.toml"
+ln -Fsv "${HOME}/bin/aerospace.toml" "${HOME}/.aerospace.toml"
