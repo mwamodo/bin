@@ -30,6 +30,9 @@ debug
 foo.*
 *.log
 data
+.luarc.json
+lazy-lock.json
+test.sh
 
 # IDE Helpers
 _ide_helper.php
