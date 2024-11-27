@@ -13,6 +13,7 @@ alias horizon="a horizon"
 alias h="a horizon"
 
 alias acc="a cache:clear"
+alias aop="a optimize:clear"
 alias log:clear="truncate -s 0 storage/logs/laravel*.log"
 
 alias artisan:test="a test"

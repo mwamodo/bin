@@ -131,3 +131,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Herd injected PHP 8.0 configuration.
 export HERD_PHP_80_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/80/"
+
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/84/"
