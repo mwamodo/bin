@@ -59,3 +59,17 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 10
+
+-- Enable better colors on the terminal
+vim.opt.termguicolors = true
+
+-- Ask for confirmations instead of erroring
+vim.opt.confirm = true
+
+-- Persist undo
+vim.opt.undofile = true
+
+-- Automatically save backups and keep them out of the current directory
+vim.opt.backup = true
+vim.opt.backupdir:remove '.'
