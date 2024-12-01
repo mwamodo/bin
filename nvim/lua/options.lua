@@ -24,6 +24,10 @@ end)
 -- Enable break indent
 vim.opt.breakindent = true
 
+-- Diable wrap by default.
+-- NOTE: You can use :set wrap and :set nowrap to enable and disable on session
+vim.opt.wrap = false
+
 -- Save undo history
 vim.opt.undofile = true
 
