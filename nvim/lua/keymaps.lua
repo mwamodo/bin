@@ -43,8 +43,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Moving lines up and down
+-- Moving lines up and down in i, v & n modes
+vim.keymap.set('i', '<C-k>', '<Esc>:move .-2<CR>==gi', { noremap = true })
+vim.keymap.set('i', '<C-j>', '<Esc>:move .+1<CR>==gi', { noremap = true })
 vim.keymap.set('n', '<C-j>', ':m .+1<CR>==', { noremap = true })
 vim.keymap.set('n', '<C-k>', ':m .-2<CR>==', { noremap = true })
 vim.keymap.set('v', '<C-j>', ":m '>+1<CR>gv=gv", { noremap = true })
 vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv=gv", { noremap = true })
+
+-- Easy insertion of a trailling ; or , from insert mode
+vim.keymap.set('i', ';;', '<Esc>A;')
+vim.keymap.set('i', ',,', '<Esc>A,')
+
+-- Duplicate line below
+vim.keymap.set('n', '<Leader>d', 'yy p', { noremap = true })
