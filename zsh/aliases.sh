@@ -89,5 +89,8 @@ alias mysql="mysql -u root -h 127.0.0.1 -P 3306 -p"
 # youtube-dl
 alias youtube-dl-mp4="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'"
 
+# switch from top to bpytop
 alias top="bpytop"
+
+# switch from neofetch to fastfetch
 alias neofetch="fastfetch"

@@ -1,6 +1,0 @@
-name: Home
-windows:
-  - tabs:
-      - title: "~"
-        layout:
-          cwd: /Users/mwamodo
