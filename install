@@ -42,5 +42,8 @@ ln -Fsv "${HOME}/bin/nvim" "${HOME}/.config/nvim"
 ln -Fsv "${HOME}/bin/.gitignore" "${HOME}/.gitignore"
 git config --global core.excludesfile ~/.gitignore
 
-# link aerospace
+# link aerospace config
 ln -Fsv "${HOME}/bin/aerospace.toml" "${HOME}/.aerospace.toml"
+
+# link ghostty config
+ln -Fsv "${HOME}/bin/ghostty" "${HOME}/.config/ghostty"
