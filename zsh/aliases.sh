@@ -5,6 +5,9 @@ alias v="vi"
 alias h="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5"
 
 # laravel & dev work
+alias php="herd php"
+alias composer="herd composer"
+
 alias artisan="php artisan"
 alias art="artisan"
 alias a="artisan"
