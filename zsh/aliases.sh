@@ -68,8 +68,11 @@ alias python="python3"
 alias pip="pip3"
 
 # ls & lsd
+alias l="lsd"
 alias ls="lsd"
-alias ll="lsd -Fl"
+alias la="l -A"
+alias ll="l -Fl"
+alias lla="l -FlA"
 
 # git
 alias g="git"
