@@ -42,9 +42,9 @@ alias q:l="queue:listen"
 alias migrate="a migrate"
 alias mf="migrate"
 alias ms="a migrate:status"
-alias mff="a migrate:fresh && a cache:clear"
-alias mfs="a migrate:fresh --seed && a cache:clear"
-alias mfsr="a migrate:fresh --seed && a cache:clear && redis-cli flushdb"
+alias mff="a migrate:fresh && a optimize:clear"
+alias mfs="a migrate:fresh --seed && a optimize:clear"
+alias mfsr="a migrate:fresh --seed && a optimize:clear && redis-cli flushdb"
 
 alias tinker="a tinker"
 
