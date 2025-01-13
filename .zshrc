@@ -100,6 +100,11 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Load environment variables from .env file
+if [ -f "$HOME/bin/.env" ]; then
+    export $(cat "$HOME/bin/.env" | grep -v '^#' | xargs)
+fi
+
 [[ -f ${HOME}/bin/zsh/aliases.sh ]] && source ${HOME}/bin/zsh/aliases.sh
 [[ -f ${HOME}/bin/zsh/exports.sh ]] && source ${HOME}/bin/zsh/exports.sh
 

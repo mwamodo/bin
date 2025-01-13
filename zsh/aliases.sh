@@ -100,3 +100,6 @@ alias top="bpytop"
 
 # switch from neofetch to fastfetch
 alias neofetch="fastfetch"
+
+# ssh
+alias lab="ssh mwamodo@${HOME_IP}"
