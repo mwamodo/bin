@@ -85,3 +85,11 @@ artisan:test-with-coverage() {
     a test --coverage-html "../coverage/${current_dir_name}/"
     open "http://coverage.test/${current_dir_name}/"
 }
+
+lab() {
+    if [ $# -eq 0 ]; then
+        ssh mwamodo@${HOME_IP}
+    else
+        ssh -tt mwamodo@${HOME_IP} "bash -ic '$*'"
+    fi
+}
