@@ -48,6 +48,11 @@ alias mfsr="a migrate:fresh --seed && a optimize:clear && redis-cli flushdb"
 
 alias tinker="a tinker"
 
+alias ide:helper="a ide-helper:generate && a ide-helper:meta && a ide-helper:models --nowrite"
+alias ide:helper:generate="a ide-helper:generate"
+alias ide:helper:meta="a ide-helper:meta"
+alias ide:helper:models="a ide-helper:models --nowrite"
+
 alias db:wipe="a db:wipe"
 alias db:seed="a db:seed"
 
