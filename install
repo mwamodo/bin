@@ -44,6 +44,3 @@ git config --global core.excludesfile ~/.gitignore
 
 # link aerospace config
 ln -Fsv "${HOME}/bin/aerospace.toml" "${HOME}/.aerospace.toml"
-
-# link ghostty config
-ln -Fsv "${HOME}/bin/ghostty" "${HOME}/.config/ghostty"

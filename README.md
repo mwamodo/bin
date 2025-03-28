@@ -30,4 +30,3 @@ chmod +x install.sh
 ## TODO
 
 1. add brew to the installation script
-2. install ghostty though brew
