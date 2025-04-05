@@ -1,30 +1,19 @@
 name: GBPN start
 windows:
   - tabs:
-      - title: TERMINAL - NPM - TWILIO
+      - title: EXPOSE - TWILIO
         layout:
           split_direction: horizontal
           panes:
-            - cwd: /Users/mwamodo/Developer/web/gbpn
+            - cwd: /Users/mwamodo/Herd/gbpn
               commands:
-                - exec: cursor .
+                - exec: npm run dev
             - split_direction: vertical
               panes:
-                - cwd: /Users/mwamodo/Developer/web/gbpn
+                - cwd: /Users/mwamodo/Herd/gbpn
                   commands:
-                    - exec: nd
-                - cwd: /Users/mwamodo/Developer/web/gbpn
+                    - exec: share
+                - cwd: /Users/mwamodo/Herd/gbpn
                   commands:
                     - exec: twilio dev-phone
         color: blue
-      - title: HERD SHARE - HORIZON
-        layout:
-          split_direction: horizontal
-          panes:
-            - cwd: /Users/mwamodo/Developer/web/gbpn
-              commands:
-                - exec: h:s
-            - cwd: /Users/mwamodo/Developer/web/gbpn
-              commands:
-                - exec: h
-        color: yellow
