@@ -139,3 +139,6 @@ export HERD_PHP_84_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(twilio autocomplete:script zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+
+# Added by Windsurf
+export PATH="/Users/mwamodo/.codeium/windsurf/bin:$PATH"
