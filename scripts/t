@@ -4,9 +4,9 @@ if [[ $# -eq 1 ]]; then
 	selected=$1
 else
     items=$(find ~/web -maxdepth 1 -mindepth 1 -type d)
-    items=$(echo -e "$items\n$(find ~/web -maxdepth 0)")
-    items=$(echo -e "$items\n$(find ~/tmp -maxdepth 0)")
-    items=$(echo -e "$items\n$(find ~/tmp -maxdepth 1 -mindepth 1 -type d)")
+    items=$(echo -e "$items\n$(find ~/Herd -maxdepth 0)")
+    items=$(echo -e "$items\n$(find ~/Archive -maxdepth 0)")
+    items=$(echo -e "$items\n$(find ~/Tmp -maxdepth 1 -mindepth 1 -type d)")
     selected=$(echo -e "$items" | fzf)
 fi
 
