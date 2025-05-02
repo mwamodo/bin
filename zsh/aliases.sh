@@ -94,6 +94,10 @@ alias gd="git diff"
 alias gl="git log"
 alias gll="git log --oneline --decorate --all --graph"
 
+#fancy git
+alias push="gp"
+alias push:main="gp origin main"
+
 # mysql herd
 alias mysql="mysql -u root -h 127.0.0.1 -P 3306 -p"
 
