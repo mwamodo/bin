@@ -41,6 +41,10 @@ ln -Fsv "${HOME}/bin/nvim" "${HOME}/.config/nvim"
 # set up ghostty config
 ln -Fsv "${HOME}/bin/ghostty" "${HOME}/Library/Application Support/com.mitchellh.ghostty"
 
+# set up yabai & skhd
+ln -Fsv "${HOME}/bin/yabai" "${HOME}/.config/yabai"
+ln -Fsv "${HOME}/bin/skhd" "${HOME}/.config/skhd"
+
 # link gitignore global
 ln -Fsv "${HOME}/bin/.gitignore" "${HOME}/.gitignore"
 git config --global core.excludesfile ~/.gitignore
