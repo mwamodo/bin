@@ -105,3 +105,6 @@ alias top="bpytop"
 
 # switch from neofetch to fastfetch
 alias neofetch="fastfetch"
+
+# switch from cat to bat
+alias cat="bat"
