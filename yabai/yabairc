@@ -32,3 +32,8 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^ChatGPT$" manage=off
 yabai -m rule --add app="^Herd$" manage=off
+yabai -m rule --add app="^Raycast$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Signal$" manage=off
+yabai -m rule --add app="^Messages" manage=off
+yabai -m rule --add app="^Telegram" manage=off
