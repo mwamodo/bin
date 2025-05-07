@@ -18,23 +18,6 @@ ln -Fsv $DOTFILES/nvim $HOME/.config/nvim
 # add warp themes
 ln -Fsv $DOTFILES/warp $HOME/.warp
 
-# link your $HOME/.vimrc to $HOME/bin/.vimrc
-ln -Fsv $DOTFILES/.vimrc $HOME/.vimrc
-
-# create .vim, and .vim/colors directory
-rm -rf "${HOME}/.vim"
-mkdir -p "${HOME}/.vim/colors"
-
-# copy vim themes to the created colors directory
-cp "${HOME}/bin/vim/colors/cobalt2.vim" "${HOME}/.vim/colors"
-cp "${HOME}/bin/vim/colors/atom-dark.vim" "${HOME}/.vim/colors"
-
-# set up vim plugins with Vundle
-mkdir -p "${HOME}/.vim/bundle"
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-ln -s "${HOME}/bin/vim/plugins.vim" "${HOME}/.vim/plugins.vim"
-vim +PluginInstall +qall
-
 # set up nvim
 ln -Fsv "${HOME}/bin/nvim" "${HOME}/.config/nvim"
 
