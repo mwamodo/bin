@@ -1,3 +1,4 @@
+-- TODO: maybe use this https://github.com/cpplain/flexoki.nvim instead. Might have better syntax highlighting --
 return {
     { 'kepano/flexoki-neovim', name = 'flexoki' },
     {
