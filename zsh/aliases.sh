@@ -92,6 +92,7 @@ alias gb="git branch"
 alias gco="git checkout"
 alias gd="git diff"
 alias gl="git log"
+alias gt="git tag -s"
 alias gll="git log --oneline --decorate --all --graph"
 
 #fancy git
