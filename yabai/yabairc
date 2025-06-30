@@ -44,4 +44,4 @@ yabai -m rule --add app="^Signal$" manage=off
 yabai -m rule --add app="^Messages" manage=off
 yabai -m rule --add app="^Telegram" manage=off
 yabai -m rule --add app="^Slack" manage=off
-yabai -m rule --add app="^Obsidian" manage=off
+yabai -m rule --add app="^Spotify" manage=off
