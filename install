@@ -11,7 +11,7 @@ ln -Fsv $DOTFILES/scripts/copyright $HOME/.local/bin/copyright
 # tmux
 ln -Fsv $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
 
-ln -Fsv $DOTFILES/.scripts/t $HOME/.local/bin/t
+ln -Fsv $DOTFILES/scripts/t $HOME/.local/bin/t
 
 ln -Fsv $DOTFILES/nvim $HOME/.config/nvim
 

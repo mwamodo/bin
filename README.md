@@ -7,6 +7,10 @@ This Repository Dotfiles contain my personal config files. Here you'll find conf
 ## Prerequisites
 
 1. git
+2. [oh-my-zsh](https://ohmyz.sh/)
+3. tmux
+4. neovim
+5. fzf *(optional for the `t` helper)*
 
 ## usage & installation
 
