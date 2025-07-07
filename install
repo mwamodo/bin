@@ -1,36 +1,66 @@
 #!/bin/bash
 
-DOTFILES=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+set -e
 
-ln -Fsv $DOTFILES/.zshrc $HOME/.zshrc
+DRY_RUN=false
+VERBOSE=false
 
-# link copyright script
-mkdir -p $HOME/.local/bin
-ln -Fsv $DOTFILES/scripts/copyright $HOME/.local/bin/copyright
+usage() {
+    echo "Usage: $0 [-n] [-v]" >&2
+    echo "  -n  dry run, show actions without executing" >&2
+    echo "  -v  verbose output" >&2
+}
 
-# tmux
-ln -Fsv $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
+while getopts ":nv" opt; do
+    case "$opt" in
+        n) DRY_RUN=true ;;
+        v) VERBOSE=true ;;
+        *) usage; exit 1 ;;
+    esac
+done
+shift $((OPTIND-1))
 
-ln -Fsv $DOTFILES/scripts/t $HOME/.local/bin/t
+OS=$(uname)
+DOTFILES=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-ln -Fsv $DOTFILES/nvim $HOME/.config/nvim
+log() {
+    [ "$VERBOSE" = true ] && echo "$@"
+}
 
-# add warp themes
-ln -Fsv $DOTFILES/warp $HOME/.warp
+link_file() {
+    local src="$1" dest="$2"
 
-# set up nvim
-ln -Fsv "${HOME}/bin/nvim" "${HOME}/.config/nvim"
+    if [ ! -e "$src" ]; then
+        echo "Error: source '$src' does not exist" >&2
+        exit 1
+    fi
 
-# set up ghostty config
-ln -Fsv "${HOME}/bin/ghostty" "${HOME}/Library/Application Support/com.mitchellh.ghostty"
+    log "ln -sf $src $dest"
+    if [ "$DRY_RUN" = false ]; then
+        ln -sf "$src" "$dest" || { echo "Failed to link $src -> $dest" >&2; exit 1; }
+    fi
+}
 
-# set up yabai & skhd
-ln -Fsv "${HOME}/bin/yabai" "${HOME}/.config/yabai"
-ln -Fsv "${HOME}/bin/skhd" "${HOME}/.config/skhd"
+# common directories
+mkdir -p "$HOME/.local/bin" "$HOME/.config" "$HOME/Library/Application Support" 2>/dev/null || true
 
-# link gitignore global
-ln -Fsv "${HOME}/bin/.gitignore" "${HOME}/.gitignore"
-git config --global core.excludesfile ~/.gitignore
+link_file "$DOTFILES/.zshrc" "$HOME/.zshrc"
+link_file "$DOTFILES/scripts/copyright" "$HOME/.local/bin/copyright"
+link_file "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
+link_file "$DOTFILES/scripts/t" "$HOME/.local/bin/t"
+link_file "$DOTFILES/nvim" "$HOME/.config/nvim"
+link_file "$DOTFILES/warp" "$HOME/.warp"
 
-# link aerospace config
-ln -Fsv "${HOME}/bin/aerospace.toml" "${HOME}/.aerospace.toml"
+# set up nvim config from local repo
+link_file "${HOME}/bin/nvim" "${HOME}/.config/nvim"
+
+if [[ "$OS" == "Darwin" ]]; then
+    link_file "${HOME}/bin/ghostty" "${HOME}/Library/Application Support/com.mitchellh.ghostty"
+    link_file "${HOME}/bin/yabai" "${HOME}/.config/yabai"
+    link_file "${HOME}/bin/skhd" "${HOME}/.config/skhd"
+fi
+
+link_file "${HOME}/bin/.gitignore" "${HOME}/.gitignore"
+git config --global core.excludesfile "$HOME/.gitignore"
+
+link_file "${HOME}/bin/aerospace.toml" "${HOME}/.aerospace.toml"

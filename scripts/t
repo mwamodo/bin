@@ -1,19 +1,38 @@
 #!/bin/bash
 
+# Helper to create or attach to tmux sessions for project directories.
+# If no directory is provided, fzf is used to select one from common locations.
+
+set -e
+
+usage() {
+    echo "Usage: $0 [DIRECTORY]" >&2
+    exit 1
+}
+
+# Determine the directory to open
+if [[ $# -gt 1 ]]; then
+    usage
+fi
+
 if [[ $# -eq 1 ]]; then
-	selected=$1
+    project_dir=$1
 else
     items=$(find ~/Code/Herd -maxdepth 1 -mindepth 1 -type d ! -name ".flux")
     items=$(echo -e "$items\n$(find ~/bin -maxdepth 0)")
-    # items=$(echo -e "$items\n$(find ~/Tmp -maxdepth 1 -mindepth 1 -type d)")
-    selected=$(echo -e "$items" | fzf)
+    project_dir=$(echo -e "$items" | fzf)
 fi
 
-dirname=$(basename $selected | sed 's/\./_/g')
-
-if tmux has-session -t "$dirname" 2>/dev/null; then
-    tmux switch-client -t "$dirname"
-    exit 0
+if [[ -z "$project_dir" || ! -d "$project_dir" ]]; then
+    echo "No valid directory selected" >&2
+    usage
 fi
 
-tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname
+session_name=$(basename "$project_dir" | sed 's/\./_/g')
+
+if [[ -n "$TMUX" ]]; then
+    tmux new-session -A -d -s "$session_name" -c "$project_dir"
+    tmux switch-client -t "$session_name"
+else
+    tmux new-session -A -s "$session_name" -c "$project_dir"
+fi
