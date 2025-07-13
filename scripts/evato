@@ -2,6 +2,9 @@
 
 # Envato SaaS Earnings Calculator
 
+# TODO: ability to -s 10 to split regular & extended sales 50/50 and just ask prices
+# TODO: ability to add -r 49 -e 499 to set prices then be able to do -s 10 -r 49 -e 499.
+
 # Author fee rate (37.5%)
 FEE_RATE=0.375
 
