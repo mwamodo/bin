@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Envato SaaS Earnings Calculator
+
+# Author fee rate (37.5%)
+FEE_RATE=0.375
+
+# Default exchange rate
+DEFAULT_EXCHANGE_RATE=130
+
+# Prompt user input
+read -p "Enter Regular License Price (e.g. 49): " REGULAR_PRICE
+read -p "Enter Regular License Sales Count: " REGULAR_SALES
+read -p "Enter Extended License Price (e.g. 499): " EXTENDED_PRICE
+read -p "Enter Extended License Sales Count: " EXTENDED_SALES
+read -p "Enter USD to KES Exchange Rate [default: $DEFAULT_EXCHANGE_RATE]: " USD_TO_KES
+
+# Fallback to default if empty
+USD_TO_KES=${USD_TO_KES:-$DEFAULT_EXCHANGE_RATE}
+
+# Calculate Regular earnings
+REGULAR_FEE=$(echo "$REGULAR_PRICE * $FEE_RATE" | bc -l)
+REGULAR_NET=$(echo "$REGULAR_PRICE - $REGULAR_FEE" | bc -l)
+REGULAR_TOTAL=$(echo "$REGULAR_NET * $REGULAR_SALES" | bc -l)
+
+# Calculate Extended earnings
+EXTENDED_FEE=$(echo "$EXTENDED_PRICE * $FEE_RATE" | bc -l)
+EXTENDED_NET=$(echo "$EXTENDED_PRICE - $EXTENDED_FEE" | bc -l)
+EXTENDED_TOTAL=$(echo "$EXTENDED_NET * $EXTENDED_SALES" | bc -l)
+
+# Calculate Total Earnings
+TOTAL_EARNINGS_USD=$(echo "$REGULAR_TOTAL + $EXTENDED_TOTAL" | bc -l)
+TOTAL_EARNINGS_KES=$(echo "$TOTAL_EARNINGS_USD * $USD_TO_KES" | bc -l)
+
+# Display results
+echo ""
+echo "📊 Earnings Breakdown:"
+printf "Regular License:  \$%.2f x %d sales = \$%.2f\n" "$REGULAR_NET" "$REGULAR_SALES" "$REGULAR_TOTAL"
+printf "Extended License: \$%.2f x %d sales = \$%.2f\n" "$EXTENDED_NET" "$EXTENDED_SALES" "$EXTENDED_TOTAL"
+echo "----------------------------------------"
+printf "💰 Total Net Earnings: \$%.2f (%.2f KES at %.2f)\n" "$TOTAL_EARNINGS_USD" "$TOTAL_EARNINGS_KES" "$USD_TO_KES"
