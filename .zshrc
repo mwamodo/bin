@@ -1,3 +1,23 @@
+# Load environment variables and shell integrations that might produce output
+# These need to be BEFORE the instant prompt to avoid warnings
+
+# Load environment variables from .env file
+if [ -f "$HOME/bin/.env" ]; then
+    export $(cat "$HOME/bin/.env" | grep -v '^#' | xargs) 2>/dev/null
+fi
+
+# Load envman (only once, removing duplicate)
+if [ -s "$HOME/.config/envman/load.sh" ]; then
+    source "$HOME/.config/envman/load.sh"
+fi
+
+# Shell integrations that might produce output
+eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null
+eval "$(twilio autocomplete:script zsh)" 2>/dev/null
+eval "$(zoxide init --cmd cd zsh)" 2>/dev/null
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)" 2>/dev/null
+
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -7,10 +27,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-if [[ -f "/opt/homebrew/bin/brew" ]] then
-  # If you're using macOS, you'll want this enabled
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -85,11 +101,6 @@ else
   export EDITOR='nvim'
 fi
 
-# Load environment variables from .env file
-if [ -f "$HOME/bin/.env" ]; then
-    export $(cat "$HOME/bin/.env" | grep -v '^#' | xargs)
-fi
-
 [[ -f ${HOME}/bin/zsh/aliases.sh ]] && source ${HOME}/bin/zsh/aliases.sh
 [[ -f ${HOME}/bin/zsh/exports.sh ]] && source ${HOME}/bin/zsh/exports.sh
 
@@ -97,14 +108,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-source ~/.config/envman/load.sh
-
 # Herd injected PHP binary.
 export PATH="/Users/mwamodo/Library/Application Support/Herd/bin/":$PATH
 export PHP_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/":$PHP_INI_SCAN_DIR
-
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 # Herd injected PHP 8.0 configuration.
 export HERD_PHP_80_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/80/"
@@ -121,11 +127,5 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd
 # Herd injected PHP 8.4 configuration.
 export HERD_PHP_84_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/84/"
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(twilio autocomplete:script zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-
 # Added by Windsurf
 export PATH="/Users/mwamodo/.codeium/windsurf/bin:$PATH"
-
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"

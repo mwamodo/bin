@@ -80,6 +80,14 @@ commit:push () {
     eval "git push origin ${gitCurrentBranch}"
 }
 
+schedule:run () {
+    while true; do
+        echo "Running Laravel schedule at $(date)"
+        php artisan schedule:run >> storage/logs/scheduler.log 2>&1
+        sleep 60
+    done
+}
+
 artisan:test-with-coverage() {
     local current_dir_name=$(basename "$PWD")
     a test --coverage-html "../coverage/${current_dir_name}/"

@@ -56,6 +56,8 @@ alias ide:helper:models="a ide-helper:models --nowrite"
 alias db:wipe="a db:wipe"
 alias db:seed="a db:seed"
 
+alias s:r="schedule:run"
+
 alias share="herd share"
 alias h:s="share"
 

@@ -1,12 +1,5 @@
 # default layout (can be bsp, stack or float)
-yabai -m config layout bsp
-
-# Override default layout for space 2 & 3 to be stack
-yabai -m config --space 2 layout stack
-yabai -m config --space 3 layout stack
-
-# Override default layout for space 4 to float
-yabai -m config --space 4 layout float
+yabai -m config layout float
 
 # New window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
