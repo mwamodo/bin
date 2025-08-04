@@ -35,6 +35,14 @@ link_file() {
         exit 1
     fi
 
+    # Remove existing destination if it exists
+    if [ -e "$dest" ]; then
+        log "Removing existing $dest"
+        if [ "$DRY_RUN" = false ]; then
+            rm -rf "$dest"
+        fi
+    fi
+
     log "ln -sf $src $dest"
     if [ "$DRY_RUN" = false ]; then
         ln -sf "$src" "$dest" || { echo "Failed to link $src -> $dest" >&2; exit 1; }
@@ -45,22 +53,18 @@ link_file() {
 mkdir -p "$HOME/.local/bin" "$HOME/.config" "$HOME/Library/Application Support" 2>/dev/null || true
 
 link_file "$DOTFILES/.zshrc" "$HOME/.zshrc"
-link_file "$DOTFILES/scripts/copyright" "$HOME/.local/bin/copyright"
 link_file "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
 link_file "$DOTFILES/scripts/t" "$HOME/.local/bin/t"
 link_file "$DOTFILES/nvim" "$HOME/.config/nvim"
 link_file "$DOTFILES/warp" "$HOME/.warp"
 
-# set up nvim config from local repo
-link_file "${HOME}/bin/nvim" "${HOME}/.config/nvim"
-
 if [[ "$OS" == "Darwin" ]]; then
-    link_file "${HOME}/bin/ghostty" "${HOME}/Library/Application Support/com.mitchellh.ghostty"
-    link_file "${HOME}/bin/yabai" "${HOME}/.config/yabai"
-    link_file "${HOME}/bin/skhd" "${HOME}/.config/skhd"
+    link_file "$DOTFILES/ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty"
+    link_file "$DOTFILES/yabai" "$HOME/.config/yabai"
+    link_file "$DOTFILES/skhd" "$HOME/.config/skhd"
 fi
 
-link_file "${HOME}/bin/.gitignore" "${HOME}/.gitignore"
+link_file "$DOTFILES/.gitignore" "$HOME/.gitignore"
 git config --global core.excludesfile "$HOME/.gitignore"
 
-link_file "${HOME}/bin/aerospace.toml" "${HOME}/.aerospace.toml"
+link_file "$DOTFILES/aerospace.toml" "$HOME/.aerospace.toml"

@@ -27,23 +27,19 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Download Zinit, if it's not there yet
+# Download Zinit, if it's not there yet (moved to avoid console output during init)
 if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+   mkdir -p "$(dirname $ZINIT_HOME)" 2>/dev/null
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME" 2>/dev/null
 fi
 
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-# Add in zsh plugins
+# Add in zsh plugins (removed duplicate Powerlevel10k since we're using instant prompt)
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
@@ -126,6 +122,3 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd
 
 # Herd injected PHP 8.4 configuration.
 export HERD_PHP_84_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/84/"
-
-# Added by Windsurf
-export PATH="/Users/mwamodo/.codeium/windsurf/bin:$PATH"

@@ -17,21 +17,25 @@ alias h="a horizon"
 
 alias acc="a cache:clear"
 alias aop="a optimize:clear"
+
 alias log:clear="truncate -s 0 storage/logs/laravel*.log"
 
+alias a:tt="artisan:test-with-coverage"
+alias a:tp="a:t --parallel"
 alias artisan:test="a test"
 alias a:t="artisan:test"
-alias a:tp="a:t --parallel"
-alias a:tt="artisan:test-with-coverage"
+
+alias c="commit"
+alias c:p="commit:push"
 
 alias artisan:enlightn="a enlightn --report"
 alias a:e="artisan:enlightn"
 
 alias npm:dev="npm run dev"
 alias npm:build="npm run build"
+alias n:b="npm:build"
 alias n:d="npm:dev"
 alias nd="n:d"
-alias n:b="npm:build"
 alias nb="n:b"
 
 alias queue:work="php artisan queue:work"
@@ -97,7 +101,7 @@ alias gl="git log"
 alias gt="git tag -s"
 alias gll="git log --oneline --decorate --all --graph"
 
-#fancy git
+# fancy git
 alias push="gp"
 alias push:main="gp origin main"
 
