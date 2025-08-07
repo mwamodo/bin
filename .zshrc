@@ -122,3 +122,8 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd
 
 # Herd injected PHP 8.4 configuration.
 export HERD_PHP_84_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/84/"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/mwamodo/.cache/lm-studio/bin"
+# End of LM Studio CLI section
+

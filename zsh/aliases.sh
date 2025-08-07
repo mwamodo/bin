@@ -24,6 +24,7 @@ alias a:tt="artisan:test-with-coverage"
 alias a:tp="a:t --parallel"
 alias artisan:test="a test"
 alias a:t="artisan:test"
+alias a:ts="a test --stop-on-failure"
 
 alias c="commit"
 alias c:p="commit:push"
