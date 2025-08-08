@@ -72,6 +72,8 @@ alias lint="duster:lint"
 alias duster:fix="duster fix"
 alias fix="duster:fix"
 
+alias flux:icon="artisan flux:icon"
+
 # system
 alias reload="source ~/.zshrc"
 
