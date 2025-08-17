@@ -41,3 +41,6 @@ _ide_helper_models.php
 
 # Environment variables
 .env
+
+# Powerlevel10k
+.powerlevel10k

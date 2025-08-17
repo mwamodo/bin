@@ -68,3 +68,6 @@ link_file "$DOTFILES/.gitignore" "$HOME/.gitignore"
 git config --global core.excludesfile "$HOME/.gitignore"
 
 link_file "$DOTFILES/aerospace.toml" "$HOME/.aerospace.toml"
+
+# todo: install powerlevel10k
+# git clone git@github.com:romkatv/powerlevel10k.git "$HOME/bin/.powerlevel10k"

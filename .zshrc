@@ -60,8 +60,9 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Source local p10k configuration if it exists
+[[ ! -f "${HOME}/bin/.powerlevel10k/powerlevel10k.zsh-theme" ]] || source "${HOME}/bin/.powerlevel10k/powerlevel10k.zsh-theme"
+[[ ! -f "${HOME}/bin/.powerlevel10k/config/p10k-robbyrussell.zsh" ]] || source "${HOME}/bin/.powerlevel10k/config/p10k-robbyrussell.zsh"
 
 # Keybindings
 bindkey -e
@@ -127,3 +128,21 @@ export HERD_PHP_84_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/p
 export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 # End of LM Studio CLI section
 
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/mwamodo/.cache/lm-studio/bin"
+# End of LM Studio CLI section
+
+
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/84/"
+
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/83/"
+
+
+# Herd injected PHP 8.2 configuration.
+export HERD_PHP_82_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/82/"
