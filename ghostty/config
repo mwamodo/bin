@@ -3,7 +3,4 @@ window-save-state = always
 font-family = "Operator Mono Lig"
 font-size = 20
 
-theme = light:flexoki-light,dark:flexoki-dark
-
-background-opacity = 0.5
-background-blur = true
+theme = dark:catppuccin-macchiato,light:catppuccin-latte

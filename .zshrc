@@ -146,3 +146,6 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd
 
 # Herd injected PHP 8.2 configuration.
 export HERD_PHP_82_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/82/"
+
+# opencode
+export PATH=/Users/mwamodo/.opencode/bin:$PATH

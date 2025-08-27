@@ -122,3 +122,6 @@ alias neofetch="fastfetch"
 
 # switch from cat to bat
 alias cat="bat"
+
+# switch from tmux to tmuxinator
+alias tmux="tmux -u"

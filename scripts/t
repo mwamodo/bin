@@ -31,8 +31,8 @@ fi
 session_name=$(basename "$project_dir" | sed 's/\./_/g')
 
 if [[ -n "$TMUX" ]]; then
-    tmux new-session -A -d -s "$session_name" -c "$project_dir"
-    tmux switch-client -t "$session_name"
+    tmux -u new-session -A -d -s "$session_name" -c "$project_dir"
+    tmux -u switch-client -t "$session_name"
 else
-    tmux new-session -A -s "$session_name" -c "$project_dir"
+    tmux -u new-session -A -s "$session_name" -c "$project_dir"
 fi
