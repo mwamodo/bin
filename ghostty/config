@@ -4,3 +4,5 @@ font-family = "Operator Mono Lig"
 font-size = 20
 
 theme = dark:catppuccin-macchiato,light:catppuccin-latte
+
+background-opacity=.8

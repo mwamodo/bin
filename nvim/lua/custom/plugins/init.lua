@@ -2,4 +2,10 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+return {
+  -- vim-be-good: A vim game to practice vim motions
+  {
+    'ThePrimeagen/vim-be-good',
+    cmd = 'VimBeGood',
+  },
+}

@@ -34,7 +34,7 @@ The install script supports:
 - **Usage**: `t [directory]` or `t` (uses fzf to select from ~/Code/Herd)
 - **Installed to**: `~/.local/bin/t`
 
-### Shell Functions (in `.zshrc`)
+### Shell Functions (in `zsh/exports.sh`)
 - `commit [message]` - Git add all and commit (defaults to "WIP")
 - `commit:push [message]` - Commit and push to current branch
 - `schedule:run` - Runs Laravel scheduler in a loop
@@ -93,3 +93,8 @@ Key Laravel aliases from `zsh/aliases.sh`:
 - Float layout by default
 - Similar vim-style bindings for window management
 - Application-specific rules for floating windows
+
+### Layout Management Script (`scripts/layout`)
+- **Purpose**: Set per-space layout configurations for yabai
+- **Usage**: `layout -1f -2s -3b` (f=float, s=stack, b=bsp)
+- **Supports**: Per-space layout switching without focus changes
