@@ -73,7 +73,7 @@ bindkey '^[w' kill-region
 # History
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
+SAVEHIST=10000
 HISTDUP=erase
 
 setopt appendhistory

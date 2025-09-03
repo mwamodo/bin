@@ -38,3 +38,4 @@ yabai -m rule --add app="^Messages" manage=off
 yabai -m rule --add app="^Telegram" manage=off
 yabai -m rule --add app="^Slack" manage=off
 yabai -m rule --add app="^Spotify" manage=off
+yabai -m rule --add app="^Ghostty" manage=off

@@ -2,7 +2,7 @@
 alias vim="nvim"
 alias vi="nvim"
 alias v="vi"
-alias h="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -5"
+alias hist="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10"
 
 # laravel & dev work
 alias php="herd php"
@@ -13,10 +13,10 @@ alias art="artisan"
 alias a="artisan"
 
 alias horizon="a horizon"
-alias h="a horizon"
+alias a:h="a horizon"
 
-alias acc="a cache:clear"
-alias aop="a optimize:clear"
+alias a:cc="a cache:clear"
+alias a:op="a optimize:clear"
 
 alias log:clear="truncate -s 0 storage/logs/laravel*.log"
 
@@ -36,8 +36,6 @@ alias npm:dev="npm run dev"
 alias npm:build="npm run build"
 alias n:b="npm:build"
 alias n:d="npm:dev"
-alias nd="n:d"
-alias nb="n:b"
 
 alias queue:work="php artisan queue:work"
 alias q:w="queue:work"
