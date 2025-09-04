@@ -73,6 +73,7 @@ alias fix="duster:fix"
 alias flux:icon="artisan flux:icon"
 
 # system
+alias history="fc -l 1"
 alias reload="source ~/.zshrc"
 
 # python
