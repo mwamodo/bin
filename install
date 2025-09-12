@@ -54,20 +54,16 @@ mkdir -p "$HOME/.local/bin" "$HOME/.config" "$HOME/Library/Application Support" 
 
 link_file "$DOTFILES/.zshrc" "$HOME/.zshrc"
 link_file "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
-link_file "$DOTFILES/scripts/t" "$HOME/.local/bin/t"
 link_file "$DOTFILES/nvim" "$HOME/.config/nvim"
-link_file "$DOTFILES/warp" "$HOME/.warp"
 
 if [[ "$OS" == "Darwin" ]]; then
     link_file "$DOTFILES/ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty"
     link_file "$DOTFILES/yabai" "$HOME/.config/yabai"
     link_file "$DOTFILES/skhd" "$HOME/.config/skhd"
+    link_file "$DOTFILES/wezterm" "$HOME/.config/wezterm"
 fi
 
 link_file "$DOTFILES/.gitignore" "$HOME/.gitignore"
-git config --global core.excludesfile "$HOME/.gitignore"
-
-link_file "$DOTFILES/aerospace.toml" "$HOME/.aerospace.toml"
 
 # todo: install powerlevel10k
 # git clone git@github.com:romkatv/powerlevel10k.git "$HOME/bin/.powerlevel10k"
