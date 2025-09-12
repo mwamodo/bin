@@ -17,6 +17,7 @@ Thumbs.db
 # Application specific files
 venv
 node_modules
+vendor
 .sass-cache
 .vscode
 .idea
