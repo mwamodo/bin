@@ -53,7 +53,6 @@ The `install` script automatically sets up your dotfiles by creating symbolic li
 - `aerospace.toml` → Aerospace window manager config
 
 **macOS Only:**
-- `ghostty/` → Ghostty terminal configuration
 - `yabai/` → Yabai window manager configuration
 - `skhd/` → SKHD hotkey daemon configuration
 

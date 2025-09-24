@@ -57,7 +57,6 @@ link_file "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
 link_file "$DOTFILES/nvim" "$HOME/.config/nvim"
 
 if [[ "$OS" == "Darwin" ]]; then
-    link_file "$DOTFILES/ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty"
     link_file "$DOTFILES/yabai" "$HOME/.config/yabai"
     link_file "$DOTFILES/skhd" "$HOME/.config/skhd"
     link_file "$DOTFILES/wezterm" "$HOME/.config/wezterm"

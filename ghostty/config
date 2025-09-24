@@ -1,9 +1,0 @@
-window-save-state = always
-
-font-family = "Operator Mono Lig"
-font-size = 20
-
-theme = dark:catppuccin-macchiato,light:catppuccin-latte
-
-background-blur=true
-background-opacity=.8
