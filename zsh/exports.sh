@@ -46,6 +46,7 @@ load-nvmrc() {
 		nvm use default
 	fi
 }
+
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
@@ -104,11 +105,11 @@ lab() {
 
 # sets the tab name for warp to the current directory name
 set_name () {
-  echo -ne "\033]0;${PWD##*/}\007"
+    echo -ne "\033]0;${PWD##*/}\007"
 }
 
 if [ -n "$ZSH_VERSION" ]; then
-  precmd_functions+=(set_name)
+    precmd_functions+=(set_name)
 elif [ -n "$BASH_VERSION" ]; then
-  PROMPT_COMMAND='set_name'
+    PROMPT_COMMAND='set_name'
 fi

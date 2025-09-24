@@ -1,39 +1,44 @@
 #!/usr/bin/env bash
+
 # layout: set per-space layout via flags like -1f -2s -3b
 # f=float, s=stack, b=bsp
+
 set -euo pipefail
 
 usage(){ echo "usage: layout -1f -2s -3b  (f=float s=stack b=bsp)"; exit 1; }
 
 map_layout() {
-  case "$1" in
-    f|float) echo float ;;
-    s|stack) echo stack ;;
-    b|bsp)   echo bsp ;;
-    *) return 1 ;;
-  esac
+    case "$1" in
+        f|float) echo float ;;
+        s|stack) echo stack ;;
+        b|bsp)   echo bsp ;;
+        *) return 1 ;;
+    esac
 }
 
 set_layout() {
-  local space="$1" layout="$2"
-  # Preferred (yabai ≥4): per-space config without focus change
-  if yabai -m config --space "$space" layout "$layout" >/dev/null 2>&1; then
-    return 0
-  fi
-  # Fallback: focus, set, return
-  local cur
-  cur="$(yabai -m query --spaces --space | jq -r '.index')"
-  yabai -m space --focus "$space"
-  yabai -m space --layout "$layout"
-  yabai -m space --focus "$cur"
+    local space="$1" layout="$2"
+
+    # Preferred (yabai ≥4): per-space config without focus change
+    if yabai -m config --space "$space" layout "$layout" >/dev/null 2>&1; then
+        return 0
+    fi
+
+    # Fallback: focus, set, return
+    local cur
+    cur="$(yabai -m query --spaces --space | jq -r '.index')"
+
+    yabai -m space --focus "$space"
+    yabai -m space --layout "$layout"
+    yabai -m space --focus "$cur"
 }
 
 [[ $# -gt 0 ]] || usage
 
 for arg in "$@"; do
-  [[ "$arg" =~ ^-([0-9]+)([A-Za-z]+)$ ]] || usage
-  space="${BASH_REMATCH[1]}"
-  code="${BASH_REMATCH[2]}"
-  layout="$(map_layout "$code")" || usage
-  set_layout "$space" "$layout"
+    [[ "$arg" =~ ^-([0-9]+)([A-Za-z]+)$ ]] || usage
+    space="${BASH_REMATCH[1]}"
+    code="${BASH_REMATCH[2]}"
+    layout="$(map_layout "$code")" || usage
+    set_layout "$space" "$layout"
 done
