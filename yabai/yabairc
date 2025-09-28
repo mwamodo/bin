@@ -51,3 +51,4 @@ yabai -m rule --add app="^Telegram" manage=off
 yabai -m rule --add app="^Podcasts" manage=off
 yabai -m rule --add app="^Music$" manage=off
 yabai -m rule --add app="^ChatGPT" manage=off
+yabai -m rule --add app="^CleanMyMac" manage=off
