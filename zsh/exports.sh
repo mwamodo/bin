@@ -103,6 +103,14 @@ lab() {
     fi
 }
 
+pihole() {
+    if [ $# -eq 0 ]; then
+        ssh mwamodo@${PIHOLE_IP}
+    else
+        ssh -tt mwamodo@${PIHOLE_IP} "bash -ic '$*'"
+    fi
+}
+
 # sets the tab name for warp to the current directory name
 set_name () {
     echo -ne "\033]0;${PWD##*/}\007"
