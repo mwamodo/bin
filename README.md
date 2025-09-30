@@ -1,27 +1,23 @@
 # Dotfiles
 
-This Repository Dotfiles contain my personal config files. Here you'll find configs, customizations, themes, and whatever I need to personalize my Linux and mac OS experience.
+Configs, customizations, themes, and whatever I need to personalize my  mac OS experience.
 
-> ⚠️ Be aware, products can change over time. I do my best to keep up with the latest changes and releases, but please understand that this won't always be the case.
+> [!IMPORTANT]
+> ⚠️ Feel free to look around, contribute and suggest improvements. However, these will remain my personal config files/preferences written to selfishly fit my needs.
 
 ## Prerequisites
 
 1. git
-2. [oh-my-zsh](https://ohmyz.sh/)
+2. zsh
 3. tmux
 4. neovim
 5. fzf *(optional for the `t` helper)*
 
 ## usage & installation
 
-1. install `git` then clone the repo to $HOME dir
+1. set zsh as your default shell
 
-2. install `oh-my-zsh` and link your $HOME/.zshrc to $HOME/bin/.vimrc
-
-```bash
-# run the command below an be found https://ohmyz.sh/#install
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
+2. install `git` then clone the repo to $HOME dir
 
 3. run the installation script
 
@@ -31,32 +27,28 @@ chmod +x install
 ./install
 ```
 
-### What the Install Script Does
+### What the install script does
 
-The `install` script automatically sets up your dotfiles by creating symbolic links from your home directory to the configuration files in this repository. Here's what it does:
+The `install` script automatically sets up the dotfiles by creating symbolic links from the home directory to the configuration files in the repo.
 
-#### Features:
-- **Dry Run Mode**: Use `./install -n` to see what would be linked without actually creating the links
-- **Verbose Output**: Use `./install -v` to see detailed output of each operation
-- **Cross-Platform**: Automatically detects macOS vs Linux and links appropriate files
+#### Features
+
+- **Dry run mode**: Use `./install -n` to see what would be linked without actually creating the links
+- **Verbose output**: Use `./install -v` to see detailed output of each operation
 - **Safe**: Removes existing files/directories before creating new symbolic links
 
-#### Files and Directories Linked:
+#### Files and directories linked
 
-**Common (Linux & macOS):**
 - `.zshrc` → Shell configuration
 - `.tmux.conf` → Tmux configuration
-- `scripts/t` → Helper script (placed in `~/.local/bin/`)
+- `scripts/t` → Helper script (in `~/.local/bin/`)
 - `nvim/` → Neovim configuration directory
-- `warp/` → Warp terminal configuration
 - `.gitignore` → Global git ignore file
-- `aerospace.toml` → Aerospace window manager config
-
-**macOS Only:**
 - `yabai/` → Yabai window manager configuration
 - `skhd/` → SKHD hotkey daemon configuration
 
-#### What Gets Created:
+#### What gets created
+
 - `~/.local/bin/` directory (if it doesn't exist)
 - `~/.config/` directory (if it doesn't exist)
 - `~/Library/Application Support/` directory on macOS (if it doesn't exist)
