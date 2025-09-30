@@ -15,10 +15,8 @@ Configs, customizations, themes, and whatever I need to personalize my  mac OS e
 
 ## usage & installation
 
-1. set zsh as your default shell
-
-2. install `git` then clone the repo to $HOME dir
-
+1. set `zsh` as your default shell
+2. install `brew` & `git` then clone the repo to $HOME dir
 3. run the installation script
 
 ```bash
@@ -54,7 +52,3 @@ The `install` script automatically sets up the dotfiles by creating symbolic lin
 - `~/Library/Application Support/` directory on macOS (if it doesn't exist)
 
 The script ensures all your dotfiles are properly linked and your development environment is configured consistently across systems.
-
-## TODO
-
-1. add brew to the installation script

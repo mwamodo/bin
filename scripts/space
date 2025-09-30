@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-# layout: set per-space layout via flags like -1f -2s -3b
+# space: set per-space layout via flags like -1f -2s -3b
 # f=float, s=stack, b=bsp
 
 set -euo pipefail
 
-usage(){ echo "usage: layout -1f -2s -3b  (f=float s=stack b=bsp)"; exit 1; }
+usage(){ echo "usage: space -1f -2s -3b  (f=float s=stack b=bsp)"; exit 1; }
 
 map_layout() {
     case "$1" in

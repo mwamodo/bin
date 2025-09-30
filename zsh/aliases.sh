@@ -126,9 +126,7 @@ alias cat="bat"
 alias tmux="tmux -u"
 
 # quickly change yabai layouts
-alias layout-balance="yabai -m space --balance"
-alias display-balance="layout-balance"
-alias disbal="layout-balance"
+alias space-balance="yabai -m space --balance"
 
-alias 1b="layout -1b"
-alias 1f="layout -1f"
+alias 1b="space -1b"
+alias 1f="space -1f"
