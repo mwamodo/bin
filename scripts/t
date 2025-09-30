@@ -18,9 +18,26 @@ fi
 if [[ $# -eq 1 ]]; then
     project_dir=$1
 else
-    items=$(echo -e "$items\n$(find ~/Code/Herd -maxdepth 1 -mindepth 1 -type d ! -name ".flux")")
-    items=$(echo -e "$items\n$(find ~/bin -maxdepth 0)")
-    project_dir=$(echo -e "$items" | fzf)
+    declare -a candidates=()
+
+    if [[ -d "$HOME/Code/Herd" ]]; then
+        while IFS= read -r dir; do
+            candidates+=("$dir")
+        done < <(find "$HOME/Code/Herd" -maxdepth 1 -mindepth 1 -type d ! -name ".flux")
+    fi
+
+    if [[ -d "$HOME/bin" ]]; then
+        while IFS= read -r dir; do
+            candidates+=("$dir")
+        done < <(find "$HOME/bin" -maxdepth 0)
+    fi
+
+    if [[ ${#candidates[@]} -eq 0 ]]; then
+        echo "No directories found to choose from" >&2
+        exit 1
+    fi
+
+    project_dir=$(printf '%s\n' "${candidates[@]}" | fzf)
 fi
 
 if [[ -z "$project_dir" || ! -d "$project_dir" ]]; then
