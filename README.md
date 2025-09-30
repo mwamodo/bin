@@ -3,7 +3,7 @@
 Configs, customizations, themes, and whatever I need to personalize my  mac OS experience.
 
 > [!IMPORTANT]
-> ⚠️ Feel free to look around, contribute and suggest improvements. However, these will remain my personal config files/preferences written to selfishly fit my needs.
+> Feel free to look around, contribute and suggest improvements. However, these will remain my personal config files/preferences written to selfishly fit my needs.
 
 ## Prerequisites
 
