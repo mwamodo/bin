@@ -97,17 +97,17 @@ artisan:test-with-coverage() {
 
 lab() {
     if [ $# -eq 0 ]; then
-        ssh mwamodo@${HOME_IP}
+        ssh rick@${HOME_IP}
     else
-        ssh -tt mwamodo@${HOME_IP} "bash -ic '$*'"
+        ssh -tt rick@${HOME_IP} "bash -ic '$*'"
     fi
 }
 
 pihole() {
     if [ $# -eq 0 ]; then
-        ssh mwamodo@${PIHOLE_IP}
+        ssh rick@${PIHOLE_IP}
     else
-        ssh -tt mwamodo@${PIHOLE_IP} "bash -ic '$*'"
+        ssh -tt rick@${PIHOLE_IP} "bash -ic '$*'"
     fi
 }
 
