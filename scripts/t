@@ -37,7 +37,21 @@ else
         exit 1
     fi
 
-    project_dir=$(printf '%s\n' "${candidates[@]}" | fzf)
+    if command -v fzf >/dev/null 2>&1; then
+        project_dir=$(printf '%s\n' "${candidates[@]}" | fzf)
+    else
+        echo "fzf not found; falling back to a simple selector." >&2
+        PS3="Select project directory: "
+        select dir in "${candidates[@]}"; do
+            if [[ -n "$dir" ]]; then
+                project_dir="$dir"
+                break
+            else
+                echo "Invalid selection" >&2
+            fi
+        done
+        unset PS3
+    fi
 fi
 
 if [[ -z "$project_dir" || ! -d "$project_dir" ]]; then
