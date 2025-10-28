@@ -44,6 +44,8 @@ yabai -m mouse_drop_action swap
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Herd$" manage=off
 yabai -m rule --add app="^Telegram" manage=off
+yabai -m rule --add app="^Finder" manage=off
+yabai -m rule --add app="^Claude" manage=off
 
 # flash focus window when focus changes
 yabai -m signal --add label="flash_focus" event="window_focused" action="yabai -m window \$YABAI_WINDOW_ID --opacity 0.1 && sleep $(yabai -m config window_opacity_duration) && yabai -m window \$YABAI_WINDOW_ID --opacity 0.0"
