@@ -124,9 +124,3 @@ alias cat="bat"
 
 # switch from tmux to tmuxinator
 alias tmux="tmux -u"
-
-# quickly change yabai layouts
-alias space-balance="yabai -m space --balance"
-
-alias 1b="space -1b"
-alias 1f="space -1f"

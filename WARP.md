@@ -23,9 +23,6 @@ The `install` script supports:
 - `.zshrc` → Shell configuration
 - `tmux/tmux.conf` → `~/.tmux.conf`
 - `nvim/` → `~/.config/nvim`
-- `yabai/` → `~/.config/yabai` (macOS only)
-- `skhd/` → `~/.config/skhd` (macOS only)
-- `wezterm/` → `~/.config/wezterm` (macOS only)
 - `.gitignore` → Global git ignore
 
 ## Architecture
@@ -52,11 +49,6 @@ This setup is optimized for **Laravel/PHP development** with:
 
 ### Helper Scripts (`scripts/`)
 - **`t`** - Tmux session manager: Creates/attaches to tmux sessions for projects in `~/Code/Herd` or `~/bin`. Uses fzf for selection when no directory is specified.
-- **`space`** - Yabai layout setter: Quickly set per-space window layouts (e.g., `space -1f -2s -3b` for float/stack/bsp)
-
-### Window Management (macOS)
-- **Yabai** (`yabai/yabairc`) - Tiling window manager configuration
-- **SKHD** (`skhd/skhdrc`) - Hotkey daemon for window management shortcuts
 
 ## Common Commands
 

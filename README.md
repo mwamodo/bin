@@ -42,8 +42,6 @@ The `install` script automatically sets up the dotfiles by creating symbolic lin
 - `scripts/t` → Helper script (in `~/.local/bin/`)
 - `nvim/` → Neovim configuration directory
 - `.gitignore` → Global git ignore file
-- `yabai/` → Yabai window manager configuration
-- `skhd/` → SKHD hotkey daemon configuration
 
 #### What gets created
 
