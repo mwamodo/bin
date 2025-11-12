@@ -103,6 +103,14 @@ lab() {
     fi
 }
 
+lab:suspend() {
+    ssh -t rick@${HOME_IP} 'sudo systemctl suspend'
+}
+
+lab:wake() {
+    wakeonlan 50:7b:9d:d8:42:19
+}
+
 pihole() {
     if [ $# -eq 0 ]; then
         ssh rick@${PIHOLE_IP}

@@ -149,7 +149,6 @@ export PATH=/Users/mwamodo/.opencode/bin:$PATH
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
-
 # Herd injected PHP 7.4 configuration.
 export HERD_PHP_74_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/74/"
 export PYENV_ROOT="$HOME/.pyenv"
