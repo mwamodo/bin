@@ -155,3 +155,10 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
+
+# Added by Antigravity
+export PATH="/Users/mwamodo/.antigravity/antigravity/bin:$PATH"
+
+
+# Herd injected PHP 8.5 configuration.
+export HERD_PHP_85_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/85/"

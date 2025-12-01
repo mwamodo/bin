@@ -124,3 +124,6 @@ alias cat="bat"
 
 # switch from tmux to tmuxinator
 alias tmux="tmux -u"
+
+# tailscale
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
