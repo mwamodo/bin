@@ -127,3 +127,5 @@ alias tmux="tmux -u"
 
 # tailscale
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+alias antigravity="agy"

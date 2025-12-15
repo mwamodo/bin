@@ -162,3 +162,9 @@ export PATH="/Users/mwamodo/.antigravity/antigravity/bin:$PATH"
 
 # Herd injected PHP 8.5 configuration.
 export HERD_PHP_85_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/85/"
+
+# Added by Antigravity
+export PATH="/Users/mwamodo/.antigravity/antigravity/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/mwamodo/.antigravity/antigravity/bin:$PATH"
