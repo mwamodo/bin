@@ -101,10 +101,6 @@ fi
 [[ -f ${HOME}/bin/zsh/aliases.sh ]] && source ${HOME}/bin/zsh/aliases.sh
 [[ -f ${HOME}/bin/zsh/exports.sh ]] && source ${HOME}/bin/zsh/exports.sh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # Herd injected PHP binary.
 export PATH="$HOME/Library/Application Support/Herd/bin/":$PATH
 export PHP_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/":$PHP_INI_SCAN_DIR

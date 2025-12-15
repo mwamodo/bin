@@ -64,7 +64,7 @@ commit () {
     fi
 
     git add .
-    eval "git commit -a -m '${commitMessage}'"
+    git commit -a -m "${commitMessage}"
 }
 
 commit:push () {
@@ -77,8 +77,8 @@ commit:push () {
     fi
 
     git add .
-    eval "git commit -a -m '${commitMessage}'"
-    eval "git push origin ${gitCurrentBranch}"
+    git commit -a -m "${commitMessage}"
+    git push origin "${gitCurrentBranch}"
 }
 
 schedule:run () {
