@@ -108,7 +108,7 @@ lab:suspend() {
 }
 
 lab:wake() {
-    wakeonlan 50:7b:9d:d8:42:19
+    wakeonlan ${HOME_MAC}
 }
 
 pihole() {
