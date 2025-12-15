@@ -1,52 +1,99 @@
 # Dotfiles
 
-Configs, customizations, themes, and whatever I need to personalize my  mac OS experience.
+Configs, customizations, and themes to personalize my macOS experience, with a heavy focus on **Laravel (Herd)** development and modern CLI tools.
 
 > [!IMPORTANT]
 > Feel free to look around, contribute and suggest improvements. However, these will remain my personal config files/preferences written to selfishly fit my needs.
 
+## Features
+
+-   **Shell**: **Zsh** optimized with `zinit` for fast plugin loading.
+-   **Theme**: **Powerlevel10k** for a highly informative and responsive prompt.
+-   **Navigation**: **zoxide** (`z`) for smarter directory jumping.
+-   **Session Management**: **Tmux** with a custom `t` helper script for instant project switching.
+-   **Editor**: **Neovim** (aliased to `vim` and `vi`) as the primary text editor.
+-   **Laravel Integration**: deep integration with **Herd** and **Artisan**, including extensive aliases.
+-   **Modern CLI Tools**: Replaces standard tools with better alternatives:
+    -   `ls` → `lsd` (icons, colors)
+    -   `cat` → `bat` (syntax highlighting)
+    -   `top` → `bpytop` (beautiful resource monitoring)
+    -   `neofetch` → `fastfetch` (system info)
+
 ## Prerequisites
 
-1. git
-2. zsh
-3. tmux
-4. neovim
-5. fzf *(optional for the `t` helper)*
+Ensure you have the following installed before running the setup:
 
-## usage & installation
+1.  **git**
+2.  **zsh**
+3.  **tmux**
+4.  **neovim**
+5.  **fzf** (Required for the `t` script)
+6.  **Recommended Modern Tools**:
+    -   `lsd`
+    -   `bat`
+    -   `zoxide`
+    -   `fastfetch`
+    -   `bpytop`
 
-1. set `zsh` as your default shell
-2. install `brew` & `git` then clone the repo to $HOME dir
-3. run the installation script
+## Installation
 
-```bash
-cd $HOME/bin
-chmod +x install
-./install
-```
+1.  Set `zsh` as your default shell.
+2.  Clone the repository to your home directory:
+    ```bash
+    git clone https://github.com/yourusername/dotfiles.git $HOME/bin
+    ```
+3.  Run the installation script:
+
+    ```bash
+    cd $HOME/bin
+    chmod +x install
+    ./install
+    ```
 
 ### What the install script does
 
-The `install` script automatically sets up the dotfiles by creating symbolic links from the home directory to the configuration files in the repo.
+The `install` script links configuration files from this repo to your home directory.
 
-#### Features
+-   **Dry run**: `./install -n` (See what happens without changes)
+-   **Verbose**: `./install -v` (Detailed output)
+-   **Safe**: Backs up/removes existing configurations before linking.
 
-- **Dry run mode**: Use `./install -n` to see what would be linked without actually creating the links
-- **Verbose output**: Use `./install -v` to see detailed output of each operation
-- **Safe**: Removes existing files/directories before creating new symbolic links
+## Directory Structure
 
-#### Files and directories linked
+-   **`zsh/`**: Contains shell aliases (`aliases.sh`) and environment exports (`exports.sh`).
+-   **`tmux/`**: Tmux configuration and themes.
+-   **`nvim/`**: Complete Neovim configuration.
+-   **`scripts/`**: Custom scripts, including the `t` session helper.
+-   **`.zshrc`**: Main shell configuration file.
 
-- `.zshrc` → Shell configuration
-- `.tmux.conf` → Tmux configuration
-- `scripts/t` → Helper script (in `~/.local/bin/`)
-- `nvim/` → Neovim configuration directory
-- `.gitignore` → Global git ignore file
+## Usage & Configuration
 
-#### What gets created
+### Environment Variables
+Create a `.env` file in `~/bin/` to store local secrets and machine-specific configs. This file is ignored by git.
+```bash
+# Example ~/bin/.env
+HOME_IP=192.168.1.5
+```
 
-- `~/.local/bin/` directory (if it doesn't exist)
-- `~/.config/` directory (if it doesn't exist)
-- `~/Library/Application Support/` directory on macOS (if it doesn't exist)
+### Top Aliases
 
-The script ensures all your dotfiles are properly linked and your development environment is configured consistently across systems.
+| Alias | Command | Description |
+| :--- | :--- | :--- |
+| `a` | `php artisan` | Run artisan commands |
+| `mf` | `a migrate` | Run migrations |
+| `mfs` | `a migrate:fresh --seed` | Fresh migration with seeds |
+| `tinker` | `a tinker` | Enter execution loop |
+| `gp` | `git push` | Push to remote |
+| `gco` | `git checkout` | Checkout branch |
+| `l` | `lsd` | List files with icons |
+| `cat` | `bat` | View file with highlighting |
+| `tm` | `tmux -u` | Start Tmux |
+
+### Tmux Smart Session Manager (`t`)
+
+The `t` script (linked to `~/.local/bin/t`) is a powerhouse for managing workflow.
+
+-   **`t`**: Opens a fuzzy finder (`fzf`) to select a project from `~/Code/Herd` or `~/bin`.
+-   **`t [directory]`**: Directly opens or attaches to a tmux session for that directory.
+
+It automatically names sessions based on the folder name and handles attaching/detaching seamlessly.
