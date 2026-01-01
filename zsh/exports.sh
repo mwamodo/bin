@@ -14,6 +14,8 @@ export PATH="$HOME/bin/scripts:$PATH"
 
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
+export PATH="$HOME/Applications/WezTerm.app/Contents/MacOS:$PATH"
+
 # unset manpath so we can inherit from /etc/manpath via the `manpath` command
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 

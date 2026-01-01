@@ -139,9 +139,6 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd
 # Herd injected PHP 8.2 configuration.
 export HERD_PHP_82_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/82/"
 
-# Added by OPENCODE CLI
-export PATH=/Users/mwamodo/.opencode/bin:$PATH
-
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
@@ -154,7 +151,6 @@ eval "$(pyenv init - zsh)"
 
 # Added by Antigravity
 export PATH="/Users/mwamodo/.antigravity/antigravity/bin:$PATH"
-
 
 # Herd injected PHP 8.5 configuration.
 export HERD_PHP_85_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/85/"
