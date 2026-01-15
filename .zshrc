@@ -160,3 +160,6 @@ export PATH="/Users/mwamodo/.antigravity/antigravity/bin:$PATH"
 
 # Added by Antigravity
 export PATH="/Users/mwamodo/.antigravity/antigravity/bin:$PATH"
+
+# opencode
+export PATH=/Users/mwamodo/.opencode/bin:$PATH

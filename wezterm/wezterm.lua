@@ -97,4 +97,16 @@ wezterm.on("window-config-reloaded", function(window, _)
 	window:set_config_overrides(overrides)
 end)
 
+config.keys = {
+  {key="Enter", mods="SHIFT", action=wezterm.action{SendString="\x1b\r"}},
+  {
+    key = 'l',
+    mods = 'CMD',
+    action = wezterm.action.Multiple {
+      wezterm.action.ClearScrollback 'ScrollbackAndViewport',
+      wezterm.action.SendKey { key = 'L', mods = 'CTRL' },
+    },
+  },
+}
+
 return config
