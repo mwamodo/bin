@@ -109,6 +109,16 @@ lab:suspend() {
     ssh -t rick@${HOME_IP} 'sudo systemctl suspend'
 }
 
+lab:sleep() {
+    local day=$(date +%u)
+    local waketime="16:30"
+
+    [[ "$day" -eq 6 || "$day" -eq 7 ]] && waketime="10:00"
+
+    echo "Manually suspending. Server will wake at $waketime today."
+    ssh -t rick@${HOME_IP} "sudo rtcwake -m mem -t \$(date -d '$waketime' +%s)"
+}
+
 lab:wake() {
     wakeonlan ${HOME_MAC}
 }
@@ -119,11 +129,6 @@ pihole() {
     else
         ssh -tt rick@${PIHOLE_IP} "bash -ic '$*'"
     fi
-}
-
-# sets the tab name for warp to the current directory name
-set_name () {
-    echo -ne "\033]0;${PWD##*/}\007"
 }
 
 if [ -n "$ZSH_VERSION" ]; then
