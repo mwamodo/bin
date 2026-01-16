@@ -59,5 +59,13 @@ link_file "$DOTFILES/wezterm" "$HOME/.config/wezterm"
 
 link_file "$DOTFILES/.gitignore" "$HOME/.gitignore"
 
-# todo: install powerlevel10k
-# git clone git@github.com:romkatv/powerlevel10k.git "$HOME/bin/.powerlevel10k"
+P10K_DIR="$HOME/bin/.powerlevel10k"
+if [ ! -d "$P10K_DIR" ]; then
+    log "Installing powerlevel10k"
+    if [ "$DRY_RUN" = false ]; then
+        mkdir -p "$HOME/bin"
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$P10K_DIR"
+    fi
+else
+    log "powerlevel10k already installed"
+fi
