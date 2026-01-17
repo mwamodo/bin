@@ -1,19 +1,82 @@
 #!/usr/bin/env python3
 
+import os
+import sys
+import argparse
+from dotenv import load_dotenv
 from transmission_rpc import Client
 
-import os
-from dotenv import load_dotenv
-
+# Load environment variables
 load_dotenv()
 
-host = os.getenv("HOME_IP")
-port = os.getenv("HOME_TRANSMISSION_PORT")
+def get_client():
+    return Client(
+        host=os.getenv("HOME_IP"),
+        port=os.getenv("HOME_TRANSMISSION_PORT"),
+        username=os.getenv("HOME_TRANSMISSION_USERNAME"),
+        password=os.getenv("HOME_TRANSMISSION_PASSWORD")
+    )
 
-username = os.getenv("HOME_TRANSMISSION_USERNAME")
-password = os.getenv("HOME_TRANSMISSION_PASSWORD")
+def main():
+    parser = argparse.ArgumentParser(description="Transmission CLI Controller")
 
-c = Client(host=host, port=port, username=username, password=password)
+    # Flags for listing
+    parser.add_argument("--list", action="store_true", help="List all torrents")
+    parser.add_argument("--stopped", action="store_true", help="List only stopped torrents")
+    parser.add_argument("--downloading", action="store_true", help="List only downloading torrents")
 
-for torrent in c.get_torrents():
-    print(f"ID: {torrent.id} | Name: {torrent.name} | Status: {torrent.status}")
+    # Bulk actions
+    parser.add_argument("--pause-all", action="store_true", help="Pause all torrents")
+    parser.add_argument("--start-all", action="store_true", help="Start all torrents")
+
+    # Specific ID actions
+    parser.add_argument("--start", type=int, nargs='+', help="Start torrents by ID(s)")
+    parser.add_argument("--stop", type=int, nargs='+', help="Stop torrents by ID(s)")
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(0)
+
+    args = parser.parse_args()
+    c = get_client()
+
+    # --- Actions ---
+    if args.pause_all:
+        c.stop_torrent("all")
+        print("Successfully paused all torrents.")
+
+    if args.start_all:
+        c.start_torrent("all")
+        print("Successfully started all torrents.")
+
+    if args.start:
+        c.start_torrent(args.start)
+        print(f"Started torrent IDs: {args.start}")
+
+    if args.stop:
+        c.stop_torrent(args.stop)
+        print(f"Stopped torrent IDs: {args.stop}")
+
+    # --- Filtering/Listing ---
+    torrents = c.get_torrents()
+
+    if args.list:
+        print(f"{'ID':<5} | {'Status':<15} | {'Name'}")
+        print("-" * 50)
+        for t in torrents:
+            print(f"{t.id:<5} | {t.status:<15} | {t.name}")
+
+    if args.stopped:
+        print("--- Stopped Torrents ---")
+        for t in torrents:
+            if t.status == "stopped":
+                print(f"ID: {t.id} | {t.name}")
+
+    if args.downloading:
+        print("--- Downloading Torrents ---")
+        for t in torrents:
+            if t.status == "downloading":
+                print(f"ID: {t.id} | {t.name}")
+
+if __name__ == "__main__":
+    main()
