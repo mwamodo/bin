@@ -6,7 +6,6 @@ import argparse
 from dotenv import load_dotenv
 from transmission_rpc import Client
 
-# Load environment variables
 load_dotenv()
 
 def get_client():
@@ -17,19 +16,35 @@ def get_client():
         password=os.getenv("HOME_TRANSMISSION_PASSWORD")
     )
 
+def format_speed(bps):
+    """Converts bytes per second to human-readable string."""
+    if bps == 0 or bps is None: return "0 B/s"
+    units = ["B/s", "KB/s", "MB/s", "GB/s"]
+    i = 0
+    while bps >= 1024 and i < len(units) - 1:
+        bps /= 1024
+        i += 1
+    return f"{bps:.1f} {units[i]}"
+
+def print_torrent_table(torrents, title="Torrents"):
+    print(f"\n--- {title} ---")
+    header = f"{'ID':<5} | {'Status':<12} | {'Progress':<10} | {'Speed':<10} | {'Name'}"
+    print(header)
+    print("-" * 80)
+
+    for t in torrents:
+        prog = f"{t.progress:.1f}%"
+        speed = format_speed(t.rate_download)
+        print(f"{t.id:<5} | {t.status:<12} | {prog:<10} | {speed:<10} | {t.name}")
+
 def main():
     parser = argparse.ArgumentParser(description="Transmission CLI Controller")
 
-    # Flags for listing
     parser.add_argument("--list", action="store_true", help="List all torrents")
     parser.add_argument("--stopped", action="store_true", help="List only stopped torrents")
     parser.add_argument("--downloading", action="store_true", help="List only downloading torrents")
-
-    # Bulk actions
     parser.add_argument("--pause-all", action="store_true", help="Pause all torrents")
     parser.add_argument("--start-all", action="store_true", help="Start all torrents")
-
-    # Specific ID actions
     parser.add_argument("--start", type=int, nargs='+', help="Start torrents by ID(s)")
     parser.add_argument("--stop", type=int, nargs='+', help="Stop torrents by ID(s)")
 
@@ -40,7 +55,6 @@ def main():
     args = parser.parse_args()
     c = get_client()
 
-    # --- Actions ---
     if args.pause_all:
         c.stop_torrent("all")
         print("Successfully paused all torrents.")
@@ -57,26 +71,18 @@ def main():
         c.stop_torrent(args.stop)
         print(f"Stopped torrent IDs: {args.stop}")
 
-    # --- Filtering/Listing ---
     torrents = c.get_torrents()
 
     if args.list:
-        print(f"{'ID':<5} | {'Status':<15} | {'Name'}")
-        print("-" * 50)
-        for t in torrents:
-            print(f"{t.id:<5} | {t.status:<15} | {t.name}")
+        print_torrent_table(torrents, "All Torrents")
 
     if args.stopped:
-        print("--- Stopped Torrents ---")
-        for t in torrents:
-            if t.status == "stopped":
-                print(f"ID: {t.id} | {t.name}")
+        stopped_list = [t for t in torrents if t.status == "stopped"]
+        print_torrent_table(stopped_list, "Stopped Torrents")
 
     if args.downloading:
-        print("--- Downloading Torrents ---")
-        for t in torrents:
-            if t.status == "downloading":
-                print(f"ID: {t.id} | {t.name}")
+        download_list = [t for t in torrents if t.status == "downloading"]
+        print_torrent_table(download_list, "Downloading Torrents")
 
 if __name__ == "__main__":
     main()

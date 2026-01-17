@@ -115,8 +115,23 @@ lab:sleep() {
 
     [[ "$day" -eq 6 || "$day" -eq 7 ]] && waketime="10:00"
 
-    echo "Manually suspending. Server will wake at $waketime today."
-    ssh -t rick@${HOME_IP} "sudo rtcwake -m mem -t \$(date -d '$waketime' +%s)"
+    local current_time=$(date +%H%M)
+    local wake_time_cmp="${waketime//:/}"
+    local target_day="today"
+
+    if [[ "$current_time" > "$wake_time_cmp" ]]; then
+        target_day="tomorrow"
+        # calculate wake time for tomorrow
+        # if today is Friday (5) or Saturday (6), tomorrow is weekend (Sat/Sun)
+        if [[ "$day" -eq 5 || "$day" -eq 6 ]]; then
+            waketime="10:00"
+        else
+            waketime="16:30"
+        fi
+    fi
+
+    echo "Manually suspending. Server will wake at $waketime $target_day."
+    ssh -t rick@${HOME_IP} "sudo rtcwake -m mem -t \$(date -d '$target_day $waketime' +%s)"
 }
 
 lab:wake() {
