@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+
+from transmission_rpc import Client
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+host = os.getenv("HOME_IP")
+port = os.getenv("HOME_TRANSMISSION_PORT")
+
+username = os.getenv("HOME_TRANSMISSION_USERNAME")
+password = os.getenv("HOME_TRANSMISSION_PASSWORD")
+
+c = Client(host=host, port=port, username=username, password=password)
+
+for torrent in c.get_torrents():
+    print(f"ID: {torrent.id} | Name: {torrent.name} | Status: {torrent.status}")
