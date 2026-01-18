@@ -28,6 +28,7 @@ alias a:ts="a test --stop-on-failure"
 
 alias c="commit"
 alias c:p="commit:push"
+alias wip="commit:push"
 
 alias artisan:enlightn="a enlightn --report"
 alias a:e="artisan:enlightn"
