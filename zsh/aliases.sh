@@ -130,3 +130,9 @@ alias tmux="tmux -u"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 alias antigravity="agy"
+
+alias claude:allow="claude --dangerously-skip-permissions"
+alias claude:dangerous="claude:allow"
+
+alias opencode:allow="opencode --dangerously-bypass-approvals-and-sandbox"
+alias opencode:dangerous="opencode:allow"
