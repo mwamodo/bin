@@ -83,6 +83,11 @@ commit:push () {
     git push origin "${gitCurrentBranch}"
 }
 
+switch:master () {
+    git checkout master
+    git pull origin master
+}
+
 schedule:run () {
     while true; do
         echo "Running Laravel schedule at $(date)"
