@@ -102,6 +102,14 @@ artisan:test-with-coverage() {
     open "http://coverage.test/${current_dir_name}/"
 }
 
+clawdbot() {
+    if [ $# -eq 0 ]; then
+        ssh clawdbot@${CLAWDBOT_IP}
+    else
+        ssh -tt clawdbot@${CLAWDBOT_IP} "bash -ic '$*'"
+    fi
+}
+
 lab() {
     if [ $# -eq 0 ]; then
         ssh rick@${HOME_IP}
