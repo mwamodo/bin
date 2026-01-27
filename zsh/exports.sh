@@ -102,7 +102,7 @@ artisan:test-with-coverage() {
     open "http://coverage.test/${current_dir_name}/"
 }
 
-clawdbot() {
+bot() {
     if [ $# -eq 0 ]; then
         ssh clawdbot@${CLAWDBOT_IP}
     else
