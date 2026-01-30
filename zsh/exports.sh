@@ -104,9 +104,9 @@ artisan:test-with-coverage() {
 
 bot() {
     if [ $# -eq 0 ]; then
-        ssh clawdbot@${CLAWDBOT_IP}
+        ssh openclaw@${OPENCLAW_IP}
     else
-        ssh -tt clawdbot@${CLAWDBOT_IP} "bash -ic '$*'"
+        ssh -tt openclaw@${OPENCLAW_IP} "bash -ic '$*'"
     fi
 }
 
@@ -149,14 +149,6 @@ lab:sleep() {
 
 lab:wake() {
     wakeonlan ${HOME_MAC}
-}
-
-pihole() {
-    if [ $# -eq 0 ]; then
-        ssh rick@${PIHOLE_IP}
-    else
-        ssh -tt rick@${PIHOLE_IP} "bash -ic '$*'"
-    fi
 }
 
 if [ -n "$ZSH_VERSION" ]; then
