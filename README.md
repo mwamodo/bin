@@ -56,7 +56,7 @@ The `install` script links configuration files from this repo to your home direc
 
 -   **Dry run**: `./install -n` (See what happens without changes)
 -   **Verbose**: `./install -v` (Detailed output)
--   **Safe**: Backs up/removes existing configurations before linking.
+-   **Safe**: Backs up existing configurations before linking (never deletes them).
 
 ## Directory Structure
 

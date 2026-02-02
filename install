@@ -29,23 +29,38 @@ log() {
 
 link_file() {
     local src="$1" dest="$2"
+    local backup_base backup_path
 
     if [ ! -e "$src" ]; then
         echo "Error: source '$src' does not exist" >&2
         exit 1
     fi
 
-    # Remove existing destination if it exists
-    if [ -e "$dest" ]; then
-        log "Removing existing $dest"
+    mkdir -p "$(dirname "$dest")"
+
+    # If destination is already the expected symlink, leave it alone.
+    if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$src" ]; then
+        log "Already linked: $dest -> $src"
+        return 0
+    fi
+
+    # Never delete user data. Move existing paths to a timestamped backup.
+    if [ -e "$dest" ] || [ -L "$dest" ]; then
+        backup_base="${dest}.backup.$(date +%Y%m%d%H%M%S)"
+        backup_path="$backup_base"
+        while [ -e "$backup_path" ] || [ -L "$backup_path" ]; do
+            backup_path="${backup_base}.$RANDOM"
+        done
+
+        log "Backing up existing $dest -> $backup_path"
         if [ "$DRY_RUN" = false ]; then
-            rm -rf "$dest"
+            mv "$dest" "$backup_path"
         fi
     fi
 
-    log "ln -sf $src $dest"
+    log "ln -s $src $dest"
     if [ "$DRY_RUN" = false ]; then
-        ln -sf "$src" "$dest" || { echo "Failed to link $src -> $dest" >&2; exit 1; }
+        ln -s "$src" "$dest" || { echo "Failed to link $src -> $dest" >&2; exit 1; }
     fi
 }
 
