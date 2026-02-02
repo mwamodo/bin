@@ -1,10 +1,65 @@
 # Load environment variables and shell integrations that might produce output
 # These need to be BEFORE the instant prompt to avoid warnings
 
-# Load environment variables from .env file
-if [ -f "$HOME/bin/.env" ]; then
-    export $(cat "$HOME/bin/.env" | grep -v '^#' | xargs) 2>/dev/null
-fi
+# Safely load environment variables from $HOME/bin/.env
+load_env_file() {
+    emulate -L zsh
+    setopt local_options extendedglob
+
+    local file="${1:-$HOME/bin/.env}"
+    [[ -r "$file" ]] || return 0
+
+    local line key val
+    while IFS= read -r line || [[ -n "$line" ]]; do
+        line="${line%$'\r'}"
+
+        # Skip blank lines and full-line comments
+        [[ "$line" =~ '^[[:space:]]*$' ]] && continue
+        [[ "$line" =~ '^[[:space:]]*#' ]] && continue
+
+        # Trim leading whitespace and optional export prefix
+        line="${line##[[:space:]]#}"
+        if [[ "$line" == export[[:space:]]#* ]]; then
+            line="${line#export}"
+            line="${line##[[:space:]]#}"
+        fi
+
+        # Require KEY=VALUE format
+        [[ "$line" == *=* ]] || {
+            print -u2 "load_env_file: skipped invalid line: $line"
+            continue
+        }
+
+        key="${line%%=*}"
+        val="${line#*=}"
+
+        # Trim whitespace around key and leading whitespace on value
+        key="${key##[[:space:]]#}"
+        key="${key%%[[:space:]]#}"
+        val="${val##[[:space:]]#}"
+
+        # Validate key name
+        if [[ ! "$key" =~ '^[A-Za-z_][A-Za-z0-9_]*$' ]]; then
+            print -u2 "load_env_file: skipped invalid key: $key"
+            continue
+        fi
+
+        if [[ "$val" == \"*\" && "$val" == *\" && ${#val} -ge 2 ]]; then
+            val="${val:1:${#val}-2}"
+        elif [[ "$val" == \'*\' && "$val" == *\' && ${#val} -ge 2 ]]; then
+            val="${val:1:${#val}-2}"
+        else
+            # Strip inline comments for unquoted values when preceded by whitespace
+            val="${val%%[[:space:]]\#*}"
+            val="${val%%[[:space:]]#}"
+        fi
+
+        export "$key=$val"
+    done < "$file"
+}
+
+load_env_file "$HOME/bin/.env"
+unset -f load_env_file
 
 # Load envman (only once, removing duplicate)
 if [ -s "$HOME/.config/envman/load.sh" ]; then
