@@ -212,3 +212,9 @@ export HERD_PHP_82_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd
 
 # Herd injected PHP 7.4 configuration.
 export HERD_PHP_74_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/74/"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/mwamodo/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mwamodo/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/mwamodo/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mwamodo/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
