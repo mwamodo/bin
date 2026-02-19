@@ -33,8 +33,9 @@ alias wip="commit:push"
 alias artisan:enlightn="a enlightn --report"
 alias a:e="artisan:enlightn"
 
-alias npm:dev="npm run dev"
-alias npm:build="npm run build"
+alias n="npm"
+alias npm:dev="n run dev"
+alias npm:build="n run build"
 alias n:b="npm:build"
 alias n:d="npm:dev"
 
