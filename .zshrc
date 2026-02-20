@@ -190,8 +190,6 @@ eval "$(pyenv init - zsh)"
 export PATH="/Users/mwamodo/.antigravity/antigravity/bin:$PATH"
 
 
-# opencode
-export PATH=/Users/mwamodo/.opencode/bin:$PATH
 
 
 # Herd injected PHP 8.3 configuration.
