@@ -104,9 +104,9 @@ artisan:test-with-coverage() {
 
 bot() {
     if [ $# -eq 0 ]; then
-        ssh openclaw@${OPENCLAW_IP}
+        ssh clawdbot@${OPENCLAW_IP}
     else
-        ssh -tt openclaw@${OPENCLAW_IP} "bash -ic '$*'"
+        ssh -tt clawdbot@${OPENCLAW_IP} "bash -ic '$*'"
     fi
 }
 
