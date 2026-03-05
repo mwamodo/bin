@@ -30,7 +30,6 @@ debug
 .repro
 foo.*
 *.log
-data
 .luarc.json
 lazy-lock.json
 test.sh
