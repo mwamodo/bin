@@ -137,3 +137,7 @@ alias claude:dangerous="claude:allow"
 
 alias opencode:allow="opencode --dangerously-bypass-approvals-and-sandbox"
 alias opencode:dangerous="opencode:allow"
+
+# claw playground
+alias pi-claw="node ~/code/pi-claw/dist/cli.js"
+alias piclaw="pi-claw"
