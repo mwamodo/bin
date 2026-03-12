@@ -175,10 +175,6 @@ export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 
-
-
-
-
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
@@ -188,28 +184,6 @@ eval "$(pyenv init - zsh)"
 
 # Added by Antigravity
 export PATH="/Users/mwamodo/.antigravity/antigravity/bin:$PATH"
-
-
-
-
-# Herd injected PHP 8.3 configuration.
-export HERD_PHP_83_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/83/"
-
-
-# Herd injected PHP 8.4 configuration.
-export HERD_PHP_84_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/84/"
-
-
-# Herd injected PHP 8.5 configuration.
-export HERD_PHP_85_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/85/"
-
-
-# Herd injected PHP 8.2 configuration.
-export HERD_PHP_82_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/82/"
-
-
-# Herd injected PHP 7.4 configuration.
-export HERD_PHP_74_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/74/"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/mwamodo/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mwamodo/Downloads/google-cloud-sdk/path.zsh.inc'; fi
