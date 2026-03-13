@@ -34,8 +34,9 @@ alias artisan:enlightn="a enlightn --report"
 alias a:e="artisan:enlightn"
 
 alias n="npm"
-alias npm:dev="n run dev"
-alias npm:build="n run build"
+alias nr="npm run"
+alias npm:dev="nr dev"
+alias npm:build="nr build"
 alias n:b="npm:build"
 alias n:d="npm:dev"
 
