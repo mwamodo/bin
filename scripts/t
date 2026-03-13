@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Helper to create or attach to tmux sessions for project directories.
-# If no directory is provided, fzf is used to select one from common locations.
+# helper to create or attach to tmux sessions for project directories.
+# if no directory is provided, fzf is used to select one from common locations.
 
 set -e
 
@@ -20,10 +20,10 @@ if [[ $# -eq 1 ]]; then
 else
     declare -a candidates=()
 
-    if [[ -d "$HOME/Code/Herd" ]]; then
+    if [[ -d "$HOME/code" ]]; then
         while IFS= read -r dir; do
             candidates+=("$dir")
-        done < <(find "$HOME/Code/Herd" -maxdepth 1 -mindepth 1 -type d ! -name ".flux")
+        done < <(find "$HOME/code" -maxdepth 1 -mindepth 1 -type d ! -name ".flux")
     fi
 
     if [[ -d "$HOME/bin" ]]; then
