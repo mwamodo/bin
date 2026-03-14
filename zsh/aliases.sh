@@ -3,6 +3,9 @@ alias vim="nvim"
 alias vi="nvim"
 alias v="vi"
 alias hist="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10"
+alias claude="claude --dangerously-skip-permissions"
+alias cc="claude"
+alias ccr="claude --resume"
 
 # laravel & dev work
 alias php="herd php"
