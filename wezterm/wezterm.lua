@@ -51,7 +51,8 @@ end
 config.font = wezterm.font("Dank Mono")
 config.font_size = 27
 
-config.window_background_opacity = 1
+config.window_background_opacity = 0.7
+config.macos_window_background_blur = 20
 config.window_decorations = "RESIZE"
 
 config.hide_tab_bar_if_only_one_tab = true
