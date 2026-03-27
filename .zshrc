@@ -190,3 +190,11 @@ if [ -f '/Users/mwamodo/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Use
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/mwamodo/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mwamodo/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/84/"
+
+
+# Herd injected PHP 8.5 configuration.
+export HERD_PHP_85_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/85/"
