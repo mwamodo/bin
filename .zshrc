@@ -68,7 +68,18 @@ fi
 
 # Shell integrations that might produce output
 eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null
-eval "$(twilio autocomplete:script zsh)" 2>/dev/null
+
+# Cache Twilio completion instead of regenerating it on every shell startup.
+if (( $+commands[twilio] )); then
+    _twilio_cache="${XDG_CACHE_HOME:-$HOME/.cache}/twilio/autocomplete.zsh"
+    if [[ ! -s "$_twilio_cache" || -n "$_twilio_cache"(Nmw-7) ]]; then
+        mkdir -p "${_twilio_cache:h}" 2>/dev/null
+        twilio autocomplete:script zsh >| "$_twilio_cache" 2>/dev/null
+    fi
+    [[ -s "$_twilio_cache" ]] && source "$_twilio_cache"
+    unset _twilio_cache
+fi
+
 eval "$(zoxide init --cmd cd zsh)" 2>/dev/null
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)" 2>/dev/null
@@ -110,8 +121,8 @@ zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 
-# Load completions
-autoload -Uz compinit && compinit
+# Load completions using the cached dump when available for faster startup.
+autoload -Uz compinit && compinit -C
 
 zinit cdreplay -q
 

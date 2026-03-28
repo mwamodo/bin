@@ -22,35 +22,66 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 # commandline
 export HISTCONTROL=ignoredups
 
-# this loads nvm
+# Lazy-load nvm so new shells start faster.
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+load_nvm() {
+    [[ -n ${__NVM_LOADED:-} ]] && return 0
+    [ -s "$NVM_DIR/nvm.sh" ] || return 0
+    export __NVM_LOADED=1
+    \. "$NVM_DIR/nvm.sh" >/dev/null
+}
+
+nvm_find_project_nvmrc() {
+    local dir="$PWD"
+    while [[ "$dir" != "/" ]]; do
+        [[ -f "$dir/.nvmrc" ]] && {
+            print -r -- "$dir/.nvmrc"
+            return 0
+        }
+        dir="${dir:h}"
+    done
+    return 1
+}
+
+_lazy_load_nvm() {
+    unset -f nvm node npm npx pnpm yarn corepack 2>/dev/null
+    load_nvm
+}
+
+nvm() { _lazy_load_nvm; nvm "$@"; }
+node() { _lazy_load_nvm; node "$@"; }
+npm() { _lazy_load_nvm; npm "$@"; }
+npx() { _lazy_load_nvm; npx "$@"; }
+pnpm() { _lazy_load_nvm; pnpm "$@"; }
+yarn() { _lazy_load_nvm; yarn "$@"; }
+corepack() { _lazy_load_nvm; corepack "$@"; }
 
 # set SSH_AUTH_SOCK for 1password
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 
-# load node version in a project with .nvmrc file
+# Load the project Node version only when a .nvmrc exists.
 autoload -U add-zsh-hook
 load-nvmrc() {
-	local node_version="$(nvm version)"
-	local nvmrc_path="$(nvm_find_nvmrc)"
+    local nvmrc_path node_version nvmrc_node_version
 
-	if [ -n "$nvmrc_path" ]; then
-		local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    nvmrc_path="$(nvm_find_project_nvmrc)" || return 0
 
-		if [ "$nvmrc_node_version" = "N/A" ]; then
-			nvm install
-		elif [ "$nvmrc_node_version" != "$node_version" ]; then
-			nvm use
-		fi
-	elif [ "$node_version" != "$(nvm version default)" ]; then
-		echo "Reverting to nvm default version"
-		nvm use default
-	fi
+    load_nvm
+    command -v nvm >/dev/null 2>&1 || return 0
+
+    node_version="$(nvm version)"
+    nvmrc_node_version="$(nvm version "$(<"$nvmrc_path")")"
+
+    if [[ "$nvmrc_node_version" == "N/A" ]]; then
+        nvm install
+    elif [[ "$nvmrc_node_version" != "$node_version" ]]; then
+        nvm use >/dev/null
+    fi
 }
 
 add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+[[ -n "$(nvm_find_project_nvmrc)" ]] && load-nvmrc
 
 # misc.
 export GPG_TTY=$(tty)
