@@ -22,15 +22,9 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 # commandline
 export HISTCONTROL=ignoredups
 
-# Lazy-load nvm so new shells start faster.
+# Load nvm directly.
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-
-load_nvm() {
-    [[ -n ${__NVM_LOADED:-} ]] && return 0
-    [ -s "$NVM_DIR/nvm.sh" ] || return 0
-    export __NVM_LOADED=1
-    \. "$NVM_DIR/nvm.sh" >/dev/null
-}
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 nvm_find_project_nvmrc() {
     local dir="$PWD"
@@ -43,19 +37,6 @@ nvm_find_project_nvmrc() {
     done
     return 1
 }
-
-_lazy_load_nvm() {
-    unset -f nvm node npm npx pnpm yarn corepack 2>/dev/null
-    load_nvm
-}
-
-nvm() { _lazy_load_nvm; nvm "$@"; }
-node() { _lazy_load_nvm; node "$@"; }
-npm() { _lazy_load_nvm; npm "$@"; }
-npx() { _lazy_load_nvm; npx "$@"; }
-pnpm() { _lazy_load_nvm; pnpm "$@"; }
-yarn() { _lazy_load_nvm; yarn "$@"; }
-corepack() { _lazy_load_nvm; corepack "$@"; }
 
 # set SSH_AUTH_SOCK for 1password
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock

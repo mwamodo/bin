@@ -221,3 +221,10 @@ export HERD_PHP_82_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd
 
 # Herd injected PHP 7.4 configuration.
 export HERD_PHP_74_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/74/"
+
+# bun completions
+[ -s "/Users/mwamodo/.bun/_bun" ] && source "/Users/mwamodo/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
