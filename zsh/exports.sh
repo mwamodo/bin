@@ -163,6 +163,11 @@ lab:wake() {
     wakeonlan ${HOME_MAC}
 }
 
+# Set terminal window/tab title to current directory
+set_name() {
+    print -Pn "\e]1;%2~\a"
+}
+
 if [ -n "$ZSH_VERSION" ]; then
     precmd_functions+=(set_name)
 elif [ -n "$BASH_VERSION" ]; then

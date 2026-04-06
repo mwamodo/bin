@@ -71,6 +71,7 @@ link_file "$DOTFILES/.zshrc" "$HOME/.zshrc"
 link_file "$DOTFILES/tmux/tmux.conf" "$HOME/.tmux.conf"
 link_file "$DOTFILES/nvim" "$HOME/.config/nvim"
 link_file "$DOTFILES/wezterm" "$HOME/.config/wezterm"
+link_file "$DOTFILES/ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty"
 
 link_file "$DOTFILES/.gitignore" "$HOME/.gitignore"
 
