@@ -49,7 +49,7 @@ local function tabbar_for_appearance(appearance)
 end
 
 config.font = wezterm.font("Dank Mono")
-config.font_size = 27
+config.font_size = 23
 
 config.window_background_opacity = 1.0
 config.macos_window_background_blur = 20

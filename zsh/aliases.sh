@@ -139,6 +139,6 @@ alias antigravity="agy"
 
 alias claude:allow="claude --dangerously-skip-permissions"
 alias claude:dangerous="claude:allow"
-
+3
 alias opencode:allow="opencode --dangerously-bypass-approvals-and-sandbox"
 alias opencode:dangerous="opencode:allow"
