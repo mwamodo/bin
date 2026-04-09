@@ -171,15 +171,6 @@ fi
 export PATH="$HOME/Library/Application Support/Herd/bin/":$PATH
 export PHP_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/":$PHP_INI_SCAN_DIR
 
-# Herd injected PHP configuration.
-export HERD_PHP_74_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/74/"
-export HERD_PHP_80_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/80/"
-export HERD_PHP_81_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/81/"
-export HERD_PHP_82_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/82/"
-export HERD_PHP_83_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/83/"
-export HERD_PHP_84_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/84/"
-export HERD_PHP_85_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/85/"
-
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 # End of LM Studio CLI section
@@ -193,9 +184,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 
-# Added by Antigravity
-export PATH="/Users/mwamodo/.antigravity/antigravity/bin:$PATH"
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/mwamodo/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mwamodo/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -208,3 +196,23 @@ if [ -f '/Users/mwamodo/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then .
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/84/"
+
+
+# Herd injected PHP 8.5 configuration.
+export HERD_PHP_85_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/85/"
+
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/83/"
+
+
+# Herd injected PHP 8.2 configuration.
+export HERD_PHP_82_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/82/"
+
+
+# Herd injected PHP 7.4 configuration.
+export HERD_PHP_74_INI_SCAN_DIR="/Users/mwamodo/Library/Application Support/Herd/config/php/74/"
