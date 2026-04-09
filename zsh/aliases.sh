@@ -3,9 +3,12 @@ alias vim="nvim"
 alias vi="nvim"
 alias v="vi"
 alias hist="history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10"
+
 alias claude="claude --dangerously-skip-permissions"
 alias cc="claude"
 alias ccr="claude --resume"
+
+alias opencode="opencode --dangerously-bypass-approvals-and-sandbox"
 
 # laravel & dev work
 alias php="herd php"
@@ -134,11 +137,3 @@ alias tmux="tmux -u"
 
 # tailscale
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-
-alias antigravity="agy"
-
-alias claude:allow="claude --dangerously-skip-permissions"
-alias claude:dangerous="claude:allow"
-
-alias opencode:allow="opencode --dangerously-bypass-approvals-and-sandbox"
-alias opencode:dangerous="opencode:allow"
