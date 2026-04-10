@@ -30,8 +30,7 @@ alias artisan:test="a test"
 alias a:t="artisan:test"
 alias a:ts="a test --stop-on-failure"
 
-alias c="commit"
-alias c:p="commit:push"
+alias commit:ai="pi --model openai-codex/gpt-5.4-mini -p 'commit all changes'"
 alias wip="commit:push"
 
 alias artisan:enlightn="a enlightn --report"
