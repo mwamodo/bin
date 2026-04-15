@@ -24,6 +24,14 @@ else
         while IFS= read -r dir; do
             candidates+=("$dir")
         done < <(find "$HOME/code" -maxdepth 1 -mindepth 1 -type d ! -name ".flux")
+
+        for nested_root in "$HOME/code/turbine/products" "$HOME/code/turbine/internal"; do
+            if [[ -d "$nested_root" ]]; then
+                while IFS= read -r dir; do
+                    candidates+=("$dir")
+                done < <(find "$nested_root" -maxdepth 1 -mindepth 1 -type d)
+            fi
+        done
     fi
 
     if [[ -d "$HOME/bin" ]]; then
