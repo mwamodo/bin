@@ -1,15 +1,14 @@
--- TODO: maybe use this https://github.com/cpplain/flexoki.nvim instead. Might have better syntax highlighting --
 return {
-  { 'kepano/flexoki-neovim', name = 'flexoki' },
   {
-    'neanias/everforest-nvim',
+    'kepano/flexoki-neovim',
+    name = 'flexoki',
     priority = 1000,
     config = function()
       -- Function to set the appropriate theme based on system appearance
       local function set_theme()
         local appearance = vim.fn.system('defaults read -g AppleInterfaceStyle'):gsub('%s+', '')
         if appearance == 'Dark' then
-          vim.cmd.colorscheme 'catppuccin-mocha'
+          vim.cmd.colorscheme 'flexoki-dark'
         else
           vim.cmd.colorscheme 'flexoki-light'
         end
