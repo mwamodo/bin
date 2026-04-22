@@ -61,6 +61,22 @@ link_file() {
     log "ln -s $src $dest"
     if [ "$DRY_RUN" = false ]; then
         ln -s "$src" "$dest" || { echo "Failed to link $src -> $dest" >&2; exit 1; }
+
+        if [ ! -L "$dest" ]; then
+            echo "Error: expected '$dest' to be a symlink after linking" >&2
+            exit 1
+        fi
+
+        if [ "$(readlink "$dest")" != "$src" ]; then
+            echo "Error: verification failed for '$dest'" >&2
+            echo "Expected: $src" >&2
+            echo "Actual:   $(readlink "$dest")" >&2
+            exit 1
+        fi
+
+        echo "Verified: $dest -> $src"
+    else
+        echo "Would verify: $dest -> $src"
     fi
 }
 
@@ -85,3 +101,5 @@ if [ ! -d "$P10K_DIR" ]; then
 else
     log "powerlevel10k already installed"
 fi
+
+echo "Install complete."
