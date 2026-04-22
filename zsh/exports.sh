@@ -114,14 +114,6 @@ artisan:test-with-coverage() {
     open "http://coverage.test/${current_dir_name}/"
 }
 
-bot() {
-    if [ $# -eq 0 ]; then
-        ssh clawdbot@${OPENCLAW_IP}
-    else
-        ssh -tt clawdbot@${OPENCLAW_IP} "bash -ic '$*'"
-    fi
-}
-
 lab() {
     if [ $# -eq 0 ]; then
         ssh rick@${HOME_IP}
@@ -131,7 +123,7 @@ lab() {
 }
 
 lab:suspend() {
-    ssh -t clawdbot@${HOME_IP} 'sudo systemctl suspend'
+    ssh -t rick@${HOME_IP} 'sudo systemctl suspend'
 }
 
 lab:sleep() {
@@ -156,7 +148,7 @@ lab:sleep() {
     fi
 
     echo "Manually suspending. Server will wake at $waketime $target_day."
-    ssh -t clawdbot@${HOME_IP} "sudo rtcwake -m mem -t \$(date -d '$target_day $waketime' +%s)"
+    ssh -t rick@${HOME_IP} "sudo rtcwake -m mem -t \$(date -d '$target_day $waketime' +%s)"
 }
 
 lab:wake() {
