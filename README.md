@@ -10,7 +10,7 @@ Configs, customizations, and themes to personalize my macOS experience, with a h
 - **Shell**: **Zsh** optimized with [`zinit`](https://github.com/zdharma-continuum/zinit) for fast plugin loading and **Powerlevel10k** instant prompt.
 - **Terminals**: **WezTerm** and **Ghostty** — both styled with the **Catppuccin** theme.
 - **Navigation**: **zoxide** (`cd`) for smarter directory jumping.
-- **Session Management**: **Tmux** with TPM, a custom `t` helper script, and plugins for sessions, floating panes, URL opening, and persistent resurrection.
+- **Session Management**: **Tmux** with TPM, a custom `t` helper script, and plugins for sessions, floating panes, and URL opening.
 - **Editor**: **Neovim** (kickstart-based, `lazy.nvim`, Catppuccin theme) — aliased to `vim` and `vi`.
 - **Laravel Integration**: deep integration with **Herd**, **Artisan**, **Composer**, and **NPM**, including extensive aliases and helper functions.
 - **Modern CLI Tools**: Replaces standard tools with better alternatives:
@@ -178,7 +178,6 @@ Plugins are managed via [TPM](https://github.com/tmux-plugins/tpm). Key features
 - **`tmux-floax`** (`Ctrl-a` + `p`): Floating popup window for quick tasks.
 - **`tmux-fzf-url`**: Open URLs from the buffer with `fzf`.
 - **`tmux-thumbs`**: Rapid copy-paste of file paths, IPs, etc.
-- **`tmux-resurrect` / `tmux-continuum`**: Automatic session save and restore.
 - **Smart navigation**: `Ctrl-h/j/k/l` seamlessly moves between vim and tmux panes.
 
 ### Transmission Remote Controller (`transmission`)
