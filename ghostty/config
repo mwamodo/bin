@@ -1,3 +1,5 @@
 font-family= Dank Mono
 font-size= 21
-theme= light:Flexoki Light,dark:Flexoki Dark
+theme= light:Catppuccin Latte,dark:Catppuccin Mocha
+background-opacity= 0.8
+background-blur= macos-glass-clear
