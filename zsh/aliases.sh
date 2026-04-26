@@ -30,7 +30,7 @@ alias artisan:test="a test"
 alias a:t="artisan:test"
 alias a:ts="a test --stop-on-failure"
 
-alias commit:ai="pi --model opencode-go/qwen3.6-plus -p 'commit all changes'"
+alias commit:ai="pi --no-session --model opencode-go/qwen3.6-plus -p 'commit all changes'"
 alias wip="commit:push"
 
 alias artisan:enlightn="a enlightn --report"
