@@ -57,11 +57,6 @@ alias mfsr="a migrate:fresh --seed && a optimize:clear && redis-cli flushdb"
 
 alias tinker="a tinker"
 
-alias ide:helper="a ide-helper:generate && a ide-helper:meta && a ide-helper:models --nowrite"
-alias ide:helper:generate="a ide-helper:generate"
-alias ide:helper:meta="a ide-helper:meta"
-alias ide:helper:models="a ide-helper:models --nowrite"
-
 alias db:wipe="a db:wipe"
 alias db:seed="a db:seed"
 
@@ -70,12 +65,6 @@ alias s:r="schedule:run"
 alias expose="expose --server-host=repounlock.com"
 alias share="herd share --server-host=repounlock.com"
 alias h:s="share"
-
-alias duster="./vendor/bin/duster"
-alias duster:lint="duster lint"
-alias lint="duster:lint"
-alias duster:fix="duster fix"
-alias fix="duster:fix"
 
 alias flux:icon="artisan flux:icon"
 
@@ -99,38 +88,31 @@ alias g="git"
 alias gst="git status"
 alias ga="git add"
 alias gaa="git add ."
-alias gc="git commit"
-alias gcm="git commit -m"
+alias gc="git commit -S"
+alias gcm="git commit -S -m"
 alias gp="git push"
 alias gpl="git pull"
 alias gb="git branch"
 alias gco="git checkout"
 alias gd="git diff"
 alias gl="git log"
-alias gt="git tag -s"
+alias gt="git tag -S"
 alias gll="git log --oneline --decorate --all --graph"
-
-# fancy git
 alias push="gp"
 alias push:main="gp origin main"
 
 # mysql herd
 alias mysql="mysql -u root -h 127.0.0.1 -P 3306 -p"
 
-# youtube-dl
-alias youtube-dl-mp4="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'"
-
-# switch from top to bpytop
+# switching defaults for terminal tools
+alias cat="bat"
 alias top="bpytop"
-
-# switch from neofetch to fastfetch
+alias htop="bpytop"
+alias tmux="tmux -u"
 alias neofetch="fastfetch"
 
-# switch from cat to bat
-alias cat="bat"
-
-# switch from tmux to tmuxinator
-alias tmux="tmux -u"
+# youtube-dl
+alias youtube-dl-mp4="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'"
 
 # tailscale
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"

@@ -78,7 +78,7 @@ commit () {
     fi
 
     git add .
-    git commit -a -m "${commitMessage}"
+    git commit -S -a -m "${commitMessage}"
 }
 
 commit:push () {
@@ -91,7 +91,7 @@ commit:push () {
     fi
 
     git add .
-    git commit -a -m "${commitMessage}"
+    git commit -S -a -m "${commitMessage}"
     git push origin "${gitCurrentBranch}"
 }
 
