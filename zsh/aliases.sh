@@ -8,6 +8,8 @@ alias claude="claude --dangerously-skip-permissions"
 alias cc="claude"
 alias ccr="claude --resume"
 
+alias code="cursor"
+
 # laravel & dev work
 alias php="herd php"
 alias composer="herd composer"
