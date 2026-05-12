@@ -1,5 +1,3 @@
-font-family= Dank Mono
-font-size= 23
+font-family= Monaspace krypton
+font-size= 18
 theme= light:Catppuccin Latte,dark:Catppuccin Mocha
-background-opacity= 1
-background-blur= macos-glass-clear
