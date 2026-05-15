@@ -108,12 +108,6 @@ schedule:run () {
     done
 }
 
-artisan:test-with-coverage() {
-    local current_dir_name=$(basename "$PWD")
-    a test --coverage-html "../coverage/${current_dir_name}/"
-    open "http://coverage.test/${current_dir_name}/"
-}
-
 lab() {
     if [ $# -eq 0 ]; then
         ssh rick@${HOME_IP}
