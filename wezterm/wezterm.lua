@@ -49,7 +49,7 @@ local function tabbar_for_appearance(appearance)
 end
 
 config.font = wezterm.font("Monaspace krypton")
-config.font_size = 18
+config.font_size = 20
 
 config.window_background_opacity = 1
 config.window_decorations = "RESIZE"
@@ -64,7 +64,7 @@ do
 	local t = tabbar_for_appearance(appearance)
 	config.window_frame = {
 		font = wezterm.font({ family = "Monaspace krypton", weight = "Bold" }),
-		font_size = 15,
+		font_size = 18,
 		active_titlebar_bg = t.frame_active_bg,
 		inactive_titlebar_bg = t.frame_inactive_bg,
 	}
