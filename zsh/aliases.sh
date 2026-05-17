@@ -11,7 +11,7 @@ alias ccr="claude --resume"
 alias code="cursor"
 
 # laravel & dev work
-alias php="herd php"
+# alias php="herd php"
 alias composer="herd composer"
 
 alias artisan="php artisan"
