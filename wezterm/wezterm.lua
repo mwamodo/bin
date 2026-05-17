@@ -49,7 +49,7 @@ local function tabbar_for_appearance(appearance)
 end
 
 config.font = wezterm.font("Monaspace krypton")
-config.font_size = 20
+config.font_size = 16
 
 config.window_background_opacity = 1
 config.window_decorations = "RESIZE"
