@@ -26,7 +26,7 @@ alias a:op="a optimize:clear"
 
 alias log:clear="truncate -s 0 storage/logs/laravel*.log"
 
-alias artisan:test-with-coverage="herd coverage ./vendor/bin/pest --coverage"
+alias artisan:test-with-coverage="herd coverage ./vendor/bin/pest --coverage --coverage-html=public/test-coverage"
 alias a:tt="artisan:test-with-coverage"
 alias a:tp="a:t --parallel"
 alias artisan:test="a test"
