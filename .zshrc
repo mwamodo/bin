@@ -84,13 +84,16 @@ eval "$(zoxide init --cmd cd zsh)" 2>/dev/null
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)" 2>/dev/null
 
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# Warp injects its own shell-integration hooks during init that produce output,
+# which trips p10k's "console output detected" warning — skip instant prompt there.
+if [[ "$TERM_PROGRAM" != "WarpTerminal" ]]; then
+    typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+        source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
 fi
 
 # Set the directory we want to store zinit and plugins
