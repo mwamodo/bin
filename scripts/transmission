@@ -8,6 +8,19 @@ from transmission_rpc import Client
 
 load_dotenv()
 
+REQUIRED_VARS = [
+    "HOME_IP",
+    "HOME_TRANSMISSION_PORT",
+    "HOME_TRANSMISSION_USERNAME",
+    "HOME_TRANSMISSION_PASSWORD",
+]
+
+def validate_env():
+    missing = [var for var in REQUIRED_VARS if not os.getenv(var)]
+    if missing:
+        print(f"Missing environment variables: {', '.join(missing)}", file=sys.stderr)
+        sys.exit(1)
+
 def get_client():
     return Client(
         host=os.getenv("HOME_IP"),
@@ -53,7 +66,12 @@ def main():
         sys.exit(0)
 
     args = parser.parse_args()
-    c = get_client()
+    validate_env()
+    try:
+        c = get_client()
+    except Exception as e:
+        print(f"Failed to connect to Transmission: {e}", file=sys.stderr)
+        sys.exit(1)
 
     if args.pause_all:
         c.stop_torrent("all")
