@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # npm global path to prevent install npm with sudo
 NPM_PACKAGES="${HOME}/.npm-packages"
 
@@ -23,7 +24,9 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 export HISTCONTROL=ignoredups
 
 # Load nvm directly.
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+export NVM_DIR
+# shellcheck source=/dev/null
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 nvm_find_project_nvmrc() {
@@ -65,7 +68,9 @@ add-zsh-hook chpwd load-nvmrc
 [[ -n "$(nvm_find_project_nvmrc)" ]] && load-nvmrc
 
 # misc.
-export GPG_TTY=$(tty)
+GPG_TTY=$(tty)
+export GPG_TTY
+# shellcheck source=/dev/null
 source <(fzf --zsh)
 
 # functions
@@ -110,23 +115,25 @@ schedule:run () {
 
 lab() {
     if [ $# -eq 0 ]; then
-        ssh rick@${HOME_IP}
+        ssh rick@"${HOME_IP}"
     else
-        ssh -tt rick@${HOME_IP} "bash -ic '$*'"
+        ssh -tt rick@"${HOME_IP}" "bash -ic '$*'"
     fi
 }
 
 lab:suspend() {
-    ssh -t rick@${HOME_IP} 'sudo systemctl suspend'
+    ssh -t rick@"${HOME_IP}" 'sudo systemctl suspend'
 }
 
 lab:sleep() {
-    local day=$(date +%u)
+    local day
+    day=$(date +%u)
     local waketime="16:30"
 
     [[ "$day" -eq 6 || "$day" -eq 7 ]] && waketime="10:00"
 
-    local current_time=$(date +%H%M)
+    local current_time
+    current_time=$(date +%H%M)
     local wake_time_cmp="${waketime//:/}"
     local target_day="today"
 
@@ -142,11 +149,11 @@ lab:sleep() {
     fi
 
     echo "Manually suspending. Server will wake at $waketime $target_day."
-    ssh -t rick@${HOME_IP} "sudo rtcwake -m mem -t \$(date -d '$target_day $waketime' +%s)"
+    ssh -t rick@"${HOME_IP}" "sudo rtcwake -m mem -t \$(date -d '$target_day $waketime' +%s)"
 }
 
 lab:wake() {
-    wakeonlan ${HOME_MAC}
+    wakeonlan "${HOME_MAC}"
 }
 
 # Set terminal window/tab title to current directory

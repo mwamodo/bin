@@ -20,7 +20,6 @@ while getopts ":nv" opt; do
 done
 shift $((OPTIND-1))
 
-OS=$(uname)
 DOTFILES=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 log() {
