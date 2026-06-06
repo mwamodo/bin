@@ -70,8 +70,11 @@ add-zsh-hook chpwd load-nvmrc
 # misc.
 GPG_TTY=$(tty)
 export GPG_TTY
+# fzf's option save/restore tries to reset the read-only `zle` option in
+# interactive shells, printing a harmless "can't change option: zle" twice.
+# Drop that cosmetic stderr noise; fzf itself still loads fine.
 # shellcheck source=/dev/null
-source <(fzf --zsh)
+source <(fzf --zsh) 2>/dev/null
 
 # functions
 commit () {
