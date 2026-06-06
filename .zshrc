@@ -220,3 +220,6 @@ export PATH="/Users/mwamodo/.local/bin:$PATH"
 
 # opencode
 export PATH=/Users/mwamodo/.opencode/bin:$PATH
+
+# Added by Antigravity IDE
+export PATH="/Users/mwamodo/.antigravity-ide/antigravity-ide/bin:$PATH"
