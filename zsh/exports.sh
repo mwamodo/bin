@@ -51,7 +51,6 @@ load-nvmrc() {
 
     nvmrc_path="$(nvm_find_project_nvmrc)" || return 0
 
-    load_nvm
     command -v nvm >/dev/null 2>&1 || return 0
 
     node_version="$(nvm version)"

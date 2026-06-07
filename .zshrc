@@ -1,3 +1,7 @@
+# Deduplicate PATH automatically: many tool installers append to PATH below and
+# in zsh/exports.sh, so keep only the first occurrence of each entry.
+typeset -U path PATH
+
 # Load environment variables and shell integrations that might produce output
 # These need to be BEFORE the instant prompt to avoid warnings
 
