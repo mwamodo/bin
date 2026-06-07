@@ -21,7 +21,10 @@ jobs:
         with:
           scandir: '.'
           additional_files: 'install t'
-          ignore_paths: 'tmux/plugins .git'
+          # ShellCheck has no zsh support, so skip zsh files: .zshrc (matched by
+          # name despite having no shebang) and the vendored Powerlevel10k tree.
+          ignore_paths: 'tmux/plugins .git .powerlevel10k'
+          ignore_names: '.zshrc'
 
   stylua:
     name: StyLua
