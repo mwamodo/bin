@@ -76,6 +76,10 @@ export GPG_TTY
 source <(fzf --zsh) 2>/dev/null
 
 # functions
+hist() {
+    history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10
+}
+
 commit () {
     commitMessage="$1"
 
