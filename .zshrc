@@ -84,8 +84,6 @@ if (( $+commands[twilio] )); then
     unset _twilio_cache
 fi
 
-eval "$(zoxide init --cmd cd zsh)" 2>/dev/null
-
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)" 2>/dev/null
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -225,3 +223,7 @@ export PATH="/Users/mwamodo/.local/bin:$PATH"
 
 # Added by Antigravity IDE
 export PATH="/Users/mwamodo/.antigravity-ide/antigravity-ide/bin:$PATH"
+
+# zoxide — initialized LAST so its chpwd/precmd hooks and completions are not
+# overridden by plugins or compinit loaded above (satisfies zoxide's doctor check).
+eval "$(zoxide init --cmd cd zsh)" 2>/dev/null
