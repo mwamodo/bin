@@ -146,6 +146,7 @@ HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
 HISTDUP=erase
+HISTORY_IGNORE="(ls|cd|pwd|exit|youtube-dl)"
 
 setopt appendhistory
 setopt sharehistory
