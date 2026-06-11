@@ -228,3 +228,6 @@ export PATH="/Users/mwamodo/.antigravity-ide/antigravity-ide/bin:$PATH"
 # zoxide — initialized LAST so its chpwd/precmd hooks and completions are not
 # overridden by plugins or compinit loaded above (satisfies zoxide's doctor check).
 eval "$(zoxide init --cmd cd zsh)" 2>/dev/null
+
+# opencode
+export PATH=/Users/mwamodo/.opencode/bin:$PATH
