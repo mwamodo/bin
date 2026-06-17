@@ -99,6 +99,7 @@ alias push="gp"
 alias push:main="gp origin main"
 
 alias gb="g branch"
+alias gbd="g branch -d"
 alias gco="g checkout"
 
 alias gd="g diff"
