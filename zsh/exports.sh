@@ -17,6 +17,8 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 export PATH="$HOME/Applications/WezTerm.app/Contents/MacOS:$PATH"
 
+export PATH="$HOME/develop/flutter/bin:$PATH"
+
 # unset manpath so we can inherit from /etc/manpath via the `manpath` command
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
