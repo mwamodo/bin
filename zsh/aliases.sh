@@ -9,7 +9,6 @@ alias cc="claude"
 alias ccr="claude --resume"
 
 # laravel & dev work
-alias code="agy-ide"
 
 alias composer="herd composer"
 
