@@ -1,0 +1,271 @@
+#!/bin/bash
+
+# Keep Claude and Codex skill dirs in sync with ~/.agents/skills.
+# Each skill directory (must contain SKILL.md) is mirrored as a symlink.
+
+set -e
+
+SOURCE_DIR="${HOME}/.agents/skills"
+DEST_DIRS=(
+    "${HOME}/.claude/skills"
+    "${HOME}/.codex/skills"
+)
+LAUNCH_LABEL="com.mwamodo.sync-skills"
+LAUNCH_PLIST="${HOME}/Library/LaunchAgents/${LAUNCH_LABEL}.plist"
+RELATIVE_TARGET="../../.agents/skills"
+
+DRY_RUN=false
+VERBOSE=false
+WATCH=false
+INSTALL_AGENT=false
+UNINSTALL_AGENT=false
+
+SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
+
+usage() {
+    echo "Usage: $0 [-n] [-v] [--watch] [--install] [--uninstall]" >&2
+    echo "  -n           dry run, show actions without executing" >&2
+    echo "  -v           verbose output" >&2
+    echo "  --watch      resync when ~/.agents/skills changes" >&2
+    echo "  --install    load a LaunchAgent that syncs on add/remove" >&2
+    echo "  --uninstall  unload and remove that LaunchAgent" >&2
+}
+
+log() {
+    if [ "$VERBOSE" = true ]; then
+        echo "$@"
+    fi
+}
+
+is_our_link() {
+    local name="$1" target="$2"
+    [ "$target" = "${RELATIVE_TARGET}/${name}" ] || [ "$target" = "${SOURCE_DIR}/${name}" ]
+}
+
+list_skills() {
+    local path name
+    [ -d "$SOURCE_DIR" ] || return 0
+
+    for path in "$SOURCE_DIR"/*; do
+        [ -d "$path" ] || continue
+        name="$(basename "$path")"
+        [ -f "${path}/SKILL.md" ] || continue
+        printf '%s\n' "$name"
+    done
+}
+
+sync_dest() {
+    local dest="$1"
+    local name path target expected
+
+    if [ ! -d "$dest" ]; then
+        log "Creating $dest"
+        if [ "$DRY_RUN" = false ]; then
+            mkdir -p "$dest"
+        fi
+    fi
+
+    while IFS= read -r name; do
+        [ -n "$name" ] || continue
+        path="${dest}/${name}"
+        expected="${RELATIVE_TARGET}/${name}"
+
+        if [ -L "$path" ]; then
+            target="$(readlink "$path")"
+            if [ "$target" = "$expected" ]; then
+                log "Already linked: $path"
+                ALREADY=$((ALREADY + 1))
+                continue
+            fi
+
+            if is_our_link "$name" "$target"; then
+                log "Updating $path -> $expected"
+                if [ "$DRY_RUN" = false ]; then
+                    ln -sfn "$expected" "$path"
+                fi
+                echo "Updated: $path -> $expected"
+                LINKED=$((LINKED + 1))
+                continue
+            fi
+
+            echo "Skipped (symlink exists): $path -> $target" >&2
+            SKIPPED=$((SKIPPED + 1))
+            continue
+        fi
+
+        if [ -e "$path" ]; then
+            echo "Skipped (exists): $path" >&2
+            SKIPPED=$((SKIPPED + 1))
+            continue
+        fi
+
+        log "ln -s $expected $path"
+        if [ "$DRY_RUN" = false ]; then
+            ln -s "$expected" "$path"
+        fi
+        echo "Linked: $path -> $expected"
+        LINKED=$((LINKED + 1))
+    done < <(list_skills)
+
+    for path in "$dest"/*; do
+        [ -L "$path" ] || continue
+        name="$(basename "$path")"
+        target="$(readlink "$path")"
+        is_our_link "$name" "$target" || continue
+
+        if [ -d "${SOURCE_DIR}/${name}" ] && [ -f "${SOURCE_DIR}/${name}/SKILL.md" ]; then
+            continue
+        fi
+
+        log "Removing stale $path"
+        if [ "$DRY_RUN" = false ]; then
+            rm "$path"
+        fi
+        echo "Pruned: $path"
+        PRUNED=$((PRUNED + 1))
+    done
+}
+
+sync_all() {
+    local dest
+
+    if [ ! -d "$SOURCE_DIR" ]; then
+        echo "Error: source '$SOURCE_DIR' does not exist" >&2
+        exit 1
+    fi
+
+    LINKED=0
+    ALREADY=0
+    PRUNED=0
+    SKIPPED=0
+
+    for dest in "${DEST_DIRS[@]}"; do
+        sync_dest "$dest"
+    done
+
+    echo "sync-skills: ${LINKED} linked, ${ALREADY} already, ${PRUNED} pruned, ${SKIPPED} skipped"
+}
+
+source_fingerprint() {
+    # Directory names plus SKILL.md presence; enough to detect add/remove/rename.
+    list_skills | sort
+}
+
+watch_loop() {
+    local prev current
+
+    sync_all
+    prev="$(source_fingerprint)"
+
+    if command -v fswatch >/dev/null 2>&1; then
+        log "Watching $SOURCE_DIR with fswatch"
+        fswatch -o -l 1 "$SOURCE_DIR" | while read -r _; do
+            sync_all
+        done
+        return
+    fi
+
+    log "Watching $SOURCE_DIR by polling (install fswatch for event-based updates)"
+    while true; do
+        sleep 2
+        current="$(source_fingerprint)"
+        if [ "$current" != "$prev" ]; then
+            sync_all
+            prev="$current"
+        fi
+    done
+}
+
+write_launch_plist() {
+    mkdir -p "$(dirname "$LAUNCH_PLIST")"
+    cat > "$LAUNCH_PLIST" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>${LAUNCH_LABEL}</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>${SCRIPT_PATH}</string>
+    </array>
+    <key>WatchPaths</key>
+    <array>
+        <string>${SOURCE_DIR}</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>${HOME}/Library/Logs/sync-skills.log</string>
+    <key>StandardErrorPath</key>
+    <string>${HOME}/Library/Logs/sync-skills.log</string>
+</dict>
+</plist>
+EOF
+}
+
+install_agent() {
+    local domain="gui/$(id -u)"
+
+    if [ "$DRY_RUN" = true ]; then
+        echo "Would install LaunchAgent: $LAUNCH_PLIST"
+        return 0
+    fi
+
+    write_launch_plist
+    launchctl bootout "$domain" "$LAUNCH_PLIST" >/dev/null 2>&1 || true
+    launchctl bootstrap "$domain" "$LAUNCH_PLIST"
+    echo "Installed LaunchAgent: $LAUNCH_LABEL"
+    echo "Watching $SOURCE_DIR (log: ${HOME}/Library/Logs/sync-skills.log)"
+}
+
+uninstall_agent() {
+    local domain="gui/$(id -u)"
+
+    if [ "$DRY_RUN" = true ]; then
+        echo "Would unload and remove $LAUNCH_PLIST"
+        return 0
+    fi
+
+    launchctl bootout "$domain" "$LAUNCH_PLIST" >/dev/null 2>&1 || true
+    rm -f "$LAUNCH_PLIST"
+    echo "Removed LaunchAgent: $LAUNCH_LABEL"
+}
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -n) DRY_RUN=true ;;
+        -v) VERBOSE=true ;;
+        --watch) WATCH=true ;;
+        --install) INSTALL_AGENT=true ;;
+        --uninstall) UNINSTALL_AGENT=true ;;
+        -h|--help) usage; exit 0 ;;
+        *) usage; exit 1 ;;
+    esac
+    shift
+done
+
+if [ "$INSTALL_AGENT" = true ] && [ "$UNINSTALL_AGENT" = true ]; then
+    echo "Error: --install and --uninstall cannot be used together" >&2
+    exit 1
+fi
+
+if [ "$UNINSTALL_AGENT" = true ]; then
+    uninstall_agent
+    exit 0
+fi
+
+if [ "$INSTALL_AGENT" = true ]; then
+    install_agent
+    # bootstrap with RunAtLoad already syncs; still run once so the terminal shows results.
+    sync_all
+    exit 0
+fi
+
+if [ "$WATCH" = true ]; then
+    watch_loop
+    exit 0
+fi
+
+sync_all
