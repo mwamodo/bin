@@ -206,7 +206,8 @@ EOF
 }
 
 install_agent() {
-    local domain="gui/$(id -u)"
+    local domain
+    domain="gui/$(id -u)"
 
     if [ "$DRY_RUN" = true ]; then
         echo "Would install LaunchAgent: $LAUNCH_PLIST"
@@ -221,7 +222,8 @@ install_agent() {
 }
 
 uninstall_agent() {
-    local domain="gui/$(id -u)"
+    local domain
+    domain="gui/$(id -u)"
 
     if [ "$DRY_RUN" = true ]; then
         echo "Would unload and remove $LAUNCH_PLIST"
