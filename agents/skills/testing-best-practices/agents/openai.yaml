@@ -1,0 +1,3 @@
+interface:
+  display_name: "Testing Best Practices"
+  short_description: "Laravel test design and review."

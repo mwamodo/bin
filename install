@@ -90,6 +90,15 @@ link_file "$DOTFILES/ghostty" "$HOME/Library/Application Support/com.mitchellh.g
 
 link_file "$DOTFILES/.gitignore" "$HOME/.gitignore"
 
+if [ -x "$DOTFILES/scripts/sync-skills" ]; then
+    log "Syncing agent skills"
+    if [ "$DRY_RUN" = true ]; then
+        "$DOTFILES/scripts/sync-skills" -n
+    else
+        "$DOTFILES/scripts/sync-skills"
+    fi
+fi
+
 P10K_DIR="$HOME/bin/.powerlevel10k"
 if [ ! -d "$P10K_DIR" ]; then
     log "Installing powerlevel10k"

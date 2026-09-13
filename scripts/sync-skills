@@ -1,18 +1,28 @@
 #!/bin/bash
 
-# Keep Claude and Codex skill dirs in sync with ~/.agents/skills.
+# Keep ~/.agents, Claude, and Codex skill dirs in sync with this repo.
 # Each skill directory (must contain SKILL.md) is mirrored as a symlink.
 
 set -e
 
-SOURCE_DIR="${HOME}/.agents/skills"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_PATH="${SCRIPT_DIR}/$(basename "${BASH_SOURCE[0]}")"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+SOURCE_DIR="${REPO_ROOT}/agents/skills"
 DEST_DIRS=(
+    "${HOME}/.agents/skills"
     "${HOME}/.claude/skills"
     "${HOME}/.codex/skills"
 )
 LAUNCH_LABEL="com.mwamodo.sync-skills"
 LAUNCH_PLIST="${HOME}/Library/LaunchAgents/${LAUNCH_LABEL}.plist"
-RELATIVE_TARGET="../../.agents/skills"
+
+# Dest dirs are $HOME/.<tool>/skills, so two hops up lands in $HOME.
+if [ "${REPO_ROOT#"$HOME"/}" != "$REPO_ROOT" ]; then
+    RELATIVE_TARGET="../../${REPO_ROOT#"$HOME"/}/agents/skills"
+else
+    RELATIVE_TARGET="$SOURCE_DIR"
+fi
 
 DRY_RUN=false
 VERBOSE=false
@@ -20,13 +30,11 @@ WATCH=false
 INSTALL_AGENT=false
 UNINSTALL_AGENT=false
 
-SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
-
 usage() {
     echo "Usage: $0 [-n] [-v] [--watch] [--install] [--uninstall]" >&2
     echo "  -n           dry run, show actions without executing" >&2
     echo "  -v           verbose output" >&2
-    echo "  --watch      resync when ~/.agents/skills changes" >&2
+    echo "  --watch      resync when ${SOURCE_DIR} changes" >&2
     echo "  --install    load a LaunchAgent that syncs on add/remove" >&2
     echo "  --uninstall  unload and remove that LaunchAgent" >&2
 }
@@ -39,7 +47,10 @@ log() {
 
 is_our_link() {
     local name="$1" target="$2"
-    [ "$target" = "${RELATIVE_TARGET}/${name}" ] || [ "$target" = "${SOURCE_DIR}/${name}" ]
+    [ "$target" = "${RELATIVE_TARGET}/${name}" ] \
+        || [ "$target" = "${SOURCE_DIR}/${name}" ] \
+        || [ "$target" = "../../.agents/skills/${name}" ] \
+        || [ "$target" = "${HOME}/.agents/skills/${name}" ]
 }
 
 list_skills() {
