@@ -1,0 +1,75 @@
+#!/usr/bin/osascript -l JavaScript
+
+// @tuna.name Center Window
+// @tuna.subtitle Center the focused window on its current screen
+// @tuna.icon macwindow
+// @tuna.mode background
+// @tuna.input none
+// @tuna.output none
+
+// center the focused window on whichever screen it is currently on.
+// needs Accessibility permission for the app that runs it
+// (System Settings > Privacy & Security > Accessibility).
+
+ObjC.import("AppKit");
+
+function focusedWindow(proc) {
+    try {
+        const win = proc.attributes.byName("AXFocusedWindow").value();
+        if (win) return win;
+    } catch (e) {
+        // some apps don't expose AXFocusedWindow, fall through
+    }
+    return proc.windows.length > 0 ? proc.windows[0] : null;
+}
+
+// NSScreen has a bottom-left origin, Accessibility has a top-left one.
+// Both are relative to the primary screen, so flip y using its height.
+function visibleFrames() {
+    const screens = $.NSScreen.screens;
+    const primaryHeight = screens.objectAtIndex(0).frame.size.height;
+    const frames = [];
+
+    for (let i = 0; i < screens.count; i++) {
+        const f = screens.objectAtIndex(i).visibleFrame;
+        frames.push({
+            x: f.origin.x,
+            y: primaryHeight - (f.origin.y + f.size.height),
+            w: f.size.width,
+            h: f.size.height,
+        });
+    }
+
+    return frames;
+}
+
+function run() {
+    const systemEvents = Application("System Events");
+    const proc = systemEvents.applicationProcesses.whose({ frontmost: true })[0];
+    const win = focusedWindow(proc);
+
+    if (!win) return;
+
+    try {
+        if (win.attributes.byName("AXFullScreen").value()) return;
+    } catch (e) {
+        // not every window has AXFullScreen
+    }
+
+    const [x, y] = win.position();
+    const [w, h] = win.size();
+    const midX = x + w / 2;
+    const midY = y + h / 2;
+
+    const frames = visibleFrames();
+    const screen =
+        frames.find(
+            (f) => midX >= f.x && midX < f.x + f.w && midY >= f.y && midY < f.y + f.h,
+        ) || frames[0];
+
+    // keep the title bar reachable if the window is bigger than the screen
+    const newX = Math.round(screen.x + Math.max(0, (screen.w - w) / 2));
+    const newY = Math.round(screen.y + Math.max(0, (screen.h - h) / 2));
+
+    win.position = [newX, newY];
+}
