@@ -4,10 +4,6 @@ alias vim="nvim"
 alias vi="nvim"
 alias v="vi"
 
-alias claude="claude --dangerously-skip-permissions"
-alias cc="claude"
-alias ccr="claude --resume"
-
 # laravel & dev work
 
 alias composer="herd composer"
