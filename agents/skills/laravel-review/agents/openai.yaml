@@ -1,0 +1,5 @@
+interface:
+  display_name: "Laravel Review"
+  short_description: "Review Laravel changes in a working tree, a commit, changes since a commit, a branch, or a PR"
+policy:
+  allow_implicit_invocation: false

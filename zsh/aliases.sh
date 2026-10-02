@@ -24,7 +24,7 @@ alias a:t="a test"
 alias a:tp="a test --parallel"
 alias a:tc="herd coverage ./vendor/bin/pest --coverage --coverage-html=public/test-coverage"
 alias a:ts="a test --stop-on-failure"
-alias commit:ai="pi --no-session --model opencode-go/deepseek-v4-flash -p 'commit all changes'"
+alias commit:ai="pi --no-session --model openai-codex/gpt-6-luna -p 'commit all changes'"
 alias wip="commit:push"
 
 alias n="npm"

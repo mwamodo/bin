@@ -1,6 +1,7 @@
 ---
 name: laravel-review
 description: Review Laravel changes in a working tree, a commit, changes since a commit, a branch, or a PR. Establish the exact snapshot, publish an upfront risk assessment, and scale review depth while reporting findings and confidence separately. Also use for risk-only assessment of a Laravel change; a whole-repository audit is a separate scope.
+disable-model-invocation: true
 ---
 
 # Laravel change review
