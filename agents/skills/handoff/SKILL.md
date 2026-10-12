@@ -1,7 +1,7 @@
 ---
 name: handoff
 description: Compact the current conversation into a handoff document for another agent to pick up.
-argument-hint: [--task] [--terminal_id]
+argument-hint: "[--task <task>] [--terminal_id <id>]"
 arguments: 
     - name: terminal_id
       type: string
