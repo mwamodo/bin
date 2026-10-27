@@ -180,7 +180,14 @@ export PHP_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/":$PH
 export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 # End of LM Studio CLI section
 
-export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+# GNU coreutils first in my terminal. Agent shells (Claude Code sets
+# CLAUDECODE) drop them, even when inherited from the terminal that started
+# the agent, because agents write macOS flags such as `stat -f`.
+if [[ -n $CLAUDECODE ]]; then
+    path=(${path:#/opt/homebrew/opt/coreutils/libexec/gnubin})
+else
+    export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+fi
 
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
