@@ -90,6 +90,9 @@ link_file "$DOTFILES/ghostty" "$HOME/Library/Application Support/com.mitchellh.g
 
 link_file "$DOTFILES/.gitignore" "$HOME/.gitignore"
 
+# Claude Code's global instructions, loaded in every session.
+link_file "$DOTFILES/agents/global-CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+
 if [ -x "$DOTFILES/scripts/sync-skills" ]; then
     log "Syncing agent skills"
     if [ "$DRY_RUN" = true ]; then
