@@ -9,3 +9,7 @@ Write working files (notes, handoff briefs, screenshots, probe scripts, test log
 # Passing on reviews
 
 When you pass on a code review from a subagent or another session, list every finding, one line each, and save the full list in the task's vault folder. Whoever fixes the code sees only what you pass on.
+
+# Decisions built on a false premise
+
+When checking shows that the reason behind a user's decision isn't true, stop and ask before building that part, and say what you found.
