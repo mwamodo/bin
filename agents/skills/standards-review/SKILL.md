@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: standards-review
 description: Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress/uncommited changes, or asks to "review since X".
 disable-model-invocation: true
 ---
@@ -17,11 +17,11 @@ The issue tracker should have been provided to you — run `/setup-repo` if `doc
 
 ### 1. Pin the fixed point
 
-Whatever the user said is the fixed point — a commit SHA, branch name, tag, `main`, `HEAD~5`, etc. If they didn't specify one, ask for it.
+Whatever the user said is the fixed point — a commit SHA, branch name, tag, `main`, `HEAD~5`, etc. "Uncommitted changes" or "work in progress" means `HEAD`. If they didn't specify one, ask for it.
 
-Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
+Capture the diff command once: `git diff $(git merge-base <fixed-point> HEAD)`. It compares the merge-base with the working tree, so it covers both the commits since the fixed point and uncommitted edits; reviews often run before the commit. Untracked files never appear in a diff: list them with `git ls-files --others --exclude-standard` and review them as new files. Also note the list of commits via `git log <fixed-point>..HEAD --oneline` (empty when the fixed point is `HEAD`).
 
-Before going further, confirm the fixed point resolves (`git rev-parse <fixed-point>`) and the diff is non-empty. A bad ref or empty diff should fail here — not inside two parallel sub-agents.
+Before going further, confirm the fixed point resolves (`git rev-parse <fixed-point>`) and that the diff or the untracked list is non-empty. A bad ref or empty diff should fail here — not inside two parallel sub-agents.
 
 ### 2. Identify the spec source
 
@@ -58,23 +58,33 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 ### 4. Spawn both sub-agents in parallel
 
+Both sub-agents return findings in one shape, worst first, at most 10 each. Give each brief this block verbatim:
+
+```
+- path/to/file.php:123 — one sentence stating the problem
+  Cost: the concrete input or state that goes wrong, or what it costs
+  Source: the quoted rule, smell + hunk, or spec line it rests on
+```
+
+Fewer real findings beat padding; return nothing for an axis that has nothing.
+
 **Standards sub-agent prompt** — include:
 
-- The full diff command and commit list.
+- The full diff command, the untracked file paths, and the commit list.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full — the sub-agent has no other access to it.
-- The brief: "Report — per file/hunk where relevant — (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls — documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
+- The brief: "Report (a) every place the change violates a documented standard, and (b) any baseline smell you spot. Flag a documented-standard violation only when you can quote both the exact rule (file + rule text) and the exact line that breaks it; leave out 'spirit of the doc' inferences. Baseline smells are always judgement calls: name the smell and quote the hunk. A documented repo standard overrides the baseline. Rules reach past the diff: for each function the change modifies, grep its callers and check them against the standards too, because an unchanged caller can break a rule the change triggers (an untouched `catch` that no longer matches a reclassified exception). Skip anything tooling enforces." Plus the finding block above.
 
 **Spec sub-agent prompt** — include:
 
-- The diff command and commit list.
+- The diff command, the untracked file paths, and the commit list.
 - The path or fetched contents of the spec.
-- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
+- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. For (b), audit removals as well as additions: for every line the change deletes or replaces, name the behaviour it enforced and check whether the spec asked for that behaviour to change. An unrequested removal is scope creep. Quote the spec line for each finding." Plus the finding block above.
 
 If the spec is missing, skip the Spec sub-agent and note this in the final report.
 
 ### 5. Aggregate
 
-Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings — the two axes are deliberately separate (see _Why two axes_).
+Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned, keeping every finding in its block shape: whoever acts on the review often reads only this report. Do **not** merge or rerank findings — the two axes are deliberately separate (see _Why two axes_).
 
 End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes — that's the reranking the separation exists to prevent.
 
