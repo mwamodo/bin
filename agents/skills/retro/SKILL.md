@@ -10,7 +10,7 @@ The user has asked for a **retrospective**. You are suggesting improvements to t
 
 1. Call the Skill tool with `writing-for-agents` for the writing style guide.
 
-2. Read the primary sources for the session the user specifies. This may mean searching through session logs on this machine. If the user doesn't specify a session, default to the current one.
+2. Read the primary sources for the session the user specifies. This may mean searching through session logs on this machine. If the user doesn't specify a session, default to the current one. If the current session has no work before the retro, review the sessions since the last saved retro (step 5).
 
 3. Look for candidates for improvement in these categories.
 
@@ -23,6 +23,8 @@ The user has asked for a **retrospective**. You are suggesting improvements to t
 - **Information access**: look for opportunities to increase the agent's access to information. Teeing dev server logs, readonly access to third-party services. _Use when_ a crucial piece of information was not available to the agent.
 
 4. Present these candidates to the user, in order of severity.
+
+5. Save the retro as a working file: `retro-<YYYY-MM-DD>/retro.md` in the project's notes folder, listed in that folder's `index.md` (the global instructions say where). The retro is done when the file holds every candidate you presented. As the user acts on one, mark it done there with its commit, so the next retro can start from what's still open.
 
 ## Reference
 
