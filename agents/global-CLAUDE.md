@@ -13,3 +13,7 @@ When you pass on a code review from a subagent or another session, list every fi
 # Decisions built on a false premise
 
 When checking shows that the reason behind a user's decision isn't true, stop and ask before building that part, and say what you found.
+
+# Checking UI changes
+
+Open every UI change in a browser yourself before handing it off or marking a PR ready: Orca's built-in browser (`orca skills get orca-cli` explains the commands) or the user's Chrome through the claude-in-chrome tools. Walk each affected screen and state, and put screenshots in the PR's Evidence section. If you can't open it, keep the PR a draft and list what's unchecked.
