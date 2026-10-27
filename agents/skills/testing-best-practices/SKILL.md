@@ -34,7 +34,7 @@ Read this section before you write a test.
 1. Read the code under test. Read the tests in the same directory. Identify every decision in the code.
 2. Select every applicable branch in the rule index. Read every selected rule file.
 3. Report each defect in the code before you write a test. Examples are a method with no body, a policy that no action calls, and a write action with no validation. Test the actual behavior. Report the defect to the user.
-4. Write the tests. Run the smallest set of tests that covers the change. The tests must pass.
+4. Write the tests. Run the smallest set of tests that covers the change. The tests must pass. When the tests cover a fix, prove they fail without it: `test-against-head <test files> -- vendor/bin/pest` runs them against `HEAD` in a throwaway worktree and exits 0 when they fail there. Check that they fail on the assertion the fix makes pass.
 5. Check every applicable item in `rules/review.md` and every selected rule file. Resolve every mismatch before completion.
 
 ## Rule Index

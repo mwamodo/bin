@@ -1,0 +1,134 @@
+#!/bin/bash
+
+# Prove new tests fail without the fix: run them against a clean copy of a
+# commit (HEAD by default) in a throwaway git worktree. The working tree is
+# never touched, so nothing needs restoring if a run dies halfway.
+
+set -eo pipefail
+
+usage() {
+    cat >&2 <<'EOF'
+Usage: test-against-head [--base <ref>] [--with <path>]... <test path>... -- <test command>...
+
+Copies the test paths from the working tree into a throwaway worktree of <ref>
+and runs "<test command> <test path>..." there. Uncommitted and untracked app
+changes stay behind, so the tests run against the code without the fix.
+
+  --base <ref>   Commit to test against (default HEAD). If the fix is already
+                 committed, pass the commit before it.
+  --with <path>  Also copy this file (a changed tests/Pest.php, a fixture)
+                 without passing it to the test command.
+
+Exits 0 when the tests fail at <ref> (what you want), 1 when they pass (they
+don't catch the bug), 2 on a usage or setup error. Read the failure output: a
+test that fails for the wrong reason, such as a class only the fix adds,
+proves nothing.
+
+Example:
+  test-against-head tests/Feature/VoicemailTest.php -- vendor/bin/pest
+EOF
+}
+
+BASE=HEAD
+TESTS=()
+SUPPORT=()
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --base) BASE="${2:?--base needs a ref}"; shift 2 ;;
+        --with) SUPPORT+=("${2:?--with needs a path}"); shift 2 ;;
+        -h|--help) usage; exit 0 ;;
+        --) shift; break ;;
+        -*) echo "Unknown option: $1" >&2; usage; exit 2 ;;
+        *) TESTS+=("$1"); shift ;;
+    esac
+done
+COMMAND=("$@")
+
+if [ ${#TESTS[@]} -eq 0 ] || [ ${#COMMAND[@]} -eq 0 ]; then
+    usage
+    exit 2
+fi
+
+ROOT="$(git rev-parse --show-toplevel)" || exit 2
+PREFIX="$(git rev-parse --show-prefix)"
+SHA="$(git rev-parse --verify --quiet "${BASE}^{commit}")" || {
+    echo "Not a commit: $BASE" >&2
+    exit 2
+}
+
+# Paths come relative to the current directory; the worktree needs them
+# relative to the repo root.
+to_repo_path() {
+    case "$1" in
+        "$ROOT"/*) printf '%s\n' "${1#"$ROOT"/}" ;;
+        /*) echo "Outside the repo: $1" >&2; return 1 ;;
+        *) printf '%s\n' "${PREFIX}${1}" ;;
+    esac
+}
+
+REL_TESTS=()
+for path in "${TESTS[@]}"; do
+    REL_TESTS+=("$(to_repo_path "$path")") || exit 2
+done
+REL_SUPPORT=()
+for path in ${SUPPORT[@]+"${SUPPORT[@]}"}; do
+    REL_SUPPORT+=("$(to_repo_path "$path")") || exit 2
+done
+
+for rel in "${REL_TESTS[@]}" ${REL_SUPPORT[@]+"${REL_SUPPORT[@]}"}; do
+    if [ ! -e "$ROOT/$rel" ]; then
+        echo "No such file in the working tree: $rel" >&2
+        exit 2
+    fi
+done
+
+WORKTREE="$(mktemp -d "${TMPDIR:-/tmp}/test-against-head.XXXXXX")"
+# shellcheck disable=SC2329 # called by the EXIT trap
+cleanup() {
+    git -C "$ROOT" worktree remove --force "$WORKTREE" >/dev/null 2>&1 || true
+    rm -rf "$WORKTREE"
+    git -C "$ROOT" worktree prune >/dev/null 2>&1 || true
+}
+trap cleanup EXIT
+trap 'exit 130' INT TERM
+
+git -C "$ROOT" worktree add --quiet --detach "$WORKTREE" "$SHA"
+
+# vendor/ is cloned, not linked: Composer's autoloader finds the app through
+# the real path of its own files, so a link would load the app from the
+# working tree. On APFS, cp -c makes a copy-on-write clone in seconds.
+if [ -d "$ROOT/vendor" ]; then
+    cp -cR "$ROOT/vendor" "$WORKTREE/vendor" 2>/dev/null || cp -R "$ROOT/vendor" "$WORKTREE/vendor"
+    if [ -f "$WORKTREE/composer.json" ] && command -v composer >/dev/null 2>&1; then
+        (cd "$WORKTREE" && composer dump-autoload --no-scripts --quiet)
+    fi
+fi
+for dep in node_modules .env .env.testing; do
+    if [ -e "$ROOT/$dep" ] && [ ! -e "$WORKTREE/$dep" ]; then
+        ln -s "$ROOT/$dep" "$WORKTREE/$dep"
+    fi
+done
+
+for rel in "${REL_TESTS[@]}" ${REL_SUPPORT[@]+"${REL_SUPPORT[@]}"}; do
+    if [ -d "$ROOT/$rel" ]; then
+        mkdir -p "$WORKTREE/$rel"
+        cp -R "$ROOT/$rel/." "$WORKTREE/$rel/"
+    else
+        mkdir -p "$WORKTREE/$(dirname "$rel")"
+        cp "$ROOT/$rel" "$WORKTREE/$rel"
+    fi
+done
+
+echo "==> Testing against $(git -C "$ROOT" log -1 --format='%h %s' "$SHA")"
+set +e
+(cd "$WORKTREE" && "${COMMAND[@]}" "${REL_TESTS[@]}")
+status=$?
+set -e
+echo
+
+if [ "$status" -ne 0 ]; then
+    echo "==> The tests fail without your changes (exit $status). Check above that they fail on the assertion your fix makes pass."
+    exit 0
+fi
+echo "==> The tests pass without your changes, so they don't catch the bug."
+exit 1
