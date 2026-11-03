@@ -1,10 +1,10 @@
 # Working files
 
-Write working files (notes, handoff briefs, screenshots, probe scripts, test logs, HTML reports) into the Obsidian vault at `~/notes/scratchpads/<Project>/`, in a task-named subfolder. The session scratchpad and `/tmp` hold only throwaway intermediates.
+Write working files (notes, handoff briefs, screenshots, probe scripts, test logs, HTML reports) into the Obsidian vault at `~/notes/scratchpads/<project>/`, in a task-named subfolder. The session scratchpad and `/tmp` hold only throwaway intermediates.
 
-- Find the project's existing folder in `~/notes/scratchpads/` first; names follow the project, not the repo (the `gbpn` repo and its worktrees use `GBPN`). Create a new folder only when none fits.
+- Name the folder after the project: the same name as its folder in `~/notes/work/` when there is one, in lowercase (`gbpn`). The repo, its worktrees and Orca workspaces all use that one folder (`gbpn-ai` → `gbpn`). Use the existing folder; create a new one only when none fits.
 - Add every new file or folder to that project folder's `index.md`: what it is, the date, and whether it's safe to clean up.
-- Leave everything else in the vault untouched. The user does all cleanup, and the folder's own notes (such as `GBPN.md`) are theirs.
+- Leave everything else in the vault untouched. The user does all cleanup. Notes outside `scratchpads/`, such as `work/gbpn/GBPN.md`, are the user's: edit them only when asked.
 
 # Passing on reviews
 
