@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 # Check who's watching Jellyfin on lab
 # Usage: ./jellyfin-status.sh
 

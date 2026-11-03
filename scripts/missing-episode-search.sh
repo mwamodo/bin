@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091,SC2269
 # Find missing episodes: cross-reference Sonarr wanted vs library vs downloads
 # Usage: ./missing-episode-search.sh [--show "Show Name"] [--season N] [--missing-only]
 #

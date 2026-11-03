@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 # Jellyfin control — status, libraries, scan, search, playback
 # Usage: ./jellyfin.sh [command] [args...]
 #

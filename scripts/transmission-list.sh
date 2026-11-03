@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 # List all torrents with status, progress, and speed
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

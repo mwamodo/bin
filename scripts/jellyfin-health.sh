@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091,SC2012
 # Jellyfin health check — playback, transcode, devices, recent errors
 # Usage: ./jellyfin-health.sh [command]
 #

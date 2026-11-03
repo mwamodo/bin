@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 # Control torrents: pause, resume, or toggle by ID
 # Usage: ./transmission-control.sh <pause|resume|toggle> [torrent-id|all]
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 # Verify all media services are reachable and responding
 # Usage: ./media-services-check.sh [--json]
 
@@ -14,14 +15,11 @@ JSON_MODE=false
 # Service definitions: name, URL, health endpoint, token header name, token value env var
 declare -a SERVICES=(
     "Jellyfin|${JELLYFIN_URL}|System/Info|X-MediaBrowser-Token|JELLYFIN_API_KEY"
-    "Jellyseerr|${JELLYSEERR_URL}|api/v1/status|x-api-key|JELLYSEERR_API_KEY"
-    "Jellystat|${JELLYSTAT_URL}|stats/getLibraryOverview|x-api-token|JELLYSTAT_API_KEY"
-    "Radarr|${RADARR_URL}|api/v3/system/status|X-Api-Key|RADARR_API_KEY"
     "Sonarr|${SONARR_URL}|api/v3/system/status|X-Api-Key|SONARR_API_KEY"
     "Prowlarr|${PROWLARR_URL}|api/v1/system/status|X-Api-Key|PROWLARR_API_KEY"
+    "FlareSolverr|${FLARESOLVERR_URL:-http://localhost:8191}|health||"
+    "Immich|${IMMICH_URL:-http://localhost:2283}|api/server/ping||"
     "Transmission|http://${TRANSMISSION_HOST}|transmission/rpc||TRANSMISSION_AUTH"
-    "Audiobookshelf|${AUDIOBOOKSHELF_URL:-http://localhost:13378}|api/libraries||"
-    "metube|${METUBE_URL:-http://localhost:8081}|||"
 )
 
 results=()
@@ -67,7 +65,7 @@ for svc in "${SERVICES[@]}"; do
     time_ms=$(python3 -c "print(f'{float('$time_ms')*1000:.0f}')" 2>/dev/null || echo "?")
 
     if [ "$http_code" == "200" ] || [ "$http_code" == "401" ] || [ "$http_code" == "403" ]; then
-        # 401/403 means the service is alive but we might lack auth (Audiobookshelf without token)
+        # 401/403 means the service is alive but we might lack auth (service without a configured token)
         results+=("$name|OK|✅ $name: up (${time_ms}ms)")
     else
         results+=("$name|FAIL|❌ $name: HTTP $http_code (${time_ms}ms)")

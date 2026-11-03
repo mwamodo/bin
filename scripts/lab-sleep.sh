@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2086
 # check jellyfin and suspend lab if idle
 # called by Yamyulack's cron job at 02:00 (Africa/Nairobi)
 

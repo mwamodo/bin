@@ -1,4 +1,0 @@
-# Lab scripts only (applies to files under lab/). Sources a gitignored .env
-# and has known style-level findings; silenced here so the repo-wide CI stays
-# green without changing script behavior.
-disable=SC1091,SC2012,SC2024,SC2034,SC2064,SC2086,SC2155,SC2269

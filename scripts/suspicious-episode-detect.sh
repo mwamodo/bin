@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091,SC2034,SC2155
 # Detect suspicious/fake episode files masquerading as video
 # Usage: ./suspicious-episode-detect.sh [--path <dir>|--downloads|--library|--fix]
 #

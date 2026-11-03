@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091,SC2034
 # Diagnose stalled/slow torrents in Transmission
 # Usage: ./transmission-diagnose.sh [torrent-id]
 #   With no args: diagnoses all active torrents

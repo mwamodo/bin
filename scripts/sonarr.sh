@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 # Sonarr control — list series, search, queue, calendar, episodes
 # Usage: ./sonarr.sh [command] [args...]
 #

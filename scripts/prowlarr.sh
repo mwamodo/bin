@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 # Prowlarr control — list indexers, health, search
 # Usage: ./prowlarr.sh [command] [args...]
 #

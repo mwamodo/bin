@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 # Remove torrent by ID
 # Usage: ./transmission-remove.sh <torrent-id> [--delete-data]
 

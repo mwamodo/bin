@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091,SC2034
 # Audit downloads folder: orphaned files, old incomplete, space hogs
 # Usage: ./downloads-audit.sh [--incomplete-only|--complete-only|--orphans|--old-days N]
 #
@@ -156,7 +157,7 @@ check_complete() {
     else
         echo ""
         echo "  Total: $found items, $(human_bytes "$total_size")"
-        echo "  → Radarr/Sonarr should have imported these. If not, check *arr logs."
+        echo "  → Sonarr should have imported these. If not, check *arr logs."
     fi
 }
 
