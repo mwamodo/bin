@@ -120,12 +120,12 @@ The shell automatically detects `.nvmrc` files and switches Node versions via **
 | `gst` | `git status` | Status |
 | `ga` | `git add` | Stage files |
 | `gaa` | `git add .` | Stage all |
-| `gc` | `git commit` | Commit |
-| `gcm` | `git commit -m` | Commit with message |
+| `gc` | `git commit -S` | Signed commit |
+| `gcm` | `git commit -S -m` | Signed commit with message |
 | `gp` | `git push` | Push |
 | `gco` | `git checkout` | Checkout branch |
 | `gd` | `git diff` | Diff |
-| `gl` / `gll` | `git log` / `git log --oneline --graph` | Log |
+| `gl` / `gll` | `git log` / `git log --oneline --decorate --all --graph` | Log |
 
 #### System & Tools
 
