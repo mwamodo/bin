@@ -16,6 +16,7 @@ JSON_MODE=false
 declare -a SERVICES=(
     "Jellyfin|${JELLYFIN_URL}|System/Info|X-MediaBrowser-Token|JELLYFIN_API_KEY"
     "Sonarr|${SONARR_URL}|api/v3/system/status|X-Api-Key|SONARR_API_KEY"
+    "Radarr|${RADARR_URL}|api/v3/system/status|X-Api-Key|RADARR_API_KEY"
     "Prowlarr|${PROWLARR_URL}|api/v1/system/status|X-Api-Key|PROWLARR_API_KEY"
     "FlareSolverr|${FLARESOLVERR_URL:-http://localhost:8191}|health||"
     "Immich|${IMMICH_URL:-http://localhost:2283}|api/server/ping||"
