@@ -43,13 +43,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Moving lines up and down in i, v & n modes
-vim.keymap.set('i', '<C-k>', '<Esc>:move .-2<CR>==gi', { noremap = true })
-vim.keymap.set('i', '<C-j>', '<Esc>:move .+1<CR>==gi', { noremap = true })
-vim.keymap.set('n', '<C-j>', ':m .+1<CR>==', { noremap = true })
-vim.keymap.set('n', '<C-k>', ':m .-2<CR>==', { noremap = true })
-vim.keymap.set('v', '<C-j>', ":m '>+1<CR>gv=gv", { noremap = true })
-vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv=gv", { noremap = true })
+-- Moving lines up and down in i, v & n modes with Option-Up/Down
+vim.keymap.set('i', '<M-Up>', '<Esc>:move .-2<CR>==gi', { noremap = true })
+vim.keymap.set('i', '<M-Down>', '<Esc>:move .+1<CR>==gi', { noremap = true })
+vim.keymap.set('n', '<M-Down>', ':m .+1<CR>==', { noremap = true })
+vim.keymap.set('n', '<M-Up>', ':m .-2<CR>==', { noremap = true })
+vim.keymap.set('v', '<M-Down>', ":m '>+1<CR>gv=gv", { noremap = true })
+vim.keymap.set('v', '<M-Up>', ":m '<-2<CR>gv=gv", { noremap = true })
 
 -- Easy insertion of a trailling ; or , from insert mode
 vim.keymap.set('i', ';;', '<Esc>A;')
