@@ -23,7 +23,9 @@ shift $((OPTIND-1))
 DOTFILES=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 log() {
-    [ "$VERBOSE" = true ] && echo "$@"
+    if [ "$VERBOSE" = true ]; then
+        echo "$@"
+    fi
 }
 
 link_file() {
