@@ -22,9 +22,6 @@ export PATH="$HOME/develop/flutter/bin:$PATH"
 # unset manpath so we can inherit from /etc/manpath via the `manpath` command
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
-# commandline
-export HISTCONTROL=ignoredups
-
 # GBPN: scripts/deploy.sh stops unless `make signoff` passed on the commit
 export GBPN_REQUIRE_SIGNOFF=1
 
