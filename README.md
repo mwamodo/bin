@@ -8,7 +8,7 @@ Configs, customizations, and themes to personalize my macOS experience, with a h
 ## Features
 
 - **Shell**: **Zsh** optimized with [`zinit`](https://github.com/zdharma-continuum/zinit) for fast plugin loading and **Powerlevel10k** instant prompt.
-- **Terminals**: **WezTerm** and **Ghostty** — both styled with the **Catppuccin** theme.
+- **Terminals**: **Ghostty** (Catppuccin) and **WezTerm** (Palenight in dark mode, Flexoki in light mode), both using Monaspace Krypton.
 - **Navigation**: **zoxide** (`cd`) for smarter directory jumping.
 - **Session Management**: **Tmux** with TPM, a custom `t` helper script, and plugins for sessions, floating panes, and URL opening.
 - **Editor**: **Neovim** (kickstart-based, `lazy.nvim`, Catppuccin theme) — aliased to `vim` and `vi`.
@@ -69,8 +69,8 @@ It also clones **Powerlevel10k** automatically if it isn't already present.
 | **`zsh/`** | Shell aliases (`aliases.sh`) and environment exports/integrations (`exports.sh`). |
 | **`tmux/`** | Tmux configuration, TPM plugins, and helper scripts. |
 | **`nvim/`** | Complete Neovim configuration based on kickstart.nvim. |
-| **`wezterm/`** | WezTerm terminal configuration (Monaspace Krypton font, Catppuccin Mocha). |
-| **`ghostty/`** | Ghostty terminal configuration (Dank Mono font, Catppuccin adaptive theme). |
+| **`wezterm/`** | WezTerm terminal configuration (Monaspace Krypton font, Palenight dark and Flexoki light themes). |
+| **`ghostty/`** | Ghostty terminal configuration (Monaspace Krypton font, Catppuccin adaptive theme). |
 | **`scripts/`** | Custom scripts, including the `t` session helper and `transmission` controller. |
 | **`.zshrc`** | Main shell configuration file (zinit plugins, keybindings, history, completions). |
 
@@ -100,19 +100,15 @@ The shell automatically detects `.nvmrc` files and switches Node versions via **
 | Alias | Command | Description |
 | :--- | :--- | :--- |
 | `a` | `php artisan` | Run artisan commands |
-| `mf` | `a migrate` | Run migrations |
+| `migrate` | `a migrate` | Run migrations |
 | `mfs` | `a migrate:fresh --seed && a optimize:clear` | Fresh migration with seeds |
 | `mfsr` | `mfs && redis-cli flushdb` | Fresh migration, seed, and flush Redis |
 | `tinker` | `a tinker` | Enter execution loop |
-| `a:t` | `artisan:test` | Run tests |
+| `a:t` | `a test` | Run tests |
 | `a:tp` | `a:t --parallel` | Run tests in parallel |
-| `a:tt` | `artisan:test-with-coverage` | Run tests with HTML coverage report |
+| `a:tc` | `herd coverage ./vendor/bin/pest --coverage --coverage-html=public/test-coverage` | Run tests with HTML coverage report |
 | `a:cc` | `a cache:clear` | Clear caches |
 | `a:op` | `a optimize:clear` | Clear optimized files |
-| `ide:helper` | `a ide-helper:generate && a ide-helper:meta && a ide-helper:models --nowrite` | Generate IDE helpers |
-| `duster` | `./vendor/bin/duster` | Run Laravel Duster |
-| `lint` | `duster lint` | Lint code |
-| `fix` | `duster fix` | Auto-fix code |
 | `expose` | `expose --server-host=repounlock.com` | Expose local site |
 | `share` / `h:s` | `herd share --server-host=repounlock.com` | Share via Herd |
 
@@ -141,10 +137,8 @@ The shell automatically detects `.nvmrc` files and switches Node versions via **
 | `cat` | `bat` | View file with syntax highlighting |
 | `top` | `bpytop` | System resource monitor |
 | `neofetch` | `fastfetch` | System info |
-| `tm` | `tmux -u` | Start Tmux |
+| `tmux` | `tmux -u` | Start Tmux |
 | `vim` / `vi` / `v` | `nvim` | Open Neovim |
-| `cc` | `claude --dangerously-skip-permissions` | Claude CLI |
-| `ccr` | `claude --resume` | Resume Claude session |
 
 ### Helper Functions
 
@@ -154,7 +148,6 @@ The shell automatically detects `.nvmrc` files and switches Node versions via **
 | `commit:push [message]` / `wip` | Stage, commit, and push to current branch |
 | `switch:master` | Checkout master and pull |
 | `schedule:run` | Loop `php artisan schedule:run` every 60 seconds |
-| `artisan:test-with-coverage` | Run tests with coverage and open in browser |
 | `lab [command]` | SSH into home server, or run a remote command |
 | `lab:suspend` | Suspend home server |
 | `lab:sleep` | Suspend home server with RTC wake time |
@@ -162,9 +155,9 @@ The shell automatically detects `.nvmrc` files and switches Node versions via **
 
 ### Tmux Smart Session Manager (`t`)
 
-The `t` script (linked to `~/.local/bin/t`) is a powerhouse for managing workflow.
+The `t` script (on `PATH` via `scripts/`) is a powerhouse for managing workflow.
 
-- **`t`**: Opens `fzf` to select a project from `~/code`, `~/code/turbine/products`, `~/code/turbine/internal`, or `~/bin`.
+- **`t`**: Opens `fzf` to select a project from `~/code` or `~/bin`.
 - **`t [directory]`**: Directly opens or attaches to a tmux session for that directory.
 
 It automatically names sessions based on the folder name and handles attaching/detaching seamlessly.
@@ -178,7 +171,7 @@ Plugins are managed via [TPM](https://github.com/tmux-plugins/tpm). Key features
 - **`tmux-floax`** (`Ctrl-a` + `p`): Floating popup window for quick tasks.
 - **`tmux-fzf-url`**: Open URLs from the buffer with `fzf`.
 - **`tmux-thumbs`**: Rapid copy-paste of file paths, IPs, etc.
-- **Smart navigation**: `Ctrl-h/j/k/l` seamlessly moves between vim and tmux panes.
+- **Pane navigation**: `Ctrl-h/j/k/l` moves between tmux panes, or between splits inside Neovim. To leave a Neovim pane, press the prefix and then `h/j/k/l`.
 
 ### Transmission Remote Controller (`transmission`)
 
