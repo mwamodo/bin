@@ -157,7 +157,7 @@ The shell automatically detects `.nvmrc` files and switches Node versions via **
 
 The `t` script (on `PATH` via `scripts/`) is a powerhouse for managing workflow.
 
-- **`t`**: Opens `fzf` to select a project from `~/code` or `~/bin`.
+- **`t`**: Opens `fzf` to select a project from `~/develop`, `~/develop/laravel`, or `~/bin`.
 - **`t [directory]`**: Directly opens or attaches to a tmux session for that directory.
 
 It automatically names sessions based on the folder name and handles attaching/detaching seamlessly.

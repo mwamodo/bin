@@ -20,11 +20,12 @@ if [[ $# -eq 1 ]]; then
 else
     declare -a candidates=()
 
-    if [[ -d "$HOME/code" ]]; then
+    for root in "$HOME/develop" "$HOME/develop/laravel"; do
+        [[ -d "$root" ]] || continue
         while IFS= read -r dir; do
             candidates+=("$dir")
-        done < <(find "$HOME/code" -maxdepth 1 -mindepth 1 -type d ! -name ".flux")
-    fi
+        done < <(find "$root" -maxdepth 1 -mindepth 1 -type d ! -name ".*")
+    done
 
     if [[ -d "$HOME/bin" ]]; then
         while IFS= read -r dir; do
