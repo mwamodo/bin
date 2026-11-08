@@ -74,9 +74,10 @@ fi
 eval "$(/opt/homebrew/bin/brew shellenv)" 2>/dev/null
 
 # Cache Twilio completion instead of regenerating it on every shell startup.
+# The output only points at ~/.twilio-cli/autocomplete, so it can't go stale.
 if (( $+commands[twilio] )); then
     _twilio_cache="${XDG_CACHE_HOME:-$HOME/.cache}/twilio/autocomplete.zsh"
-    if [[ ! -s "$_twilio_cache" || -n "$_twilio_cache"(Nmw-7) ]]; then
+    if [[ ! -s "$_twilio_cache" ]]; then
         mkdir -p "${_twilio_cache:h}" 2>/dev/null
         twilio autocomplete:script zsh >| "$_twilio_cache" 2>/dev/null
     fi
