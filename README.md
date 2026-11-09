@@ -30,7 +30,9 @@ Ensure you have the following installed before running the setup:
 3. **tmux**
 4. **neovim**
 5. **fzf** (Required for the `t` script and shell integrations)
-6. **Recommended Modern Tools**:
+6. **tree-sitter-cli** 0.26.1 or later, from a package manager rather than npm (Required to build Neovim's Treesitter parsers)
+7. **A C compiler** (Required to build Neovim's Treesitter parsers)
+8. **Recommended Modern Tools**:
    - `lsd`
    - `bat`
    - `zoxide`
