@@ -39,3 +39,7 @@ rex.bind('ctrl+a>ctrl+n', 'client.tab.next')
 rex.bind('ctrl+a>shift+\\', 'pane.split', { direction = 'right' })
 rex.bind('ctrl+a>-', 'pane.split', { direction = 'down' })
 rex.bind('ctrl+a>c', 'client.tab.new')
+
+-- Custom actions
+require('actions')
+rex.bind('ctrl+a>g', 'lazygit_float')
