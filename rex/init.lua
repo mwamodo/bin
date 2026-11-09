@@ -43,3 +43,4 @@ rex.bind('ctrl+a>c', 'client.tab.new')
 -- Custom actions
 require('actions')
 rex.bind('ctrl+a>g', 'lazygit_float')
+rex.bind('ctrl+a>e', 'nvim_float')
