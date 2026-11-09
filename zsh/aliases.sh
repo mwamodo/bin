@@ -24,7 +24,7 @@ alias a:t="a test"
 alias a:tp="a test --parallel"
 alias a:tc="herd coverage ./vendor/bin/pest --coverage --coverage-html=public/test-coverage"
 alias a:ts="a test --stop-on-failure"
-alias commit:ai="pi --no-session --model xai/grok-4.7 'commit all changes'"
+alias commit:ai="pi --no-session --print --model xai/grok-4.7 'commit all changes'"
 alias wip="commit:push"
 
 alias n="npm"
@@ -119,3 +119,6 @@ alias youtube-dl-mp4="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[
 
 # tailscale
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+# ai stuff
+alias claude="claude --dangerously-skip-permissions"
