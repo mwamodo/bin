@@ -45,5 +45,7 @@ _ide_helper_models.php
 # Powerlevel10k
 .powerlevel10k
 
-
 .claude
+
+# My claude rules and maddness
+AGENTS.md
