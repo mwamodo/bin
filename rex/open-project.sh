@@ -2,15 +2,18 @@
 # Pick a project with fzf and switch Rex to its session, creating the session if
 # none is open. Run in a floating pane by the "Open Project" action (ctrl+a s).
 #
-# Projects are each git repo directly in ~/develop, the folders inside every other
-# folder in ~/develop (laravel, worktrees, ...), and ~/bin. A session is labelled
-# with the project's folder name, or parent/name when two projects share a name.
+# Projects are each git repo directly in ~/develop except the Flutter SDK, the
+# folders inside every other folder in ~/develop (laravel, worktrees, ...), and
+# ~/bin. A session is labelled with the project's folder name, or parent/name
+# when two projects share a name.
 set -eu
 
 projects() {
     local dir sub
     for dir in "$HOME"/develop/*/; do
         dir=${dir%/}
+        # ~/develop/flutter is the Flutter SDK checkout, not a project.
+        [ "$dir" = "$HOME/develop/flutter" ] && continue
         if [ -e "$dir/.git" ]; then
             echo "$dir"
         else
