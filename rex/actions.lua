@@ -1,6 +1,6 @@
 local terminal = 'com.superlogical.terminal'
 
--- Defines a palette action that runs a command in a floating pane, in the focused pane's directory.
+-- Defines a palette action that runs a command in a floating pane, in spec.cwd or else the focused pane's directory.
 -- spec.bounds is x, y, width, height as fractions of the window, nearly full-window by default.
 local function float_action(spec)
   rex.action({
@@ -8,8 +8,11 @@ local function float_action(spec)
     title = spec.title,
     keywords = spec.keywords,
     run = function(ctx)
-      local proc = rex.block.call(terminal, 'process', { block_id = ctx.block_id })
-      local cwd = proc and proc.foreground and proc.foreground.cwd
+      local cwd = spec.cwd
+      if not cwd then
+        local proc = rex.block.call(terminal, 'process', { block_id = ctx.block_id })
+        cwd = proc and proc.foreground and proc.foreground.cwd
+      end
 
       local _, err = rex.session.new_layer({
         bounds = spec.bounds or { 0.05, 0.05, 0.9, 0.9 },
@@ -37,6 +40,14 @@ float_action({
   title = 'Neovim',
   keywords = 'nvim vim editor float',
   command = { 'nvim', '.' },
+})
+
+float_action({
+  name = 'notes_float',
+  title = 'Notes',
+  keywords = 'notes obsidian vault nvim editor float',
+  command = { 'nvim', '.' },
+  cwd = os.getenv('HOME') .. '/notes',
 })
 
 float_action({
