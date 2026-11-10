@@ -3,24 +3,38 @@
 # none is open. Run in a floating pane by the "Open Project" action (ctrl+a s).
 #
 # Projects are each git repo directly in ~/develop, the folders inside every other
-# folder in ~/develop (laravel, worktrees, ...), and ~/bin. ~/develop/flutter and
-# ~/develop/templates are skipped. A session is labelled with the project's folder
-# name, or parent/name when two projects share a name.
+# folder in ~/develop (laravel, worktrees, ...), the packages in ~/develop/packages/php
+# and ~/develop/packages/js, and ~/bin. ~/develop/flutter and ~/develop/templates are
+# skipped. A session is labelled with the project's folder name, or parent/name when
+# two projects share a name.
 set -eu
 
+# Print each argument that is a folder, without its trailing slash. An unmatched
+# glob arrives as the pattern itself and is dropped.
+folders() {
+    local path
+    for path in "$@"; do
+        if [ -d "$path" ]; then echo "${path%/}"; fi
+    done
+}
+
 projects() {
-    local dir sub
+    local dir
     for dir in "$HOME"/develop/*/; do
         dir=${dir%/}
+        case ${dir##*/} in
         # Skip folders that hold no projects. flutter is the Flutter SDK checkout.
-        case ${dir##*/} in flutter | templates) continue ;; esac
-        if [ -e "$dir/.git" ]; then
-            echo "$dir"
-        else
-            for sub in "$dir"/*/; do
-                [ -d "$sub" ] && echo "${sub%/}"
-            done
-        fi
+        flutter | templates) ;;
+        # Packages are grouped by language: packages/php/<name>, packages/js/<name>.
+        packages) folders "$dir"/*/*/ ;;
+        *)
+            if [ -e "$dir/.git" ]; then
+                echo "$dir"
+            else
+                folders "$dir"/*/
+            fi
+            ;;
+        esac
     done
     echo "$HOME/bin"
 }
