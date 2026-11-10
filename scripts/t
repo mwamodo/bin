@@ -20,7 +20,7 @@ if [[ $# -eq 1 ]]; then
 else
     declare -a candidates=()
 
-    for root in "$HOME/develop" "$HOME/develop/laravel"; do
+    for root in "$HOME/develop" "$HOME/develop/laravel" "$HOME/develop/packages/php" "$HOME/develop/packages/js"; do
         [[ -d "$root" ]] || continue
         while IFS= read -r dir; do
             candidates+=("$dir")
