@@ -48,6 +48,7 @@ float_action({
   keywords = 'notes obsidian vault nvim editor float',
   command = { 'nvim', '.' },
   cwd = os.getenv('HOME') .. '/notes',
+  bounds = { 0.5, 0, 0.5, 1 },
 })
 
 float_action({
