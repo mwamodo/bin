@@ -1,6 +1,7 @@
 local terminal = 'com.superlogical.terminal'
 
 -- Defines a palette action that runs a command in a floating pane, in the focused pane's directory.
+-- spec.bounds is x, y, width, height as fractions of the window, nearly full-window by default.
 local function float_action(spec)
   rex.action({
     name = spec.name,
@@ -11,7 +12,7 @@ local function float_action(spec)
       local cwd = proc and proc.foreground and proc.foreground.cwd
 
       local _, err = rex.session.new_layer({
-        bounds = { 0.05, 0.05, 0.9, 0.9 },
+        bounds = spec.bounds or { 0.05, 0.05, 0.9, 0.9 },
         layout = rex.layout.block({
           flavor = terminal .. '.shell',
           -- interactive: Homebrew's PATH is set in .zshrc, which commands don't read otherwise.
@@ -36,4 +37,12 @@ float_action({
   title = 'Neovim',
   keywords = 'nvim vim editor float',
   command = { 'nvim', '.' },
+})
+
+float_action({
+  name = 'open_project',
+  title = 'Open Project',
+  keywords = 'project folder session open switch',
+  command = { os.getenv('HOME') .. '/.config/rex/open-project.sh' },
+  bounds = { 0.25, 0.2, 0.5, 0.5 },
 })

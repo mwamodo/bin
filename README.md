@@ -70,6 +70,7 @@ It also clones **Powerlevel10k** automatically if it isn't already present.
 | :--- | :--- |
 | **`zsh/`** | Shell aliases (`aliases.sh`) and environment exports/integrations (`exports.sh`). |
 | **`tmux/`** | Tmux configuration, TPM plugins, and helper scripts. |
+| **`rex/`** | Rex configuration (`init.lua` key bindings, `actions.lua` custom actions) and the `open-project.sh` picker, linked to `~/.config/rex`. |
 | **`nvim/`** | Complete Neovim configuration based on kickstart.nvim. |
 | **`wezterm/`** | WezTerm terminal configuration (Monaspace Krypton font, Palenight dark and Flexoki light themes). |
 | **`ghostty/`** | Ghostty terminal configuration (Monaspace Krypton font, Catppuccin adaptive theme). |
@@ -163,6 +164,14 @@ The `t` script (on `PATH` via `scripts/`) is a powerhouse for managing workflow.
 - **`t [directory]`**: Directly opens or attaches to a tmux session for that directory.
 
 It automatically names sessions based on the folder name and handles attaching/detaching seamlessly.
+
+### Rex Open Project (`Ctrl-a` + `s`)
+
+The Rex counterpart to `t`. `Ctrl-a s` (or **Open Project** in the command palette) opens an `fzf` picker in a floating pane, then switches to a Rex session for the chosen project, creating it in that folder if none is open.
+
+- **Projects**: each git repo directly in `~/develop` (such as `flutter`), the folders inside every other `~/develop` folder (`laravel/`, `worktrees/`, `cipherwill/`, `templates/`), and `~/bin`.
+- **Sessions** are labelled with the folder name, or `parent/name` when two projects share a name. A session is reused by that label, so renaming it means the next pick opens a new one.
+- **Switching** needs Remote Control on in Rex Settings > Rex Server. Without it the session is still created, and the picker says so.
 
 ### Tmux Plugins & Features
 
