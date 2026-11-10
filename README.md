@@ -169,7 +169,7 @@ It automatically names sessions based on the folder name and handles attaching/d
 
 The Rex counterpart to `t`. `Ctrl-a s` (or **Open Project** in the command palette) opens an `fzf` picker in a floating pane, then switches to a Rex session for the chosen project, creating it in that folder if none is open.
 
-- **Projects**: each git repo directly in `~/develop` except the Flutter SDK in `~/develop/flutter`, the folders inside every other `~/develop` folder (`laravel/`, `worktrees/`, `cipherwill/`, `templates/`), and `~/bin`.
+- **Projects**: each git repo directly in `~/develop`, the folders inside every other `~/develop` folder (`laravel/`, `worktrees/`, `cipherwill/`), and `~/bin`. `~/develop/flutter` (the Flutter SDK) and `~/develop/templates` are skipped.
 - **Sessions** are labelled with the folder name, or `parent/name` when two projects share a name. A session is reused by that label, so renaming it means the next pick opens a new one.
 - **Switching** needs Remote Control on in Rex Settings > Rex Server. Without it the session is still created, and the picker says so.
 
