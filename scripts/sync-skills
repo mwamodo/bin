@@ -16,6 +16,8 @@ DEST_DIRS=(
 )
 LAUNCH_LABEL="com.mwamodo.sync-skills"
 LAUNCH_PLIST="${HOME}/Library/LaunchAgents/${LAUNCH_LABEL}.plist"
+SYSTEMD_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/systemd/user"
+SYSTEMD_UNIT="sync-skills"
 
 # Dest dirs are $HOME/.<tool>/skills, so two hops up lands in $HOME.
 if [ "${REPO_ROOT#"$HOME"/}" != "$REPO_ROOT" ]; then
@@ -35,8 +37,8 @@ usage() {
     echo "  -n           dry run, show actions without executing" >&2
     echo "  -v           verbose output" >&2
     echo "  --watch      resync when ${SOURCE_DIR} changes" >&2
-    echo "  --install    load a LaunchAgent that syncs on add/remove" >&2
-    echo "  --uninstall  unload and remove that LaunchAgent" >&2
+    echo "  --install    sync on add/remove: a LaunchAgent on macOS, a systemd user service on Linux" >&2
+    echo "  --uninstall  stop and remove that LaunchAgent or service" >&2
 }
 
 log() {
@@ -216,7 +218,7 @@ write_launch_plist() {
 EOF
 }
 
-install_agent() {
+install_launch_agent() {
     local domain
     domain="gui/$(id -u)"
 
@@ -232,7 +234,7 @@ install_agent() {
     echo "Watching $SOURCE_DIR (log: ${HOME}/Library/Logs/sync-skills.log)"
 }
 
-uninstall_agent() {
+uninstall_launch_agent() {
     local domain
     domain="gui/$(id -u)"
 
@@ -244,6 +246,66 @@ uninstall_agent() {
     launchctl bootout "$domain" "$LAUNCH_PLIST" >/dev/null 2>&1 || true
     rm -f "$LAUNCH_PLIST"
     echo "Removed LaunchAgent: $LAUNCH_LABEL"
+}
+
+# A systemd path unit drops changes made while a sync runs and misses a SKILL.md
+# written after its folder, so on Linux a user service runs --watch instead.
+write_systemd_unit() {
+    mkdir -p "$SYSTEMD_DIR"
+    cat > "${SYSTEMD_DIR}/${SYSTEMD_UNIT}.service" <<EOF
+[Unit]
+Description=Keep agent skill links in sync with ${SOURCE_DIR}
+
+[Service]
+ExecStart=/bin/bash "${SCRIPT_PATH}" --watch
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
+EOF
+}
+
+install_systemd_unit() {
+    if [ "$DRY_RUN" = true ]; then
+        echo "Would install systemd user service: ${SYSTEMD_DIR}/${SYSTEMD_UNIT}.service"
+        return 0
+    fi
+
+    write_systemd_unit
+    systemctl --user daemon-reload
+    systemctl --user enable "${SYSTEMD_UNIT}.service"
+    systemctl --user restart "${SYSTEMD_UNIT}.service"
+    echo "Installed systemd user service: ${SYSTEMD_UNIT}.service"
+    echo "Watching $SOURCE_DIR (log: journalctl --user -u ${SYSTEMD_UNIT})"
+}
+
+uninstall_systemd_unit() {
+    if [ "$DRY_RUN" = true ]; then
+        echo "Would stop and remove ${SYSTEMD_DIR}/${SYSTEMD_UNIT}.service"
+        return 0
+    fi
+
+    systemctl --user disable --now "${SYSTEMD_UNIT}.service" >/dev/null 2>&1 || true
+    rm -f "${SYSTEMD_DIR}/${SYSTEMD_UNIT}.service"
+    systemctl --user daemon-reload
+    echo "Removed systemd user service: ${SYSTEMD_UNIT}.service"
+}
+
+install_agent() {
+    case "$(uname -s)" in
+        Darwin) install_launch_agent ;;
+        Linux) install_systemd_unit ;;
+        *) echo "Error: --install supports macOS and Linux only" >&2; exit 1 ;;
+    esac
+}
+
+uninstall_agent() {
+    case "$(uname -s)" in
+        Darwin) uninstall_launch_agent ;;
+        Linux) uninstall_systemd_unit ;;
+        *) echo "Error: --uninstall supports macOS and Linux only" >&2; exit 1 ;;
+    esac
 }
 
 while [ $# -gt 0 ]; do
@@ -271,7 +333,7 @@ fi
 
 if [ "$INSTALL_AGENT" = true ]; then
     install_agent
-    # bootstrap with RunAtLoad already syncs; still run once so the terminal shows results.
+    # The agent also syncs when it starts; sync here too so the terminal shows results.
     sync_all
     exit 0
 fi
