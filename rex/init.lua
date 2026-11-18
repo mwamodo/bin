@@ -47,9 +47,12 @@ rex.bind('ctrl+a>e', 'nvim_float')
 rex.bind('ctrl+a>shift+n', 'notes_float')
 rex.bind('ctrl+a>s', 'open_project')
 
+-- The leaf block below is rewritten by leaf in its own style.
+-- stylua: ignore start
 -- >>> leaf >>>
 -- Managed by `leaf rex install`; `leaf rex uninstall` removes it.
 -- plugin: dbd96079ad70c4c6
 dofile("/Users/mwamodo/.config/rex/plugins/leaf/init.lua").setup({ bin = { "/opt/homebrew/bin/leaf" } })
 -- open: idle classic
 -- <<< leaf <<<
+-- stylua: ignore end

@@ -1,0 +1,3 @@
+# Written by `leaf rex install`, which rewrites it in its own style on every
+# install or upgrade.
+rex/plugins/leaf/
