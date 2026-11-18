@@ -112,8 +112,8 @@ The shell automatically detects `.nvmrc` files and switches Node versions via **
 | `a:tc` | `herd coverage ./vendor/bin/pest --coverage --coverage-html=public/test-coverage` | Run tests with HTML coverage report |
 | `a:cc` | `a cache:clear` | Clear caches |
 | `a:op` | `a optimize:clear` | Clear optimized files |
-| `expose` | `expose --server-host=repounlock.com` | Expose local site |
-| `share` / `h:s` | `herd share --server-host=repounlock.com` | Share via Herd |
+| `expose` | `expose --server-host=repounlock.com --no-vite-detection` | Expose local site |
+| `share` / `h:s` | `herd share --server-host=repounlock.com --no-vite-detection` | Share via Herd |
 
 #### Git
 

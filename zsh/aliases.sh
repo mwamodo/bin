@@ -56,8 +56,8 @@ alias db:seed="a db:seed"
 
 alias s:r="schedule:run"
 
-alias expose="expose --server-host=repounlock.com"
-alias share="herd share --server-host=repounlock.com"
+alias expose="expose --server-host=repounlock.com --no-vite-detection"
+alias share="herd share --server-host=repounlock.com --no-vite-detection"
 alias h:s="share"
 
 alias flux:icon="artisan flux:icon"
