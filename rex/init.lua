@@ -53,6 +53,6 @@ rex.bind('ctrl+a>s', 'open_project')
 -- Managed by `leaf rex install`; `leaf rex uninstall` removes it.
 -- plugin: dbd96079ad70c4c6
 dofile("/Users/mwamodo/.config/rex/plugins/leaf/init.lua").setup({ bin = { "/opt/homebrew/bin/leaf" } })
--- open: idle classic
+-- open: document classic
 -- <<< leaf <<<
 -- stylua: ignore end
