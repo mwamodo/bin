@@ -90,6 +90,7 @@ HOME_MAC=aa:bb:cc:dd:ee:ff
 HOME_TRANSMISSION_PORT=9091
 HOME_TRANSMISSION_USERNAME=admin
 HOME_TRANSMISSION_PASSWORD=secret
+PRIORITIES_DOC=~/notes/work/{project}/priorities.md
 ```
 
 ### Node Version Management
@@ -155,6 +156,7 @@ The shell automatically detects `.nvmrc` files and switches Node versions via **
 | `lab:suspend` | Suspend home server |
 | `lab:sleep` | Suspend home server with RTC wake time |
 | `lab:wake` | Wake home server via Wake-on-LAN |
+| `priorities` | Open the project's priorities doc (`PRIORITIES_DOC` in `.env`) in leaf |
 
 ### Tmux Smart Session Manager (`t`)
 

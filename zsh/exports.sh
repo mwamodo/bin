@@ -164,6 +164,35 @@ lab:wake() {
     wakeonlan "${HOME_MAC}"
 }
 
+# Open this project's priorities doc in leaf. PRIORITIES_DOC in ~/bin/.env is the
+# doc's path with {project} where the project's name goes. The project is the git
+# repo's folder name in lowercase, and a worktree counts as its main repo; outside
+# a repo it's the current folder's name.
+priorities() {
+    if [[ -z "${PRIORITIES_DOC-}" ]]; then
+        print -u2 "priorities: set PRIORITIES_DOC in ~/bin/.env"
+        return 1
+    fi
+
+    local common project doc
+    if common=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null); then
+        project=${common:h:t}
+    else
+        project=${PWD:t}
+    fi
+    project=${project:l}
+
+    doc=${PRIORITIES_DOC//\{project\}/$project}
+    doc=${doc/#\~/$HOME}
+
+    if [[ ! -f "$doc" ]]; then
+        print "no priorities doc"
+        return 1
+    fi
+
+    leaf "$doc"
+}
+
 # Set terminal window/tab title to current directory
 set_name() {
     print -Pn "\e]1;%2~\a"
