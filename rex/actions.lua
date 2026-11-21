@@ -53,10 +53,79 @@ float_action {
   bounds = { 0.5, 0, 0.5, 1 },
 }
 
-float_action {
+-- Pick a project in the command palette and switch to its session, creating the session in the project's folder
+-- if none is open. Passing dir skips the picker: rex do open_project dir="$HOME/bin"
+rex.action {
   name = 'open_project',
   title = 'Open Project',
   keywords = 'project folder session open switch',
-  command = { os.getenv 'HOME' .. '/.config/rex/open-project.sh' },
-  bounds = { 0.25, 0.2, 0.5, 0.5 },
+  args = { dir = 'string?' },
+  run = function(ctx, args)
+    local home = os.getenv 'HOME'
+    local listed, err = rex.exec({ home .. '/.config/rex/list-projects.sh' }, { timeout = 10 })
+    if listed == nil then
+      error(err, 0)
+    end
+    if not listed.ok then
+      error(listed.stderr, 0)
+    end
+
+    local dirs, shared = {}, {}
+    for dir in listed.stdout:gmatch '[^\n]+' do
+      local name = dir:match '[^/]+$'
+      dirs[#dirs + 1] = dir
+      shared[name] = (shared[name] or 0) + 1
+    end
+
+    -- A session is labelled with the project's folder name, or parent/name when two projects share a name.
+    local function label(dir)
+      local name = dir:match '[^/]+$'
+      return (shared[name] or 0) > 1 and dir:match '[^/]+/[^/]+$' or name
+    end
+
+    local dir = args.dir and args.dir:gsub('/+$', '')
+    if not dir then
+      local items = {}
+      for i, path in ipairs(dirs) do
+        items[i] = { id = path, title = label(path), subtitle = '~' .. path:sub(#home + 1), icon = 'folder' }
+      end
+
+      local why, detail
+      dir, why, detail = rex.ui.pick { title = 'Open project', placeholder = 'Filter projects', items = items }
+      if dir == nil then
+        if why == 'cancelled' or why == 'timeout' then
+          return
+        end
+        error('project picker: ' .. (detail or why), 0)
+      end
+    end
+
+    local sessions, list_err = rex.call 'session.list'
+    if sessions == nil then
+      error(list_err, 0)
+    end
+
+    local session_id
+    for _, session in ipairs(sessions.sessions or {}) do
+      if session.label == label(dir) then
+        session_id = session.session_id
+        break
+      end
+    end
+
+    if not session_id then
+      local created, create_err = rex.call('session.create', {
+        label = label(dir),
+        initial_windows = {
+          { layout = rex.layout.block { flavor = terminal .. '.shell', options = { cwd = dir } } },
+        },
+      })
+      if created == nil then
+        error(create_err, 0)
+      end
+      session_id = created.session_id
+    end
+
+    rex.client.queue('session.select', { session_id = session_id })
+  end,
 }
