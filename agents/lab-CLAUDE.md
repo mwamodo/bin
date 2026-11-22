@@ -9,7 +9,7 @@ You're on `lab`, the home server. It runs services people use every day (media, 
 
 Write working files (notes, handoff briefs, screenshots, probe scripts, test logs, HTML reports) into the Obsidian vault at `~/notes/scratchpads/<project>/`, in a task-named subfolder. The session scratchpad and `/tmp` hold only throwaway intermediates.
 
-- Name the folder after the project: the same name as its folder in `~/notes/work/` when there is one, in lowercase (`gbpn`). The repo, its worktrees and Orca workspaces all use that one folder (`gbpn-ai` → `gbpn`). Use the existing folder; create a new one only when none fits.
+- Name the folder after the project: the same name as its folder in `~/notes/work/` when there is one, in lowercase (`gbpn`). The repo and its worktrees share that one folder (`gbpn-ai` → `gbpn`). Use the existing folder; create a new one only when none fits.
 - Add every new file or folder to that project folder's `index.md`: what it is, the date, and whether it's safe to clean up.
 - Leave everything else in the vault untouched. The user does all cleanup. Notes outside `scratchpads/`, such as `work/gbpn/GBPN.md`, are the user's: edit them only when asked.
 

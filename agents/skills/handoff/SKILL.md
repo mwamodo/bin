@@ -1,12 +1,8 @@
 ---
 name: handoff
 description: Compact the current conversation into a handoff document for another agent to pick up.
-argument-hint: "[--task <task>] [--terminal_id <id>]"
+argument-hint: "[--task <task>]"
 arguments: 
-    - name: terminal_id
-      type: string
-      description: handoff to the agent in this terminal id
-      required: false
     - name: task
       type: string
       description: what will the next sessions be used for?
@@ -22,7 +18,4 @@ Do not duplicate content already captured in other artifacts (specs, plans, ADRs
 
 Redact any sensitive information, such as API keys, passwords, or personally identifiable information.
 
-If the user passed arguments, 
-
-1. treat the --task as a description of what the next session will focus on and tailor the doc accordingly.
-2. if --terminal_id has been passed use orca to hand the handoff document to the agent in the passed terminal_id
+If the user passed --task, treat it as what the next session will focus on and tailor the doc accordingly.
