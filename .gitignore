@@ -46,3 +46,5 @@ _ide_helper_models.php
 .powerlevel10k
 
 .claude
+
+**/.claude/settings.local.json
