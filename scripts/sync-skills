@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Keep ~/.agents, Claude, and Codex skill dirs in sync with this repo.
+# Keep ~/.agents, Claude, Codex, and Antigravity skill dirs in sync with this repo.
 # Each skill directory (must contain SKILL.md) is mirrored as a symlink.
 
 set -e
@@ -13,18 +13,37 @@ DEST_DIRS=(
     "${HOME}/.agents/skills"
     "${HOME}/.claude/skills"
     "${HOME}/.codex/skills"
+    "${HOME}/.gemini/config/skills"
 )
 LAUNCH_LABEL="com.mwamodo.sync-skills"
 LAUNCH_PLIST="${HOME}/Library/LaunchAgents/${LAUNCH_LABEL}.plist"
 SYSTEMD_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/systemd/user"
 SYSTEMD_UNIT="sync-skills"
 
-# Dest dirs are $HOME/.<tool>/skills, so two hops up lands in $HOME.
-if [ "${REPO_ROOT#"$HOME"/}" != "$REPO_ROOT" ]; then
-    RELATIVE_TARGET="../../${REPO_ROOT#"$HOME"/}/agents/skills"
-else
-    RELATIVE_TARGET="$SOURCE_DIR"
-fi
+target_base_for_dest() {
+    local dest="$1"
+    local repo_rel dest_rel rest prefix=""
+
+    if [ "${REPO_ROOT#"$HOME"/}" = "$REPO_ROOT" ] || [ "${dest#"$HOME"/}" = "$dest" ]; then
+        printf '%s\n' "$SOURCE_DIR"
+        return
+    fi
+
+    repo_rel="${REPO_ROOT#"$HOME"/}"
+    dest_rel="${dest#"$HOME"/}"
+    dest_rel="${dest_rel%/}"
+    rest="$dest_rel"
+
+    while [ -n "$rest" ]; do
+        prefix="../${prefix}"
+        case "$rest" in
+            */*) rest="${rest#*/}" ;;
+            *) rest="" ;;
+        esac
+    done
+
+    printf '%s\n' "${prefix}${repo_rel}/agents/skills"
+}
 
 DRY_RUN=false
 VERBOSE=false
@@ -48,8 +67,8 @@ log() {
 }
 
 is_our_link() {
-    local name="$1" target="$2"
-    [ "$target" = "${RELATIVE_TARGET}/${name}" ] \
+    local name="$1" target="$2" target_base="$3"
+    [ "$target" = "${target_base}/${name}" ] \
         || [ "$target" = "${SOURCE_DIR}/${name}" ] \
         || [ "$target" = "../../.agents/skills/${name}" ] \
         || [ "$target" = "${HOME}/.agents/skills/${name}" ]
@@ -69,7 +88,9 @@ list_skills() {
 
 sync_dest() {
     local dest="$1"
-    local name path target expected
+    local target_base name path target expected
+
+    target_base="$(target_base_for_dest "$dest")"
 
     if [ ! -d "$dest" ]; then
         log "Creating $dest"
@@ -81,7 +102,7 @@ sync_dest() {
     while IFS= read -r name; do
         [ -n "$name" ] || continue
         path="${dest}/${name}"
-        expected="${RELATIVE_TARGET}/${name}"
+        expected="${target_base}/${name}"
 
         if [ -L "$path" ]; then
             target="$(readlink "$path")"
@@ -91,7 +112,7 @@ sync_dest() {
                 continue
             fi
 
-            if is_our_link "$name" "$target"; then
+            if is_our_link "$name" "$target" "$target_base"; then
                 log "Updating $path -> $expected"
                 if [ "$DRY_RUN" = false ]; then
                     ln -sfn "$expected" "$path"
@@ -124,7 +145,7 @@ sync_dest() {
         [ -L "$path" ] || continue
         name="$(basename "$path")"
         target="$(readlink "$path")"
-        is_our_link "$name" "$target" || continue
+        is_our_link "$name" "$target" "$target_base" || continue
 
         if [ -d "${SOURCE_DIR}/${name}" ] && [ -f "${SOURCE_DIR}/${name}/SKILL.md" ]; then
             continue
