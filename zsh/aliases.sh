@@ -122,4 +122,7 @@ alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 # ai stuff
 alias claude="claude --dangerously-skip-permissions"
+alias opus="claude --model opus"
+alias fable="claude --model fable"
+alias sonnet="claude --model sonnet"
 alias agy="agy --dangerously-skip-permissions"
