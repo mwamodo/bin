@@ -93,8 +93,9 @@ link_file "$DOTFILES/rex" "$HOME/.config/rex"
 
 link_file "$DOTFILES/.gitignore" "$HOME/.gitignore"
 
-# Claude Code's global instructions, loaded in every session.
+# Claude Code and Antigravity global instructions, loaded in every session.
 link_file "$DOTFILES/agents/global-CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+link_file "$DOTFILES/agents/global-CLAUDE.md" "$HOME/.gemini/GEMINI.md"
 
 if [ -x "$DOTFILES/scripts/sync-skills" ]; then
     log "Syncing agent skills"

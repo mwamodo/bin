@@ -22,4 +22,4 @@ For a Laravel repo, run `herd link <folder-name>` inside the worktree so it serv
 
 # Checking UI changes
 
-Open every UI change in the user's Chrome yourself, through the claude-in-chrome tools, before handing it off or marking a PR ready. Walk each affected screen and state, and put screenshots in the PR's Evidence section. If you can't open it, keep the PR a draft and list what's unchecked.
+Open every UI change in a browser yourself (prefer the user's Chrome when available) before handing it off or marking a PR ready. Walk each affected screen and state, and put screenshots in the PR's Evidence section. If you can't open it, keep the PR a draft and list what's unchecked.
